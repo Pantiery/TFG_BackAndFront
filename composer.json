@@ -1,0 +1,10 @@
+{
+    "name": "tfg/backend",
+    "description": "TFG Backend",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "require": {}
+}

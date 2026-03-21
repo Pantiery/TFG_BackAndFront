@@ -1,22 +1,13 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json");
+session_start();
 
-$url = $_SERVER['REQUEST_URI'];
+require_once __DIR__ . '/../vendor/autoload.php';
 
-if (strpos($url, "/login") !== false) {
-    require '../app/controllers/AuthController.php';
+use App\Core\Router;
 
-    $controller = new AuthController();
-    $controller->login();
-    exit;
-}
+$router = new Router();
 
-// fallback
-echo json_encode([
-    "error" => "Ruta no encontrada",
-    "url" => $url
-]);
+require_once __DIR__ . '/../routes/web.php';
+
+$router->resolve();
