@@ -18,7 +18,7 @@ class AuthController
 
         $_SESSION['user'] = $email;
 
-        header("Location: /proyecto_TFG/back_end/TFG_BackEnd/public/");
+        header("Location: /proyecto_TFG/back_and_front/TFG_BackAndFront/public/");
         exit;
 
     } else {
