@@ -1,3 +1,4 @@
+
 <?php require_once __DIR__ . '/../layout/header.php'; ?>
 
 <?php if (isset($_SESSION['user'])): ?>

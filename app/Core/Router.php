@@ -16,34 +16,33 @@ class Router
         $this->routes['POST'][$path] = $callback;
     }
 
-   public function resolve()
-{
-    $method = $_SERVER['REQUEST_METHOD'];
-    $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    public function resolve()
+    {
+        $httpMethod = $_SERVER['REQUEST_METHOD'];
+        $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-    // quitar base del proyecto
-    $base = '/proyecto_TFG/TFG_BackAndFront/public';
-    $uri = str_replace($base, '', $uri);
+        $base = dirname($_SERVER['SCRIPT_NAME']);
+        $uri = str_replace($base, '', $uri);
 
-    // normalizar URI
-    $uri = rtrim($uri, '/');
-    if ($uri === '') {
-        $uri = '/';
+        $uri = rtrim($uri, '/');
+        if ($uri === '') {
+            $uri = '/';
+        }
+
+        $callback = $this->routes[$httpMethod][$uri] ?? null;
+
+        if (!$callback) {
+            http_response_code(404);
+            echo "404 - Ruta no encontrada";
+            return;
+        }
+
+        if (is_array($callback)) {
+            $controller = new $callback[0];
+            $action = $callback[1];
+            $controller->$action();
+        } else {
+            call_user_func($callback);
+        }
     }
-
-    $callback = $this->routes[$method][$uri] ?? null;
-
-    if (!$callback) {
-        echo "Ruta no encontrada: " . $uri; // 👈 DEBUG
-        return;
-    }
-
-    if (is_array($callback)) {
-        $controller = new $callback[0];
-        $method = $callback[1];
-        $controller->$method();
-    } else {
-        call_user_func($callback);
-    }
-}
 }

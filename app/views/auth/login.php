@@ -2,7 +2,7 @@
 
 <h2>Login</h2>
 
-<form method="POST" action="/proyecto_TFG/TFG_BackAndFront/public/login">
+<form method="POST" action="/login">
     <div>
         <label>Email:</label>
         <input type="text" name="email" required>
