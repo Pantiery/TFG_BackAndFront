@@ -3,17 +3,19 @@
 <h2>Login</h2>
 
 <form method="POST" action="/login">
-    <div>
-        <label>Email:</label>
-        <input type="text" name="email" required>
+  <div class="row mb-3">
+    <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" id="inputEmail3" required>
     </div>
-
-    <div>
-        <label>Password:</label>
-        <input type="password" name="password" required>
+  </div>
+  <div class="row mb-3">
+    <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+    <div class="col-sm-10">
+      <input type="password" class="form-control" id="inputPassword3" required>
     </div>
-
-    <button type="submit">Entrar</button>
+  </div>
+  <button type="submit" class="btn btn-primary">Entrar</button>
 </form>
 
 <?php require_once __DIR__ . '/../layout/footer.php'; ?>
