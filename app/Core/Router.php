@@ -22,7 +22,7 @@ class Router
     $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
     // quitar base del proyecto
-    $base = '/proyecto_TFG/back_and_front/TFG_BackAndFront/public';
+    $base = '/proyecto_TFG/TFG_BackAndFront/public';
     $uri = str_replace($base, '', $uri);
 
     // normalizar URI
