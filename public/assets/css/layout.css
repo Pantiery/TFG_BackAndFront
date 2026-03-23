@@ -1,0 +1,53 @@
+/* HEADER    */
+.navbar {
+    background-color: #73b3f3 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    padding: 12px 20px;
+}
+
+/* Enlaces */
+.navbar-nav .nav-link {
+    color: #555;
+    font-size: 1rem;
+    margin: 0 10px;
+    transition: all 0.2s ease;
+}
+
+/* Botón hamburguesa */
+.navbar-toggler {
+    border: none;
+}
+
+/* Icono hamburguesa */
+.navbar-toggler-icono {
+    filter: invert(40%);
+}
+
+/* FOOTER */
+.footer {
+    background-color: #73b3f3;
+    border-top: 1px solid #eaeaea;
+    color: #73b3f3;
+    padding: 20px 0;
+}
+
+/* TEXTO GENERAL */
+.footer-text {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* TITULOS */
+.footer-title {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+
+/* LINKS */
+.footer-link {
+    color: #555;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
