@@ -14,4 +14,4 @@ $uri = str_replace('/proyecto_TFG/TFG_BackAndFront/public', '', $uri);
 
 //cargar rutas
 
-require_once '../routes/web.php';
+require_once __DIR__ . '/../routes/web.php';

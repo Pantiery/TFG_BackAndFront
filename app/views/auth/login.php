@@ -2,19 +2,21 @@
 
 <h2>Login</h2>
 
-<form method="POST" action="/login">
+<form action="" method="POST">
   <div class="row mb-3">
-    <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+    <label class="col-sm-2 col-form-label">Email</label>
     <div class="col-sm-10">
-      <input type="email" class="form-control" id="inputEmail3" required>
+      <input type="email" name="email" class="form-control" required>
     </div>
   </div>
+
   <div class="row mb-3">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+    <label class="col-sm-2 col-form-label">Password</label>
     <div class="col-sm-10">
-      <input type="password" class="form-control" id="inputPassword3" required>
+      <input type="password" name="password" class="form-control" required>
     </div>
   </div>
+
   <button type="submit" class="btn btn-primary">Entrar</button>
 </form>
 
