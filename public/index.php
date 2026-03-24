@@ -12,12 +12,6 @@ $uri = explode('?', $uri)[0];
 
 $uri = str_replace('/proyecto_TFG/TFG_BackAndFront/public', '', $uri);
 
-//rutas simples
+//cargar rutas
 
-if ($uri === '/') {
-    echo "estas en home";
-}elseif ($uri === '/login') {
-    echo "estas en login";
-} else {
-    echo "404 error";
-}
+require_once '../routes/web.php';
