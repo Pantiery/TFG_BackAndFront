@@ -1,23 +1,23 @@
 <?php require_once __DIR__ . '/../layout/header.php'; ?>
 
-    <form method="POST" class="grid-layout">
+    <form method="POST" action="/proyecto_TFG/TFG_BackAndFront/public/register" class="grid-layout">
             
         <h2>Regístrate</h2>
 
         <label>Nombre</label>
-        <input type="text" name="nombre" class="form-control" required>
+        <input type="text" name="nombre" class="form-control" maxlength="25" required>
 
         <label>Primer apellido</label>
-        <input type="text" name="primer-apellido" class="form-control" required>
+        <input type="text" name="apellido1" class="form-control" maxlength="25" required>
 
         <label>Segundo apellido (opcional)</label>
-        <input type="text" name="segundo-apellido" class="form-control">
+        <input type="text" name="apellido2" class="form-control" maxlength="25">
 
         <label>E-mail</label>
-        <input type="email" name="e-mail" class="form-control" required>
+        <input type="email" name="email" class="form-control" maxlength="100" required>
 
         <label>Contraseña</label>
-        <input type="password" name="contra" class="form-control" required>
+        <input type="password" name="password" class="form-control" minlength="8" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$" required>
 
         <button type="submit" class="btn btn-primary">Registrarme</button>
 
