@@ -28,7 +28,13 @@ class AuthController
         if ($usuario) {
             
             if ($password === $usuario['password']) {
-                echo "Login realizado con éxito";
+                
+            //COJO NOMBRE DE QUIEN HA HECHO LOGIN PARA LA SESION
+            $_SESSION['user'] = $email;
+     
+            header("Location: /proyecto_TFG/TFG_BackAndFront/public/");
+            exit;
+
             }else {
                 echo "Password incorrecto";
             }
