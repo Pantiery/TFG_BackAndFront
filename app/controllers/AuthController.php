@@ -88,28 +88,27 @@ class AuthController
         $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
         //COMPROBACION USUARIO
-        if ($usuario) {
 
-            if (password_verify($password, $usuario['password'])) 
-                {
+        if ($usuario && password_verify($password, $usuario['password'])) {
 
-                //COJO NOMBRE DE QUIEN HA HECHO LOGIN PARA LA SESION
-                $_SESSION['user'] = $email;
+            //COJO NOMBRE DE QUIEN HA HECHO LOGIN PARA LA SESION
+            $_SESSION['user'] = $email;
 
-                header("Location: /proyecto_TFG/TFG_BackAndFront/public/");
+            header("Location: /proyecto_TFG/TFG_BackAndFront/public/");
             exit;
 
-            } else {
-                echo "Password incorrecto";
-            }
-
         } else {
-            echo "Usuario NO encontrado";
+
+            $_SESSION['error'] = "Credenciales incorrectas";
+
+            header("Location: /proyecto_TFG/TFG_BackAndFront/public/login");
+            exit;
         }
     }
 
     public function logout()
     {
+        $_SESSION = [];
         session_destroy();
 
         header("Location: /proyecto_TFG/TFG_BackAndFront/public/");
