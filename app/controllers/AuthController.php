@@ -31,6 +31,44 @@ class AuthController
     public function register()
     {
         $nombre = $_POST['nombre'] ?? '';
+        $apellido1 = $_POST['apellido1'] ?? '';
+        $email = $_POST['email'] ?? '';
+        $password = $_POST['password'] ?? '';
+
+        if (!$nombre || !$apellido1 || !$email || !$password) {
+            echo "Faltan datos";
+            return;
+        }
+
+        require __DIR__ . '/../../config/database.php';
+
+        //VERIFICO SI EXISTE EL EMAIL
+        $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE email = :email");
+        $stmt->execute(['email' => $email]);
+
+        $resulset = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($resulset) {
+            echo "El email ya esta registrado";
+            return;
+        }
+
+        //CODIFICAMOS CONTRASEÑA
+        $passwordHash = password_hash($password, PASSWORD_BCRYPT);
+
+        //HACEMOS INSERT EN BD
+        $stmt = $pdo->prepare("INSERT INTO usuarios (nombre, apellido1, email, password) VALUES (:nombre, :apellido1, :email, :password)");
+
+        $stmt->execute([
+            'nombre' => $nombre,
+            'apellido1' => $apellido1,
+            'email' => $email,
+            'password' => $passwordHash
+        ]);
+
+        header("Location: /proyecto_TFG/TFG_BackAndFront/public/login");
+        exit;
+
     }
 
     //FUNCION PARA HACER LOGIN
@@ -52,13 +90,14 @@ class AuthController
         //COMPROBACION USUARIO
         if ($usuario) {
 
-            if ($password === $usuario['password']) {
+            if (password_verify($password, $usuario['password'])) 
+                {
 
                 //COJO NOMBRE DE QUIEN HA HECHO LOGIN PARA LA SESION
                 $_SESSION['user'] = $email;
 
                 header("Location: /proyecto_TFG/TFG_BackAndFront/public/");
-                exit;
+            exit;
 
             } else {
                 echo "Password incorrecto";
