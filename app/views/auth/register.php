@@ -5,19 +5,19 @@
         <h2>Regístrate</h2>
 
         <label>Nombre</label>
-        <input type="email" name="email" class="form-control" required>
+        <input type="text" name="nombre" class="form-control" required>
 
         <label>Primer apellido</label>
-        <input type="password" name="password" class="form-control" required>
+        <input type="text" name="primer-apellido" class="form-control" required>
 
         <label>Segundo apellido (opcional)</label>
-        <input type="password" name="password" class="form-control">
+        <input type="text" name="segundo-apellido" class="form-control">
 
         <label>E-mail</label>
-        <input type="email" name="email" class="form-control" required>
+        <input type="email" name="e-mail" class="form-control" required>
 
         <label>Contraseña</label>
-        <input type="email" name="email" class="form-control" required>
+        <input type="password" name="contra" class="form-control" required>
 
         <button type="submit" class="btn btn-primary">Registrarme</button>
 
