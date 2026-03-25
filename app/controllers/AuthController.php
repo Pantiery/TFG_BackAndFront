@@ -1,17 +1,36 @@
 <?php
 
+namespace App\Controllers;
+
+use PDO;
+
 class AuthController
 {
     //REDIRECCION A LOGIN
     public function showLogin()
     {
-        require_once __DIR__ . '/../views/auth/login.php';
+        if (isset($_SESSION['user'])) {
+            header("Location: /proyecto_TFG/TFG_BackAndFront/public/");
+            exit;
+        }
+
+        require __DIR__ . '/../views/auth/login.php';
     }
 
     //REDIRECCION A REGISTRO
     public function showRegister()
     {
+        if (isset($_SESSION['user'])) {
+            header("Location: /proyecto_TFG/TFG_BackAndFront/public/");
+            exit;
+        }
+
         require __DIR__ . '/../views/auth/register.php';
+    }
+
+    public function register()
+    {
+        $nombre = $_POST['nombre'] ?? '';
     }
 
     //FUNCION PARA HACER LOGIN
@@ -48,6 +67,14 @@ class AuthController
         } else {
             echo "Usuario NO encontrado";
         }
+    }
+
+    public function logout()
+    {
+        session_destroy();
+
+        header("Location: /proyecto_TFG/TFG_BackAndFront/public/");
+        exit;
     }
 
 }
