@@ -1,10 +1,10 @@
-<footer>
+<footer class="footer">
 
     <div class="container py-4">
         <div class="row">
             <!-- Logo -->
             <div class="col-md-4 mb-3">
-                <h5 class="footer-brand">Uniformes segunda mano</h5>
+                <h5 class="footer-title">Uniformes segunda mano</h5>
                 <p class="footer-text">Proyecto TFG</p>
             </div>
 
@@ -27,9 +27,9 @@
         </div>
     </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
 </footer>
+    
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
