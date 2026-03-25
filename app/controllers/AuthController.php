@@ -92,7 +92,12 @@ class AuthController
         if ($usuario && password_verify($password, $usuario['password'])) {
 
             //COJO NOMBRE DE QUIEN HA HECHO LOGIN PARA LA SESION
-            $_SESSION['user'] = $email;
+            $_SESSION['user'] = [
+                'id' => $usuario['id'],
+                'nombre' => $usuario['nombre'],
+                'email' => $usuario['email'],
+                'rol' => $usuario['rol']
+            ];
 
             header("Location: /proyecto_TFG/TFG_BackAndFront/public/");
             exit;
