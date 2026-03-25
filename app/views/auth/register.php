@@ -1,7 +1,26 @@
 <?php require_once __DIR__ . '/../layout/header.php'; ?>
 
-<div class="container mt-4 mb-4 text-center">
-    <h1 class="text-primary"> FUNCIONANDO REGISTRO FALTA HERO</h1>
-</div>
+    <form method="POST" class="grid-layout">
+            
+        <h2>Regístrate</h2>
+
+        <label>Nombre</label>
+        <input type="email" name="email" class="form-control" required>
+
+        <label>Primer apellido</label>
+        <input type="password" name="password" class="form-control" required>
+
+        <label>Segundo apellido (opcional)</label>
+        <input type="password" name="password" class="form-control">
+
+        <label>E-mail</label>
+        <input type="email" name="email" class="form-control" required>
+
+        <label>Contraseña</label>
+        <input type="email" name="email" class="form-control" required>
+
+        <button type="submit" class="btn btn-primary">Registrarme</button>
+
+    </form>
 
 <?php require_once __DIR__ . '/../layout/footer.php'; ?>

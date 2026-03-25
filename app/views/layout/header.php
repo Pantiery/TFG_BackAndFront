@@ -64,7 +64,7 @@
                             <?php endif; ?>
 
                              <li class="nav-item">
-                                <a class="nav-link text-primary" href="/proyecto_TFG/TFG_BackAndFront/public/register">Registrate</a>
+                                <a class="nav-link active" href="/proyecto_TFG/TFG_BackAndFront/app/views/auth/register.php">Registrate</a>
                             </li>
 
                         </ul>
