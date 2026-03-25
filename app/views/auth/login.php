@@ -1,18 +1,25 @@
 <?php require_once __DIR__ . '/../layout/header.php'; ?>
 
-  <form method="POST" class="grid-layout">
-        
-    <h2>Login</h2>
+<?php if (isset($_SESSION['error'])): ?>
+  <p style="color:red;">
+    <?= $_SESSION['error'] ?>
+  </p>
+  <?php unset($_SESSION['error']); ?>
+<?php endif; ?>
 
-    <label>Email</label>
-    <input type="email" name="email" class="form-control" required>
+<form method="POST" class="grid-layout">
 
-    <label>Contraseña</label>
-    <input type="password" name="password" class="form-control" required>
+  <h2>Login</h2>
 
-    <button type="submit" class="btn btn-primary">Entrar</button>
+  <label>Email</label>
+  <input type="email" name="email" class="form-control" required>
 
-  </form>
+  <label>Contraseña</label>
+  <input type="password" name="password" class="form-control" required>
+
+  <button type="submit" class="btn btn-primary">Entrar</button>
+
+</form>
 
 
 
