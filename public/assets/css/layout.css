@@ -1,6 +1,6 @@
 /* HEADER    */
 .navbar {
-    background-color: #73b3f3;
+    background-color: #4cb1e0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     padding: 12px 20px;
 }
@@ -25,7 +25,7 @@
 
 /* FOOTER */
 footer {
-    background-color: #f3b3f3;
+    background-color: #4cb1e0;
     border-top: 1px solid #eaeaea;
     color: #222;
     padding: 20px 0;

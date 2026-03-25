@@ -11,17 +11,32 @@ if ($uri === '/') {
     $controller = new HomeController();
     $controller->index();
 
-}elseif ($uri === '/login') {
+} elseif ($uri === '/login') {
 
     $controller = new AuthController();
 
-    if ($_SERVER['REQUEST_METHOD']=== 'GET') {
-        $controller->showLogin();    
+    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        $controller->showLogin();
     }
-    if ($_SERVER['REQUEST_METHOD']=== 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $controller->login();
     }
 
-} else {
+} elseif ($uri === '/logout') {
+
+    session_destroy();
+
+    header("Location: /proyecto_TFG/TFG_BackAndFront/public/");
+    exit;
+} elseif ($uri === '/register') {
+
+     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $controller->showRegister();
+    }
+    
+    header("localhost/proyecto_TFG/TFG_BackAndFront/public/register.php");
+}
+
+else {
     echo "404 no existe la pagina";
 }
