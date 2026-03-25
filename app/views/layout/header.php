@@ -27,20 +27,19 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                                <a class="nav-link active" aria-current="page" href="/proyecto_TFG/TFG_BackAndFront/public/">Inicio</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Vender</a>
+                                <a class="nav-link active" href="#">Vender</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Contacto</a>
+                                <a class="nav-link active" href="#">Contacto</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link disabled">Iniciar sesión</a>
+                                <a class="nav-link active" href="http://localhost/proyecto_TFG/TFG_BackAndFront/public/login">Iniciar sesión</a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </nav>
         </section>
-    </body>

@@ -1,5 +1,8 @@
 <?php
 
+//inicio sesion
+session_start();
+
 // obtener ruta (URL)
 
 $uri = $_SERVER['REQUEST_URI'];

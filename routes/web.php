@@ -1,13 +1,15 @@
 <?php
 
-//cargo controller
+//cargo controllers
 
 require_once __DIR__ . '/../app/Controllers/AuthController.php';
+require_once __DIR__ . '/../app/Controllers/HomeController.php';
 
 //rutas simples
 
 if ($uri === '/') {
-    echo "estas en home";
+    $controller = new HomeController();
+    $controller->index();
 
 }elseif ($uri === '/login') {
 
