@@ -19,7 +19,7 @@
     <h2>Regístrate</h2>
 
     <label>Nombre</label>
-    <input type="text" name="nombre" class="form-control" maxlength="25">
+    <input type="text" name="nombre" class="form-control" maxlength="25" required>
 
     <label>Primer apellido</label>
     <input type="text" name="apellido1" class="form-control" maxlength="25" required>
