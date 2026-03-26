@@ -42,7 +42,7 @@
                             <a class="nav-link active" href="#">Contacto</a>
                         </li>
 
-                        <?php if (isset($_SESSION['user'])): ?>
+                        <?php if (isset($_SESSION['usuario'])): ?>
 
                             <li class="nav-item">
                                 <a class="nav-link text-primary" href="/proyecto_TFG/TFG_BackAndFront/public/logout">
@@ -52,7 +52,7 @@
 
                             <li class="nav-item">
                                 <a class="nav-link">
-                                    👤 <?= $_SESSION['user']['nombre'] ?>
+                                    👤 <?= $_SESSION['usuario']['nombre'] ?>
                                 </a>
                             </li>
 

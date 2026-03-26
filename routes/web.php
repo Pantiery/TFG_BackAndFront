@@ -2,6 +2,7 @@
 
 use App\Controllers\AuthController;
 use App\Controllers\HomeController;
+use App\Controllers\AdminController;
 
 // rutas
 
@@ -14,3 +15,5 @@ $router->get('/logout', [AuthController::class, 'logout']);
 
 $router->get('/register', [AuthController::class, 'showRegister']);
 $router->post('/register', [AuthController::class, 'register']);
+
+$router->get('/admin', [AdminController::class, 'index']);
