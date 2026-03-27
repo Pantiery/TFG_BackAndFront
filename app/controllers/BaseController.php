@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 class BaseController
 {
+    //CLASES PARA CONTROLAR ACCESO A RUTAS PROTEGIDAS
     protected function checkLogin()
     {
         if (!isset($_SESSION['usuario'])) {

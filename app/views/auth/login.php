@@ -1,10 +1,10 @@
 <?php require_once __DIR__ . '/../layout/header.php'; ?>
 
-<?php if (isset($_SESSION['error'])): ?>
+<?php if (isset($_SESSION['error_credenciales'])): ?>
   <p style="color:red;">
-    <?= $_SESSION['error'] ?>
+    <?= $_SESSION['error_credenciales'] ?>
   </p>
-  <?php unset($_SESSION['error']); ?>
+  <?php unset($_SESSION['error_credenciales']); ?>
 <?php endif; ?>
 
 <form method="POST" class="grid-layout">

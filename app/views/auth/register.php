@@ -1,17 +1,17 @@
 <?php require_once __DIR__ . '/../layout/header.php'; ?>
 
-<?php if (isset($_SESSION['error-registro'])): ?>
+<?php if (isset($_SESSION['error_registro'])): ?>
     <p style="color:red;">
-        <?= $_SESSION['error'] ?>
+        <?= $_SESSION['error_registro'] ?>
     </p>
-    <?php unset($_SESSION['error-registro']); ?>
+    <?php unset($_SESSION['error_registro']); ?>
 <?php endif; ?>
 
-<?php if (isset($_SESSION['error-campos'])): ?>
+<?php if (isset($_SESSION['error_campos'])): ?>
     <p style="color:red;">
-        <?= $_SESSION['error-campos'] ?>
+        <?= $_SESSION['error_campos'] ?>
     </p>
-    <?php unset($_SESSION['error-campos']); ?>
+    <?php unset($_SESSION['error_campos']); ?>
 <?php endif; ?>
 
 <form method="POST" action="/proyecto_TFG/TFG_BackAndFront/public/register" class="grid-layout">

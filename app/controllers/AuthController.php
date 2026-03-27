@@ -38,7 +38,7 @@ class AuthController
         $password = $_POST['password'] ?? '';
 
         if (!$nombre || !$apellido1 || !$email || !$password) {
-            $_SESSION['error-campos'] = "Todos los campos obligatorios deben ser completados";
+            $_SESSION['error_campos'] = "Todos los campos obligatorios deben ser completados";
             header("Location: /proyecto_TFG/TFG_BackAndFront/public/register");
             exit;
         }
@@ -52,7 +52,7 @@ class AuthController
         $resulset = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($resulset) {
-            $_SESSION['error-registro'] = "El email ya esta registrado";
+            $_SESSION['error_registro'] = "El email ya esta registrado";
             header("Location: /proyecto_TFG/TFG_BackAndFront/public/register");
             exit;
         }
@@ -116,7 +116,7 @@ class AuthController
 
         } else {
 
-            $_SESSION['error'] = "Credenciales incorrectas";
+            $_SESSION['error_credenciales'] = "Credenciales incorrectas";
 
             header("Location: /proyecto_TFG/TFG_BackAndFront/public/login");
             exit;

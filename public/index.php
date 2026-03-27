@@ -2,6 +2,23 @@
 
 session_start();
 
+//CIERRE DE SESION POR INACTIVIDAD
+$tiempo_inactividad = 1200; // 20 minutos en segundos
+if (isset($_SESSION['ultima_actividad'])) 
+    {
+        if (time() - $_SESSION['ultima_actividad'] > $tiempo_inactividad) {
+            session_unset();
+            session_destroy();
+
+            header("Location: /proyecto_TFG/TFG_BackAndFront/public/login");
+            exit;
+        }
+    
+}
+
+//RESETEO EL TIEMPO DE INACTIVIDAD
+$_SESSION['ultima_actividad'] = time();
+
 //AUTOLOAD (CARGA AUTOMATICA DE CLASES)
 spl_autoload_register(function ($class) {
     $class = str_replace('App\\', '', $class);
