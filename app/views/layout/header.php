@@ -13,9 +13,9 @@
     <!-- Enlace Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Enlace a CSS -->
-    <link rel="stylesheet" href="../../../public/assets/css/layout.css">
-    <!-- Iconos -->
     <link rel="stylesheet" href="/proyecto_TFG/TFG_BackAndFront/public/assets/css/layout.css">
+    <!-- Iconos -->
+    
 </head>
 
 <body>
@@ -51,8 +51,8 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link">
-                                    👤 <?= $_SESSION['usuario']['nombre'] ?>
+                                <a class="nav-link disabled" href="#">
+                                    👤 <?= $_SESSION['usuario']['nombre'] . " " . $_SESSION['usuario']['apellido1'] . " " . "(" . $_SESSION['usuario']['rol'] . ")" ?>
                                 </a>
                             </li>
 
@@ -72,7 +72,6 @@
 
                         <?php endif; ?>
 
-                    </ul>
                     </ul>
                 </div>
             </div>

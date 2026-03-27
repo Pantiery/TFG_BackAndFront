@@ -1,18 +1,6 @@
 <?php require_once __DIR__ . '/../layout/header.php'; ?>
 
-<?php if (isset($_SESSION['error_registro'])): ?>
-    <p style="color:red;">
-        <?= $_SESSION['error_registro'] ?>
-    </p>
-    <?php unset($_SESSION['error_registro']); ?>
-<?php endif; ?>
 
-<?php if (isset($_SESSION['error_campos'])): ?>
-    <p style="color:red;">
-        <?= $_SESSION['error_campos'] ?>
-    </p>
-    <?php unset($_SESSION['error_campos']); ?>
-<?php endif; ?>
 
 <form method="POST" action="/proyecto_TFG/TFG_BackAndFront/public/register" class="grid-layout">
 
@@ -35,6 +23,20 @@
         pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$" required>
 
     <button type="submit" class="btn btn-primary">Registrarme</button>
+
+    <?php if (isset($_SESSION['error_registro'])): ?>
+    <p style="color:red;">
+        <?= $_SESSION['error_registro'] ?>
+    </p>
+    <?php unset($_SESSION['error_registro']); ?>
+<?php endif; ?>
+
+<?php if (isset($_SESSION['error_campos'])): ?>
+    <p style="color:red;">
+        <?= $_SESSION['error_campos'] ?>
+    </p>
+    <?php unset($_SESSION['error_campos']); ?>
+<?php endif; ?>
 
 </form>
 
