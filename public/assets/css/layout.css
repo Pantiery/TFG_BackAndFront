@@ -7,11 +7,13 @@
 
 /* Enlaces */
 .navbar-nav .nav-link {
+    display: flex;
     color: #555;
     font-size: 1rem;
     margin: 0 10px;
     transition: all 0.2s ease;
 }
+
 
 /* Botón hamburguesa */
 .navbar-toggler {
