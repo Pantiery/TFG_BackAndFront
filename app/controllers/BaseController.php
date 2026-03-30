@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 class BaseController
 {
-    //CLASES PARA CONTROLAR ACCESO A RUTAS PROTEGIDAS
+    // METODOS PARA VERIFICAR ACCESO A RUTAS PROTEGIDAS
     protected function checkLogin()
     {
         if (!isset($_SESSION['usuario'])) {
@@ -15,7 +15,9 @@ class BaseController
 
     protected function checkAdmin()
     {
-        if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['rol'] !== 'admin') {
+        $this->checkLogin();
+
+        if ($_SESSION['usuario']['rol'] !== 'admin') {
             header("Location: /proyecto_TFG/TFG_BackAndFront/public/");
             exit;
         }
