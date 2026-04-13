@@ -1,83 +1,74 @@
 <?php require_once __DIR__ . '/../layout/header.php'; ?>
 
 <div class="container mt-4 mb-4">
-
-    <h2 class="text-center mb-4">Solicitar venta de prenda</h2>
-
+    
     <!-- MENSAJE DE ÉXITO -->
     <?php if (isset($_SESSION['success_prenda'])): ?>
         <div class="alert alert-success text-center">
             <?= $_SESSION['success_prenda'] ?>
         </div>
         <?php unset($_SESSION['success_prenda']); ?>
-    <?php endif; ?>
+        <?php endif; ?>
+        
+        <form method="POST" action="./solicitar" class="grid-layout">
 
-    <form method="POST" action="./solicitar">
-
+        <h2 class="text-center mb-4">Solicitar venta de prenda</h2>
+            
         <!-- COLEGIO -->
-        <div class="mb-3">
-            <label class="form-label">Colegio</label>
-            <select name="colegio" class="form-control" required>
-                <option value="">-- Selecciona un colegio --</option>
+        <label class="form-label">Colegio</label>
+        <select name="colegio" class="form-control" required>
+            <option value="">-- Selecciona un colegio --</option>
 
-                <?php foreach ($colegios as $colegio): ?>
-                    <option value="<?= $colegio['id'] ?>">
-                        <?= $colegio['nombre'] ?>
-                    </option>
-                <?php endforeach; ?>
+            <?php foreach ($colegios as $colegio): ?>
+                <option value="<?= $colegio['id'] ?>">
+                    <?= $colegio['nombre'] ?>
+                </option>
+            <?php endforeach; ?>
 
-            </select>
-        </div>
+        </select>
 
         <!-- TIPO PRENDA -->
-        <div class="mb-3">
-            <label class="form-label">Tipo prenda</label>
-            <select name="tipoPrenda" class="form-control" required>
-                <option value="">-- Selecciona --</option>
+        <label class="form-label">Tipo prenda</label>
+        <select name="tipoPrenda" class="form-control" required>
+            <option value="">-- Selecciona --</option>
 
-                <?php foreach ($tiposPrenda as $tipo): ?>
-                    <option value="<?= $tipo['id'] ?>">
-                        <?= $tipo['nombre'] ?>
-                    </option>
-                <?php endforeach; ?>
+            <?php foreach ($tiposPrenda as $tipo): ?>
+                <option value="<?= $tipo['id'] ?>">
+                    <?= $tipo['nombre'] ?>
+                </option>
+            <?php endforeach; ?>
 
-            </select>
-        </div>
+        </select>
 
         <!-- ESTADO -->
-        <div class="mb-3">
-            <label class="form-label">Estado de la prenda</label>
-            <select name="estadoPrenda" class="form-control" required>
-                <option value="">-- Selecciona --</option>
+        <label class="form-label">Estado de la prenda</label>
+        <select name="estadoPrenda" class="form-control" required>
+            <option value="">-- Selecciona --</option>
 
-                <?php foreach ($estados as $estado): ?>
-                    <option value="<?= $estado['id'] ?>">
-                        <?= $estado['nombre'] ?>
-                    </option>
-                <?php endforeach; ?>
+            <?php foreach ($estados as $estado): ?>
+                <option value="<?= $estado['id'] ?>">
+                    <?= $estado['nombre'] ?>
+                </option>
+            <?php endforeach; ?>
 
-            </select>
-        </div>
+        </select>
 
         <!-- TALLA -->
-        <div class="mb-3">
-            <label class="form-label">Talla</label>
-            <select name="talla" class="form-control" required>
-                <option value="">--Selecciona--</option>
+        <label class="form-label">Talla</label>
+        <select name="talla" class="form-control" required>
+            <option value="">--Selecciona--</option>
 
-                <?php foreach ($tallas as $talla): ?>
-                    <option value="<?= $talla['id'] ?>">
-                        <?= $talla['nombre'] ?>
-                    </option>
-                <?php endforeach; ?>
+            <?php foreach ($tallas as $talla): ?>
+                <option value="<?= $talla['id'] ?>">
+                    <?= $talla['nombre'] ?>
+                </option>
+            <?php endforeach; ?>
 
-            </select>
-        </div>
+        </select>
 
         <!-- GÉNERO -->
-        <div class="mb-3">
-            <label class="form-label">Género</label>
-            <select name="genero" class="form-control" required>
+        <label class="form-label">Género</label>
+        <select name="genero" class="form-control" required>
                 <option value="">--Selecciona--</option>
 
             <?php foreach ($generos as $genero): ?>
@@ -87,7 +78,6 @@
             <?php endforeach; ?>
 
         </select>
-        </div>
 
         <!-- BOTÓN DE ENVÍO -->
 
