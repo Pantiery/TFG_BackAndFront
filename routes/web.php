@@ -29,5 +29,5 @@ $router->get('/prendas/solicitar', [PrendaController::class, 'create']);
 $router->post('/prendas/solicitar', [PrendaController::class, 'store']);
 
 // RUTAS DE INSERTAR PRENDAS
-$router->get('/prendas/create', [PrendaController::class, 'create']);
-$router->post('/prendas/create', [PrendaController::class, 'store']);
+$router->get('/admin/prendas/insertar', [AdminController::class, 'showInsertarPrenda']);
+$router->post('/admin/prendas/insertar', [AdminController::class, 'insertarPrenda']);
