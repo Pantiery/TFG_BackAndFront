@@ -27,24 +27,37 @@ class PrendaController extends BaseController
 
         require __DIR__ . '/../../config/database.php';
 
+        $stmtPrecio = $pdo->prepare("
+    SELECT precio 
+    FROM precios_estandar 
+    WHERE tipo_prenda_id = :tipo 
+    AND estado_calidad_id = :estado
+");
+
+        $stmtPrecio->execute([
+            'tipo' => $tipoPrenda,
+            'estado' => $estadoPrenda
+        ]);
+
+        $precio = $stmtPrecio->fetchColumn();
+
         $usuario_id = $_SESSION['usuario']['id'];
 
         $stmt = $pdo->prepare("
         INSERT INTO prendas 
         (usuario_id, tipo_prenda_id, colegio_id, estado_calidad_id, precio_asignado, estado_publicacion) 
-        VALUES 
-        (:usuario_id, :tipo_prenda_id, :colegio_id, :estado_calidad_id, 0, 'pendiente')
-    ");
+        VALUES (:usuario_id, :tipo_prenda_id, :colegio_id, :estado_calidad_id, :precio, 'pendiente')");
 
         $stmt->execute([
             'usuario_id' => $usuario_id,
             'tipo_prenda_id' => $tipoPrenda,
             'colegio_id' => $colegio,
-            'estado_calidad_id' => $estadoPrenda
+            'estado_calidad_id' => $estadoPrenda,
+            'precio' => $precio
         ]);
 
         $_SESSION['success_prenda'] = "Prenda solicitada con éxito";
-        header("Location: /prendas/solicitar");
+        header("Location: ./solicitar");
         exit;
     }
 }
