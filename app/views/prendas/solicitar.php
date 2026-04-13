@@ -1,53 +1,102 @@
 <?php require_once __DIR__ . '/../layout/header.php'; ?>
 
-<div class="container mt-4 mb-4 text-center">
-    <form method="POST" action="/proyecto_TFG/TFG_BackAndFront/public/register" class="grid-layout">
+<div class="container mt-4 mb-4">
 
-        <h2>Solicitar venta</h2>
+    <h2 class="text-center mb-4">Solicitar venta de prenda</h2>
 
-        <label>Nombre del colegio</label>
-        <select name="colegios" id="colegio" required>
-            <option disabled selected>--Selecciona un colegio--</option>
-            <option>IES Gabriel García Márquez</option>
-            <option>IES Pedro Duque</option>
+    <!-- MENSAJE DE ÉXITO -->
+    <?php if (isset($_SESSION['success_prenda'])): ?>
+        <div class="alert alert-success text-center">
+            <?= $_SESSION['success_prenda'] ?>
+        </div>
+        <?php unset($_SESSION['success_prenda']); ?>
+    <?php endif; ?>
+
+    <form method="POST" action="./solicitar">
+
+        <!-- COLEGIO -->
+        <div class="mb-3">
+            <label class="form-label">Colegio</label>
+            <select name="colegio" class="form-control" required>
+                <option value="">-- Selecciona un colegio --</option>
+
+                <?php foreach ($colegios as $colegio): ?>
+                    <option value="<?= $colegio['id'] ?>">
+                        <?= $colegio['nombre'] ?>
+                    </option>
+                <?php endforeach; ?>
+
+            </select>
+        </div>
+
+        <!-- TIPO PRENDA -->
+        <div class="mb-3">
+            <label class="form-label">Tipo prenda</label>
+            <select name="tipoPrenda" class="form-control" required>
+                <option value="">-- Selecciona --</option>
+
+                <?php foreach ($tiposPrenda as $tipo): ?>
+                    <option value="<?= $tipo['id'] ?>">
+                        <?= $tipo['nombre'] ?>
+                    </option>
+                <?php endforeach; ?>
+
+            </select>
+        </div>
+
+        <!-- ESTADO -->
+        <div class="mb-3">
+            <label class="form-label">Estado de la prenda</label>
+            <select name="estadoPrenda" class="form-control" required>
+                <option value="">-- Selecciona --</option>
+
+                <?php foreach ($estados as $estado): ?>
+                    <option value="<?= $estado['id'] ?>">
+                        <?= $estado['nombre'] ?>
+                    </option>
+                <?php endforeach; ?>
+
+            </select>
+        </div>
+
+        <!-- TALLA -->
+        <div class="mb-3">
+            <label class="form-label">Talla</label>
+            <select name="talla" class="form-control" required>
+                <option value="">--Selecciona--</option>
+
+                <?php foreach ($tallas as $talla): ?>
+                    <option value="<?= $talla['id'] ?>">
+                        <?= $talla['nombre'] ?>
+                    </option>
+                <?php endforeach; ?>
+
+            </select>
+        </div>
+
+        <!-- GÉNERO -->
+        <div class="mb-3">
+            <label class="form-label">Género</label>
+            <select name="genero" class="form-control" required>
+                <option value="">--Selecciona--</option>
+
+            <?php foreach ($generos as $genero): ?>
+                <option value="<?= $genero['id'] ?>">
+                    <?= $genero['nombre'] ?>
+                </option>
+            <?php endforeach; ?>
+
         </select>
+        </div>
 
-        <label>Tipo de prenda</label>
-        <select name="prendas" id="prenda" required>
-            <option disabled selected>--Selecciona una prenda--</option>
-            <option value="1">Polo</option>
-            <option value="2">Pantalón corto</option>
-            <option value="3">Falda</option>
-            <option value="4">Sudadera</option>
-        </select>
+        <!-- BOTÓN DE ENVÍO -->
 
-        <label>Género</label>
-        <select name="genero" id="genero" required>
-            <option disabled selected>--Selecciona un genero--</option>
-            <option>Chico</option>
-            <option>Chica</option>
-        </select>
-
-        <label>Talla</label>
-        <select name="tallas" id="talla" required>
-            <option disabled selected>--Selecciona una talla--</option>
-            <option>S</option>
-            <option>M</option>
-            <option>L</option>
-            <option>XL</option>
-        </select>
-
-        <label>Estado</label>
-        <select name="estados" id="estado" required>
-            <option disabled selected>--Selecciona el estado de la prenda--</option>
-            <option>Nuevo</option>
-            <option>Usado</option>
-            <option>Muy usado</option>
-        </select>
-
-        <button type="submit" class="btn btn-primary">Solicitar venta</button>
+        <button type="submit" class="btn btn-primary w-100">
+            Solicitar venta
+        </button>
 
     </form>
+
 </div>
 
 <?php require_once __DIR__ . '/../layout/footer.php'; ?>
