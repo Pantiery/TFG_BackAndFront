@@ -9,8 +9,25 @@ class PrendaController extends BaseController
 
         require __DIR__ . '/../../config/database.php';
 
-        $stmt = $pdo->query("SELECT id, nombre FROM tipos_prenda");
-        $tiposPrenda = $stmt->fetchAll();
+        $colegioSeleccionado = $_GET['colegio'] ?? null;
+
+        // FILTRAR SEGÚN COLEGIO
+        if ($colegioSeleccionado) {
+
+            $stmt = $pdo->prepare("
+        SELECT tp.id, tp.nombre
+        FROM tipos_prenda tp
+        JOIN colegio_tipo_prenda ctp 
+        ON tp.id = ctp.tipo_prenda_id
+        WHERE ctp.colegio_id = :colegio
+    ");
+
+            $stmt->execute(['colegio' => $colegioSeleccionado]);
+            $tiposPrenda = $stmt->fetchAll();
+
+        } else {
+            $tiposPrenda = [];
+        }
         $colegios = $pdo->query("SELECT id, nombre FROM colegios")->fetchAll();
         $estados = $pdo->query("SELECT id, nombre FROM estados_calidad")->fetchAll();
         $tallas = $pdo->query("SELECT id, nombre FROM tallas")->fetchAll();
@@ -43,11 +60,29 @@ class PrendaController extends BaseController
 
         require __DIR__ . '/../../config/database.php';
 
+        $stmtCheck = $pdo->prepare("
+            SELECT COUNT(*) 
+            FROM colegio_tipo_prenda 
+            WHERE colegio_id = :colegio 
+            AND tipo_prenda_id = :tipo
+        ");
+
+        $stmtCheck->execute([
+            'colegio' => $colegio,
+            'tipo' => $tipoPrenda
+        ]);
+
+        if ($stmtCheck->fetchColumn() == 0) {
+            $_SESSION['error_campos'] = "Esa prenda no pertenece a ese colegio";
+            header("Location: ./solicitar");
+            exit;
+        }
+
         $stmtPrecio = $pdo->prepare("
-    SELECT precio 
-    FROM precios_estandar 
-    WHERE tipo_prenda_id = :tipo 
-    AND estado_calidad_id = :estado");
+            SELECT precio 
+            FROM precios_estandar 
+            WHERE tipo_prenda_id = :tipo 
+            AND estado_calidad_id = :estado");
 
         $stmtPrecio->execute([
             'tipo' => $tipoPrenda,
