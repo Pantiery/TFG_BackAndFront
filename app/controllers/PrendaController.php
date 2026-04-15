@@ -11,16 +11,15 @@ class PrendaController extends BaseController
 
         $colegioSeleccionado = $_GET['colegio'] ?? null;
 
-        // FILTRAR SEGÚN COLEGIO
         if ($colegioSeleccionado) {
 
             $stmt = $pdo->prepare("
-        SELECT tp.id, tp.nombre
-        FROM tipos_prenda tp
-        JOIN colegio_tipo_prenda ctp 
-        ON tp.id = ctp.tipo_prenda_id
-        WHERE ctp.colegio_id = :colegio
-    ");
+            SELECT tp.id, tp.nombre
+            FROM tipos_prenda tp
+            JOIN colegio_tipo_prenda ctp 
+            ON tp.id = ctp.tipo_prenda_id
+            WHERE ctp.colegio_id = :colegio
+        ");
 
             $stmt->execute(['colegio' => $colegioSeleccionado]);
             $tiposPrenda = $stmt->fetchAll();
@@ -28,6 +27,7 @@ class PrendaController extends BaseController
         } else {
             $tiposPrenda = [];
         }
+
         $colegios = $pdo->query("SELECT id, nombre FROM colegios")->fetchAll();
         $estados = $pdo->query("SELECT id, nombre FROM estados_calidad")->fetchAll();
         $tallas = $pdo->query("SELECT id, nombre FROM tallas ORDER BY id")->fetchAll();
@@ -111,5 +111,45 @@ class PrendaController extends BaseController
         $_SESSION['success_prenda'] = "Prenda solicitada con éxito";
         header("Location: ./solicitar");
         exit;
+    }
+
+    // querys para mostrar las prendas del usuario logueado
+    public function misVentas()
+    {
+        $this->checkLogin();
+
+        require __DIR__ . '/../../config/database.php';
+
+        $usuarioId = $_SESSION['usuario']['id'];
+
+        $queryBase = "
+        SELECT p.*, tp.nombre AS tipo, c.nombre AS colegio
+        FROM prendas p
+        JOIN tipos_prenda tp ON p.tipo_prenda_id = tp.id
+        JOIN colegios c ON p.colegio_id = c.id
+        WHERE p.usuario_id = ?
+    ";
+
+        // EN VENTA (publicadas)
+        $stmt = $pdo->prepare($queryBase . " AND p.estado_publicacion = 'publicada'");
+        $stmt->execute([$usuarioId]);
+        $enVenta = $stmt->fetchAll();
+
+        // VENDIDAS
+        $stmt = $pdo->prepare($queryBase . " AND p.estado_publicacion = 'vendida'");
+        $stmt->execute([$usuarioId]);
+        $vendidas = $stmt->fetchAll();
+
+        // PENDIENTES
+        $stmt = $pdo->prepare($queryBase . " AND p.estado_publicacion = 'pendiente'");
+        $stmt->execute([$usuarioId]);
+        $pendientes = $stmt->fetchAll();
+
+        // RECHAZADAS
+        $stmt = $pdo->prepare($queryBase . " AND p.estado_publicacion = 'rechazada'");
+        $stmt->execute([$usuarioId]);
+        $rechazadas = $stmt->fetchAll();
+
+        require __DIR__ . '/../views/prendas/misVentas.php';
     }
 }

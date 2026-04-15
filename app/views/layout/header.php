@@ -15,7 +15,7 @@
     <!-- Enlace a CSS -->
     <link rel="stylesheet" href="/proyecto_TFG/TFG_BackAndFront/public/assets/css/layout.css">
     <!-- Iconos -->
-    
+
 </head>
 
 <body>
@@ -32,43 +32,50 @@
                     <?php if (isset($_SESSION['usuario']) && $_SESSION['usuario']['rol'] === 'user'): ?>
 
                         <ul class="navbar-nav">
-                            
+
                             <li class="nav-item">
                                 <a class="nav-link active" href="/proyecto_TFG/TFG_BackAndFront/public/">
                                     Inicio
                                 </a>
                             </li>
-    
+
                             <li class="nav-item">
                                 <a class="nav-link active" href="">
                                     Catálogo
                                 </a>
                             </li>
-    
+
                             <li class="nav-item">
                                 <a class="nav-link active" href="/proyecto_TFG/TFG_BackAndFront/public/prendas/solicitar">
                                     Solicitar Venta
                                 </a>
                             </li>
-    
+
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/proyecto_TFG/TFG_BackAndFront/public/prendas/misVentas">
+                                    Mis Ventas
+                                </a>
+                            </li>
+
                             <li class="nav-item">
                                 <a class="nav-link active" href="">
                                     Mis Compras
                                 </a>
                             </li>
-    
+
                             <li class="nav-item">
                                 <a class="nav-link text-primary" href="/proyecto_TFG/TFG_BackAndFront/public/logout">
                                     Cerrar Sesión
                                 </a>
                             </li>
-    
+
                             <li class="nav-item">
                                 <a class="nav-link disabled" href="#">
-                                    👤 <?= $_SESSION['usuario']['nombre'] . " " . $_SESSION['usuario']['apellido1'] . " " . "(" . $_SESSION['usuario']['rol'] . ")" ?>
+                                    👤
+                                    <?= $_SESSION['usuario']['nombre'] . " " . $_SESSION['usuario']['apellido1'] . " " . "(" . $_SESSION['usuario']['rol'] . ")" ?>
                                 </a>
                             </li>
-                            
+
                         </ul>
 
                         <ul class="navbar-nav ms-auto">
@@ -86,48 +93,49 @@
                             </li>
 
                         </ul>
-                            
+
                     <?php elseif (isset($_SESSION['usuario']) && $_SESSION['usuario']['rol'] === 'admin'): ?>
                         <ul class="navbar-nav">
-                            
+
                             <li class="nav-item">
                                 <a class="nav-link active" href="/proyecto_TFG/TFG_BackAndFront/public/">
                                     Inicio
                                 </a>
                             </li>
-    
+
                             <li class="nav-item">
                                 <a class="nav-link active" href="">
                                     Gestión de Prendas
                                 </a>
                             </li>
-    
+
                             <li class="nav-item">
                                 <a class="nav-link active" href="">
                                     Gestión de Ventas
                                 </a>
                             </li>
-    
+
                             <li class="nav-item">
                                 <a class="nav-link active" href="">
                                     Gestión de Usuarios
                                 </a>
                             </li>
-    
+
                             <li class="nav-item">
                                 <a class="nav-link text-primary" href="/proyecto_TFG/TFG_BackAndFront/public/logout">
                                     Cerrar sesión
                                 </a>
                             </li>
-    
+
                             <li class="nav-item">
                                 <a class="nav-link disabled" href="#">
-                                    👤 <?= $_SESSION['usuario']['nombre'] . " " . $_SESSION['usuario']['apellido1'] . " " . "(" . $_SESSION['usuario']['rol'] . ")" ?>
+                                    👤
+                                    <?= $_SESSION['usuario']['nombre'] . " " . $_SESSION['usuario']['apellido1'] . " " . "(" . $_SESSION['usuario']['rol'] . ")" ?>
                                 </a>
                             </li>
 
                         </ul>
-                        
+
                         <ul class="navbar-nav ms-auto">
 
                             <li class="nav-item">
@@ -146,19 +154,19 @@
                                     Inicio
                                 </a>
                             </li>
-    
+
                             <li class="nav-item">
                                 <a class="nav-link active" href="">
                                     Catálogo
                                 </a>
                             </li>
-    
+
                             <li class="nav-item">
                                 <a class="nav-link text-primary" href="/proyecto_TFG/TFG_BackAndFront/public/login">
                                     Iniciar sesión
                                 </a>
                             </li>
-    
+
                             <li class="nav-item">
                                 <a class="nav-link active" href="/proyecto_TFG/TFG_BackAndFront/public/register">
                                     Registrate
