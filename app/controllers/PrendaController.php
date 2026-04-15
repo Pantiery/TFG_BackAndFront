@@ -30,7 +30,7 @@ class PrendaController extends BaseController
         }
         $colegios = $pdo->query("SELECT id, nombre FROM colegios")->fetchAll();
         $estados = $pdo->query("SELECT id, nombre FROM estados_calidad")->fetchAll();
-        $tallas = $pdo->query("SELECT id, nombre FROM tallas")->fetchAll();
+        $tallas = $pdo->query("SELECT id, nombre FROM tallas ORDER BY id")->fetchAll();
         $generos = $pdo->query("SELECT id, nombre FROM generos")->fetchAll();
 
         require __DIR__ . '/../views/prendas/solicitar.php';
