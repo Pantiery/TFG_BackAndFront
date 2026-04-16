@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+
 class PrendaController extends BaseController
 {
     public function create()
@@ -60,6 +61,7 @@ class PrendaController extends BaseController
 
         require __DIR__ . '/../../config/database.php';
 
+        // 🔹 Validar que el tipo pertenece al colegio
         $stmtCheck = $pdo->prepare("
             SELECT COUNT(*) 
             FROM colegio_tipo_prenda 
@@ -78,11 +80,13 @@ class PrendaController extends BaseController
             exit;
         }
 
+        // 🔹 Obtener precio estándar
         $stmtPrecio = $pdo->prepare("
             SELECT precio 
             FROM precios_estandar 
             WHERE tipo_prenda_id = :tipo 
-            AND estado_calidad_id = :estado");
+            AND estado_calidad_id = :estado
+        ");
 
         $stmtPrecio->execute([
             'tipo' => $tipoPrenda,
@@ -91,12 +95,33 @@ class PrendaController extends BaseController
 
         $precio = $stmtPrecio->fetchColumn();
 
+        // SUBIDA DE IMAGEN
+        $imagenRuta = null;
+
+        if (!empty($_FILES['archivoEnviado']['name'])) {
+
+            $nombre = time() . '_' . $_FILES['archivoEnviado']['name'];
+            $tmp = $_FILES['archivoEnviado']['tmp_name'];
+
+            $rutaDestino = __DIR__ . '/../../public/uploads/' . $nombre;
+
+            if (move_uploaded_file($tmp, $rutaDestino)) {
+                $imagenRuta = '/uploads/' . $nombre;
+            } else {
+                $_SESSION['error_campos'] = "Error al subir la imagen";
+                header("Location: ./solicitar");
+                exit;
+            }
+        }
+
         $usuario_id = $_SESSION['usuario']['id'];
 
+        // 🔹 INSERT con imagen
         $stmt = $pdo->prepare("
         INSERT INTO prendas 
-        (usuario_id, tipo_prenda_id, colegio_id, estado_calidad_id, precio_asignado, estado_publicacion, talla_id, genero_id) 
-        VALUES (:usuario_id, :tipo_prenda_id, :colegio_id, :estado_calidad_id, :precio, 'pendiente', :talla_id, :genero_id)");
+        (usuario_id, tipo_prenda_id, colegio_id, estado_calidad_id, precio_asignado, estado_publicacion, talla_id, genero_id, imagen) 
+        VALUES (:usuario_id, :tipo_prenda_id, :colegio_id, :estado_calidad_id, :precio, 'pendiente', :talla_id, :genero_id, :imagen)
+        ");
 
         $stmt->execute([
             'usuario_id' => $usuario_id,
@@ -104,8 +129,9 @@ class PrendaController extends BaseController
             'colegio_id' => $colegio,
             'estado_calidad_id' => $estadoPrenda,
             'precio' => $precio,
-            'talla_id' => $_POST['talla'] ?? '',
-            'genero_id' => $_POST['genero'] ?? ''
+            'talla_id' => $talla,
+            'genero_id' => $genero,
+            'imagen' => $imagenRuta
         ]);
 
         $_SESSION['success_prenda'] = "Prenda solicitada con éxito";
@@ -113,7 +139,7 @@ class PrendaController extends BaseController
         exit;
     }
 
-    // querys para mostrar las prendas del usuario logueado
+    // 🔹 Mis ventas
     public function misVentas()
     {
         $this->checkLogin();
@@ -130,22 +156,18 @@ class PrendaController extends BaseController
         WHERE p.usuario_id = ?
     ";
 
-        // EN VENTA (publicadas)
         $stmt = $pdo->prepare($queryBase . " AND p.estado_publicacion = 'publicada'");
         $stmt->execute([$usuarioId]);
         $enVenta = $stmt->fetchAll();
 
-        // VENDIDAS
         $stmt = $pdo->prepare($queryBase . " AND p.estado_publicacion = 'vendida'");
         $stmt->execute([$usuarioId]);
         $vendidas = $stmt->fetchAll();
 
-        // PENDIENTES
         $stmt = $pdo->prepare($queryBase . " AND p.estado_publicacion = 'pendiente'");
         $stmt->execute([$usuarioId]);
         $pendientes = $stmt->fetchAll();
 
-        // RECHAZADAS
         $stmt = $pdo->prepare($queryBase . " AND p.estado_publicacion = 'rechazada'");
         $stmt->execute([$usuarioId]);
         $rechazadas = $stmt->fetchAll();
@@ -153,26 +175,26 @@ class PrendaController extends BaseController
         require __DIR__ . '/../views/prendas/misVentas.php';
     }
 
-    // ver catalogo de prendas en venta
+    // 🔹 Catálogo
     public function catalogo()
-{
-    require __DIR__ . '/../../config/database.php';
+    {
+        require __DIR__ . '/../../config/database.php';
 
-    $stmt = $pdo->query("
-        SELECT 
-            p.*, 
-            tp.nombre AS tipo, 
-            c.nombre AS colegio, 
-            e.nombre AS estado
-        FROM prendas p
-        JOIN tipos_prenda tp ON p.tipo_prenda_id = tp.id
-        JOIN colegios c ON p.colegio_id = c.id
-        JOIN estados_calidad e ON p.estado_calidad_id = e.id
-        WHERE p.estado_publicacion = 'publicada'
-    ");
+        $stmt = $pdo->query("
+            SELECT 
+                p.*, 
+                tp.nombre AS tipo, 
+                c.nombre AS colegio, 
+                e.nombre AS estado
+            FROM prendas p
+            JOIN tipos_prenda tp ON p.tipo_prenda_id = tp.id
+            JOIN colegios c ON p.colegio_id = c.id
+            JOIN estados_calidad e ON p.estado_calidad_id = e.id
+            WHERE p.estado_publicacion = 'publicada'
+        ");
 
-    $prendas = $stmt->fetchAll();
+        $prendas = $stmt->fetchAll();
 
-    require __DIR__ . '/../views/prendas/catalogo.php';
-}
+        require __DIR__ . '/../views/prendas/catalogo.php';
+    }
 }

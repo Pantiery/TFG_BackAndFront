@@ -34,8 +34,7 @@
                             <option value="">-- Selecciona un colegio --</option>
 
                             <?php foreach ($colegios as $c): ?>
-                                <option value="<?= $c['id'] ?>"
-                                    <?= (isset($_GET['colegio']) && $_GET['colegio'] == $c['id']) ? 'selected' : '' ?>>
+                                <option value="<?= $c['id'] ?>" <?= (isset($_GET['colegio']) && $_GET['colegio'] == $c['id']) ? 'selected' : '' ?>>
                                     <?= $c['nombre'] ?>
                                 </option>
                             <?php endforeach; ?>
@@ -46,7 +45,7 @@
                 </form>
 
                 <!-- FORM 2: ENVÍO -->
-                <form method="POST" action="./solicitar">
+                <form enctype="multipart/form-data" method="POST" action="./solicitar">
 
                     <input type="hidden" name="colegio" value="<?= $_GET['colegio'] ?? '' ?>">
 
@@ -97,6 +96,12 @@
                             <?php endforeach; ?>
                         </select>
                     </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Archivo</label>
+                        <input type="file" name="archivoEnviado" class="form-control" required>
+                    </div>
+
 
                     <button type="submit" class="btn btn-primary w-100">
                         Solicitar venta

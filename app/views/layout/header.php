@@ -14,6 +14,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Enlace a CSS -->
     <link rel="stylesheet" href="/proyecto_TFG/TFG_BackAndFront/public/assets/css/layout.css">
+    <link rel="stylesheet" href="/proyecto_TFG/TFG_BackAndFront/public/assets/css/cards.css">
     <!-- Iconos -->
 
 </head>

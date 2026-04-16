@@ -8,19 +8,27 @@
 
         <?php foreach ($prendas as $prenda): ?>
 
-            <?php 
-            // CONTROL DE DATOS
+            <?php
             if (
                 !$prenda['tipo'] ||
                 !$prenda['colegio'] ||
                 !$prenda['precio_asignado'] ||
                 $prenda['precio_asignado'] <= 0
             ) continue;
+
+            // ID único para cada modal
+            $modalId = "modalPrenda_" . $prenda['id'];
             ?>
 
             <div class="col-md-4 mb-4">
 
                 <div class="card h-100 shadow-sm">
+
+                    <?php if (!empty($prenda['imagen'])): ?>
+                        <img src="/proyecto_TFG/TFG_BackAndFront/public<?= $prenda['imagen'] ?>"
+                             class="card-img-top"
+                             style="height:200px; object-fit:cover;">
+                    <?php endif; ?>
 
                     <div class="card-body">
 
@@ -51,10 +59,48 @@
 
                     <div class="card-footer text-center">
                         <strong><?= $prenda['precio_asignado'] ?> €</strong>
+
+                        <br>
+
+                        <!-- BOTÓN MODAL -->
+                        <button class="btn btn-sm btn-primary mt-2"
+                                data-bs-toggle="modal"
+                                data-bs-target="#<?= $modalId ?>">
+                            Ver detalle
+                        </button>
                     </div>
 
                 </div>
 
+            </div>
+
+            <!-- MODAL -->
+            <div class="modal fade" id="<?= $modalId ?>" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <h5 class="modal-title">
+                                <?= htmlspecialchars($prenda['tipo']) ?>
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <div class="modal-body text-center">
+
+                            <?php if (!empty($prenda['imagen'])): ?>
+                                <img src="/proyecto_TFG/TFG_BackAndFront/public<?= $prenda['imagen'] ?>"
+                                     style="max-width:100%; height:auto; margin-bottom:15px;">
+                            <?php endif; ?>
+
+                            <p><strong>Colegio:</strong> <?= htmlspecialchars($prenda['colegio']) ?></p>
+                            <p><strong>Estado:</strong> <?= htmlspecialchars($prenda['estado']) ?></p>
+                            <p><strong>Precio:</strong> <?= $prenda['precio_asignado'] ?> €</p>
+
+                        </div>
+
+                    </div>
+                </div>
             </div>
 
         <?php endforeach; ?>
