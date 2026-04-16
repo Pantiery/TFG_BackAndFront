@@ -152,4 +152,27 @@ class PrendaController extends BaseController
 
         require __DIR__ . '/../views/prendas/misVentas.php';
     }
+
+    // ver catalogo de prendas en venta
+    public function catalogo()
+{
+    require __DIR__ . '/../../config/database.php';
+
+    $stmt = $pdo->query("
+        SELECT 
+            p.*, 
+            tp.nombre AS tipo, 
+            c.nombre AS colegio, 
+            e.nombre AS estado
+        FROM prendas p
+        JOIN tipos_prenda tp ON p.tipo_prenda_id = tp.id
+        JOIN colegios c ON p.colegio_id = c.id
+        JOIN estados_calidad e ON p.estado_calidad_id = e.id
+        WHERE p.estado_publicacion = 'publicada'
+    ");
+
+    $prendas = $stmt->fetchAll();
+
+    require __DIR__ . '/../views/prendas/catalogo.php';
+}
 }

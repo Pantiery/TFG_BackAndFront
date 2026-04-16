@@ -34,3 +34,8 @@ $router->post('/admin/prendas/insertar', [AdminController::class, 'insertarPrend
 
 // RUTA PARA VER MIS PRENDAS
 $router->get('/prendas/misVentas', [PrendaController::class, 'misVentas']);
+
+// RUTA PARA VER PRENDAS EN VENTA
+$router->get('/prendas/catalogo', [PrendaController::class, 'catalogo']);
+
+

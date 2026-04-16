@@ -1,0 +1,40 @@
+<div class="container mt-4">
+
+    <div class="row">
+
+        <?php if (empty($prendas)): ?>
+            <p class="text-center">No hay prendas disponibles</p>
+        <?php endif; ?>
+
+        <?php foreach ($prendas as $prenda): ?>
+
+            <div class="col-md-4 mb-4">
+
+                <div class="card h-100 shadow-sm">
+
+                    <div class="card-body">
+
+                        <h5 class="card-title">
+                            <?= $prenda['tipo'] ?>
+                        </h5>
+
+                        <p class="card-text">
+                            <strong>Colegio:</strong> <?= $prenda['colegio'] ?><br>
+                            <strong>Estado:</strong> <?= $prenda['estado'] ?>
+                        </p>
+
+                    </div>
+
+                    <div class="card-footer text-center">
+                        <strong><?= $prenda['precio_asignado'] ?> €</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        <?php endforeach; ?>
+
+    </div>
+
+</div>

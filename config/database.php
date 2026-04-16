@@ -1,15 +1,24 @@
 <?php
 
 //HOST
-$host = 'localhost';
+// $host = 'localhost';
 //NOMBRE BASE DE DATOS
-$db = 'uniformes_segunda_mano';
+// $db = 'uniformes_segunda_mano';
 //USER
-$user = 'root';
+// $user = 'root';
 //PASSWORD VACIO
 $pass = '';
 //CHARSET (que es?)
 $charset = 'utf8mb4';
+
+//HOST REMOTO
+$host = 'sql8.freesqldatabase.com';
+$db = 'sql8823386';
+$user = 'sql8823386';
+$pass = 'gtqVCrJh67';
+
+
+
 
 try {
     //CREACION DE CONEXION PDO
