@@ -8,6 +8,16 @@
 
         <?php foreach ($prendas as $prenda): ?>
 
+            <?php 
+            // CONTROL DE DATOS
+            if (
+                !$prenda['tipo'] ||
+                !$prenda['colegio'] ||
+                !$prenda['precio_asignado'] ||
+                $prenda['precio_asignado'] <= 0
+            ) continue;
+            ?>
+
             <div class="col-md-4 mb-4">
 
                 <div class="card h-100 shadow-sm">
@@ -15,11 +25,12 @@
                     <div class="card-body">
 
                         <h5 class="card-title">
-                            <?= $prenda['tipo'] ?>
+                            <?= htmlspecialchars($prenda['tipo']) ?>
                         </h5>
 
                         <p class="card-text">
-                            <strong>Colegio:</strong> <?= $prenda['colegio'] ?><br>
+                            <strong>Colegio:</strong> <?= htmlspecialchars($prenda['colegio']) ?><br>
+
                             <?php
                             $badge = 'secondary';
 
@@ -32,7 +43,7 @@
                             ?>
 
                             <span class="badge bg-<?= $badge ?>">
-                                <?= $prenda['estado'] ?>
+                                <?= htmlspecialchars($prenda['estado']) ?>
                             </span>
                         </p>
 

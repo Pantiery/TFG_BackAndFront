@@ -23,14 +23,14 @@
 
         <div style="max-width: 500px; width: 100%;">
 
-            <div class="card p-4">
+            <div class="card p-4 formulario-solicitar">
 
                 <!-- FORM 1: FILTRO -->
                 <form method="GET">
 
                     <div class="mb-3">
                         <label class="form-label">Colegio</label>
-                        <select name="colegio" class="form-control" onchange="this.form.submit()">
+                        <select name="colegio" class="form-control casilla" onchange="this.form.submit()">
                             <option value="">-- Selecciona un colegio --</option>
 
                             <?php foreach ($colegios as $c): ?>
@@ -52,7 +52,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Tipo prenda</label>
-                        <select name="tipoPrenda" class="form-control" required>
+                        <select name="tipoPrenda" class="form-control casilla" required>
                             <option value="">-- Selecciona --</option>
                             <?php foreach ($tiposPrenda as $tipo): ?>
                                 <option value="<?= $tipo['id'] ?>">
@@ -64,7 +64,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Estado</label>
-                        <select name="estadoPrenda" class="form-control" required>
+                        <select name="estadoPrenda" class="form-control casilla" required>
                             <option value="">-- Selecciona --</option>
                             <?php foreach ($estados as $estado): ?>
                                 <option value="<?= $estado['id'] ?>">
@@ -76,7 +76,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Talla</label>
-                        <select name="talla" class="form-control" required>
+                        <select name="talla" class="form-control casilla" required>
                             <option value="">-- Selecciona --</option>
                             <?php foreach ($tallas as $talla): ?>
                                 <option value="<?= $talla['id'] ?>">
@@ -88,7 +88,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Género</label>
-                        <select name="genero" class="form-control" required>
+                        <select name="genero" class="form-control casilla" required>
                             <option value="">-- Selecciona --</option>
                             <?php foreach ($generos as $genero): ?>
                                 <option value="<?= $genero['id'] ?>">
