@@ -56,7 +56,7 @@ footer {
   max-width: 400px;
   margin: 50px auto;
   padding: 25px;
-  background: white;
+  background: gray;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
@@ -137,4 +137,31 @@ footer {
   margin: 40px auto;
   padding: 0 20px;
   text-align: center;
+}
+
+/* FORMULARIO SOLICITAR */
+.formulario-solicitar {
+    background-color: #6f7071;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px; /* mejora visual */
+}
+
+/* CAMPOS DEL FORM */
+.casilla {
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    transition: background-color 0.2s ease;
+}
+
+/* FOCUS */
+.casilla:focus {
+    background-color: #e9ecef;
+    box-shadow: none;
+    border-color: #adb5bd;
+}
+
+/* OPCIONES (limitado por navegador) */
+.casilla option {
+    background-color: #f8f9fa;
 }

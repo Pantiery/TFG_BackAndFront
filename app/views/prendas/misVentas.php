@@ -16,9 +16,9 @@
                 <?php endif; ?>
 
                 <?php foreach ($enVenta as $p): ?>
-                    <div class="border rounded p-2 mb-2">
-                        <strong><?= $p['tipo'] ?></strong><br>
-                        <?= $p['colegio'] ?><br>
+                    <div class="border rounded p-2 mb-2 bg-success-subtle">
+                        <strong><?= htmlspecialchars($p['tipo']) ?></strong><br>
+                        <?= htmlspecialchars($p['colegio']) ?><br>
                         <?= $p['precio_asignado'] ?> €
                     </div>
                 <?php endforeach; ?>
@@ -36,8 +36,8 @@
 
                 <?php foreach ($vendidas as $p): ?>
                     <div class="border rounded p-2 mb-2 bg-danger-subtle">
-                        <strong><?= $p['tipo'] ?></strong><br>
-                        <?= $p['colegio'] ?><br>
+                        <strong><?= htmlspecialchars($p['tipo']) ?></strong><br>
+                        <?= htmlspecialchars($p['colegio']) ?><br>
                         <?= $p['precio_asignado'] ?> €
                     </div>
                 <?php endforeach; ?>
@@ -55,8 +55,8 @@
 
                 <?php foreach ($pendientes as $p): ?>
                     <div class="border rounded p-2 mb-2 bg-warning-subtle">
-                        <strong><?= $p['tipo'] ?></strong><br>
-                        <?= $p['colegio'] ?><br>
+                        <strong><?= htmlspecialchars($p['tipo']) ?></strong><br>
+                        <?= htmlspecialchars($p['colegio']) ?><br>
                         <?= $p['precio_asignado'] ?> €
                     </div>
                 <?php endforeach; ?>
@@ -74,8 +74,8 @@
 
                 <?php foreach ($rechazadas as $p): ?>
                     <div class="border rounded p-2 mb-2 bg-light">
-                        <strong><?= $p['tipo'] ?></strong><br>
-                        <?= $p['colegio'] ?><br>
+                        <strong><?= htmlspecialchars($p['tipo']) ?></strong><br>
+                        <?= htmlspecialchars($p['colegio']) ?><br>
                         <?= $p['precio_asignado'] ?> €
                     </div>
                 <?php endforeach; ?>

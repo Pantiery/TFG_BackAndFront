@@ -156,7 +156,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link active" href="">
+                                <a class="nav-link active" href="/proyecto_TFG/TFG_BackAndFront/public/prendas/catalogo">
                                     Catálogo
                                 </a>
                             </li>
