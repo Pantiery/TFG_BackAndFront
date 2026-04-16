@@ -20,7 +20,20 @@
 
                         <p class="card-text">
                             <strong>Colegio:</strong> <?= $prenda['colegio'] ?><br>
-                            <strong>Estado:</strong> <?= $prenda['estado'] ?>
+                            <?php
+                            $badge = 'secondary';
+
+                            if ($prenda['estado'] == 'excelente')
+                                $badge = 'success';
+                            elseif ($prenda['estado'] == 'bueno')
+                                $badge = 'warning';
+                            elseif ($prenda['estado'] == 'aceptable')
+                                $badge = 'danger';
+                            ?>
+
+                            <span class="badge bg-<?= $badge ?>">
+                                <?= $prenda['estado'] ?>
+                            </span>
                         </p>
 
                     </div>

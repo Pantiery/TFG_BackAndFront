@@ -7,13 +7,15 @@ html, body {
 body {
   display: flex;
   flex-direction: column;
+  background-color: rgb(23, 60, 81);
+  color: white;
 }
 
 main {
   flex: 1;
   padding: 0;
   margin: 0;
-  background-color: #73b3f3;
+  
 }
 
 /* HEADER */
@@ -41,7 +43,7 @@ main {
 
 /* FOOTER */
 footer {
-  background-color: #73b3f3;
+  background-color: #4cb1e0;
   color: #222;
   padding: 20px 0;
   border-top: none;
@@ -127,4 +129,12 @@ footer {
 .hero h1,
 .hero h2 {
   margin: 0;
+}
+
+/* PRESENTACION */
+.presentacion {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+  text-align: center;
 }
