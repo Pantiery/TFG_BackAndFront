@@ -56,6 +56,9 @@ class AuthController extends BaseController
         try {
             $usuario = $service->login($_POST);
 
+            // Regenerar el ID de sesión para prevenir ataques de fijación de sesión
+            session_regenerate_id(true);
+
             $_SESSION['usuario'] = [
                 'id' => $usuario['id'],
                 'nombre' => $usuario['nombre'],

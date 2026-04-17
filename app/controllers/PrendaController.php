@@ -90,4 +90,39 @@ class PrendaController extends BaseController
             'prendas' => $prendas
         ]);
     }
+
+    // Página para insertar una prenda (solo admin)
+    public function createAdmin()
+    {
+        $this->checkAdmin();
+
+        // Puedes reutilizar lógica de create()
+        $colegioSeleccionado = $_GET['colegio'] ?? null;
+
+        $datos = $this->service->obtenerDatosFormulario($colegioSeleccionado);
+
+        $this->view('admin/insertarPrenda', $datos);
+    }
+
+    // Gestiona el envío del formulario de inserción por parte del admin
+    public function storeAdmin()
+    {
+        $this->checkAdmin();
+
+        $data = $_POST;
+        $file = $_FILES['archivoEnviado'] ?? null;
+
+        $usuario_id = $_SESSION['usuario']['id'];
+
+        try {
+            $this->service->crearPrenda($data, $file, $usuario_id);
+
+            $_SESSION['success_prenda'] = "Prenda insertada correctamente";
+        } catch (\Exception $e) {
+            $_SESSION['error_campos'] = $e->getMessage();
+        }
+
+        header("Location: /admin/prendas/insertar");
+        exit;
+    }
 }
