@@ -13,6 +13,7 @@ class BaseController
         }
     }
 
+    // SOLO PARA ADMINISTRADORES
     protected function checkAdmin()
     {
         $this->checkLogin();
@@ -21,5 +22,19 @@ class BaseController
             header("Location: /proyecto_TFG/TFG_BackAndFront/public/");
             exit;
         }
+    }
+
+    // FUNCION PARA CARGAR VISTAS
+    protected function view($ruta, $data = [])
+    {
+        extract($data);
+
+        $archivo = __DIR__ . '/../views/' . $ruta . '.php';
+
+        if (!file_exists($archivo)) {
+            die("Vista no encontrada: " . $ruta);
+        }
+
+        require $archivo;
     }
 }

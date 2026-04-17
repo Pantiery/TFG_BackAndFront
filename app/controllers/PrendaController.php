@@ -2,17 +2,18 @@
 
 namespace App\Controllers;
 use App\Services\PrendaService;
+use App\Controllers\BaseController;
 
 class PrendaController extends BaseController
 {
 
-private $service;
+    private $service;
     public function __construct()
     {
         $this->service = new PrendaService();
     }
 
-// Página para solicitar una prenda
+    // Página para solicitar una prenda
     public function create()
     {
         $this->checkLogin();
@@ -27,30 +28,36 @@ private $service;
         $tallas = $datos['tallas'];
         $generos = $datos['generos'];
 
-        require __DIR__ . '/../views/prendas/solicitar.php';
+        $this->view('prendas/solicitar', [
+            'tiposPrenda' => $tiposPrenda,
+            'colegios' => $colegios,
+            'estados' => $estados,
+            'tallas' => $tallas,
+            'generos' => $generos
+        ]);
     }
 
     // Gestiona el envío del formulario delegando la lógica al service
     public function store()
-{
-    $this->checkLogin();
+    {
+        $this->checkLogin();
 
-    $data = $_POST;
-    $file = $_FILES['archivoEnviado'] ?? null;
+        $data = $_POST;
+        $file = $_FILES['archivoEnviado'] ?? null;
 
-    $usuario_id = $_SESSION['usuario']['id'];
+        $usuario_id = $_SESSION['usuario']['id'];
 
-    try {
-        $this->service->crearPrenda($data, $file, $usuario_id);
+        try {
+            $this->service->crearPrenda($data, $file, $usuario_id);
 
-        $_SESSION['success_prenda'] = "Prenda solicitada con éxito";
-    } catch (\Exception $e) {
-        $_SESSION['error_campos'] = $e->getMessage();
+            $_SESSION['success_prenda'] = "Prenda solicitada con éxito";
+        } catch (\Exception $e) {
+            $_SESSION['error_campos'] = $e->getMessage();
+        }
+
+        header("Location: ./solicitar");
+        exit;
     }
-
-    header("Location: ./solicitar");
-    exit;
-}
 
     // Página de mis ventas
     public function misVentas()
@@ -66,7 +73,12 @@ private $service;
         $pendientes = $datos['pendientes'];
         $rechazadas = $datos['rechazadas'];
 
-        require __DIR__ . '/../views/prendas/misVentas.php';
+        $this->view('prendas/misVentas', [
+            'enVenta' => $enVenta,
+            'vendidas' => $vendidas,
+            'pendientes' => $pendientes,
+            'rechazadas' => $rechazadas
+        ]);
     }
 
     // Catálogo de prendas
@@ -74,6 +86,8 @@ private $service;
     {
         $prendas = $this->service->obtenerCatalogo();
 
-        require __DIR__ . '/../views/prendas/catalogo.php';
+        $this->view('prendas/catalogo', [
+            'prendas' => $prendas
+        ]);
     }
 }

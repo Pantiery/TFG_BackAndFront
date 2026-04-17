@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/../app/Core/Autoload.php';
+
 session_start();
 
 //CIERRE DE SESION POR INACTIVIDAD
