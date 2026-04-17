@@ -1,6 +1,6 @@
 <?php require_once __DIR__ . '/../layout/header.php'; ?>
 
-<div class="container mt-4">
+<div class="container-fluid mt-4">
 
     <h2 class="text-center mb-4">Mis prendas</h2>
 

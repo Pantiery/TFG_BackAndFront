@@ -1,4 +1,4 @@
-<div class="container mt-4">
+<div class="container-fluid mt-4">
 
     <div class="row">
 
@@ -20,7 +20,7 @@
             $modalId = "modalPrenda_" . $prenda['id'];
             ?>
 
-            <div class="col-md-4 mb-4">
+            <div class="col-md-3 mb-4">
 
                 <div class="card h-100 shadow-sm">
 
@@ -53,6 +53,7 @@
                             <span class="badge bg-<?= $badge ?>">
                                 <?= htmlspecialchars($prenda['estado']) ?>
                             </span>
+                            
                         </p>
 
                     </div>
@@ -96,6 +97,7 @@
                             <p><strong>Colegio:</strong> <?= htmlspecialchars($prenda['colegio']) ?></p>
                             <p><strong>Estado:</strong> <?= htmlspecialchars($prenda['estado']) ?></p>
                             <p><strong>Precio:</strong> <?= $prenda['precio_asignado'] ?> €</p>
+                            <strong>Vendedor:</strong> <?= htmlspecialchars($prenda['vendedor']) ?><br>
 
                         </div>
 

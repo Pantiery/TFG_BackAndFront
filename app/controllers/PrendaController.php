@@ -185,11 +185,13 @@ class PrendaController extends BaseController
                 p.*, 
                 tp.nombre AS tipo, 
                 c.nombre AS colegio, 
-                e.nombre AS estado
+                e.nombre AS estado,
+                u.nombre AS vendedor
             FROM prendas p
             JOIN tipos_prenda tp ON p.tipo_prenda_id = tp.id
             JOIN colegios c ON p.colegio_id = c.id
             JOIN estados_calidad e ON p.estado_calidad_id = e.id
+            JOIN usuarios u ON p.usuario_id = u.id
             WHERE p.estado_publicacion = 'publicada'
         ");
 
