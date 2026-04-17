@@ -2,101 +2,60 @@
 
 namespace App\Controllers;
 
-use PDO;
+use App\Config\App;
+use App\Controllers\BaseController;
+use App\Services\AuthService;
 
-class AuthController
+class AuthController extends BaseController
 {
-    //REDIRECCION A LOGIN
+    // REDIRECCION A LOGIN
     public function showLogin()
     {
         if (isset($_SESSION['usuario'])) {
-            header("Location: /proyecto_TFG/TFG_BackAndFront/public/");
+            header("Location: " . App::baseUrl() . "/");
             exit;
         }
 
-        require __DIR__ . '/../views/auth/login.php';
+        $this->view('auth/login');
     }
 
-    //REDIRECCION A REGISTRO
+    // REDIRECCION A REGISTRO
     public function showRegister()
     {
         if (isset($_SESSION['usuario'])) {
-            header("Location: /proyecto_TFG/TFG_BackAndFront/public/");
+            header("Location: " . App::baseUrl() . "/");
             exit;
         }
 
-        require __DIR__ . '/../views/auth/register.php';
+        $this->view('auth/register');
     }
 
-    //REGISTRO USUARIO
+    // REGISTRO USUARIO
     public function register()
     {
-        $nombre = $_POST['nombre'] ?? '';
-        $apellido1 = $_POST['apellido1'] ?? '';
-        $apellido2 = $_POST['apellido2'] ?? '';
-        $email = $_POST['email'] ?? '';
-        $password = $_POST['password'] ?? '';
+        $service = new AuthService();
 
-        if (!$nombre || !$apellido1 || !$email || !$password) {
-            $_SESSION['error_campos'] = "Todos los campos obligatorios deben ser completados";
-            header("Location: /proyecto_TFG/TFG_BackAndFront/public/register");
+        try {
+            $service->registrar($_POST);
+
+            header("Location: " . App::baseUrl() . "/login");
+            exit;
+
+        } catch (\Exception $e) {
+            $_SESSION['error_campos'] = $e->getMessage();
+            header("Location: " . App::baseUrl() . "/register");
             exit;
         }
-
-        require __DIR__ . '/../../config/database.php';
-
-        //VERIFICO SI EXISTE EL EMAIL
-        $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE email = :email");
-        $stmt->execute(['email' => $email]);
-
-        $resulset = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($resulset) {
-            $_SESSION['error_registro'] = "El email ya esta registrado";
-            header("Location: /proyecto_TFG/TFG_BackAndFront/public/register");
-            exit;
-        }
-
-        //CODIFICAMOS CONTRASEÑA
-        $passwordHash = password_hash($password, PASSWORD_BCRYPT);
-
-        //HACEMOS INSERT EN BD
-        $stmt = $pdo->prepare("INSERT INTO usuarios (nombre, apellido1, apellido2, email, password) VALUES (:nombre, :apellido1, :apellido2, :email, :password)");
-
-        $stmt->execute([
-            'nombre' => $nombre,
-            'apellido1' => $apellido1,
-            'apellido2' => $apellido2 ?? null,
-            'email' => $email,
-            'password' => $passwordHash
-        ]);
-
-        header("Location: /proyecto_TFG/TFG_BackAndFront/public/login");
-        exit;
-
     }
 
-    //FUNCION PARA HACER LOGIN
+    // FUNCION PARA HACER LOGIN
     public function login()
     {
-        //TRAER CONEXION CREADA
-        require __DIR__ . '/../../config/database.php';
+        $service = new AuthService();
 
-        //RECOGO DATOS FORMULARIO
-        $email = $_POST['email'] ?? '';
-        $password = $_POST['password'] ?? '';
+        try {
+            $usuario = $service->login($_POST);
 
-        //PREPARO CONSULTA
-        $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE email = :email");
-        $stmt->execute(['email' => $email]);
-
-        $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        //COMPROBACION USUARIO
-
-        if ($usuario && password_verify($password, $usuario['password'])) {
-
-            //COJO NOMBRE DE QUIEN HA HECHO LOGIN PARA LA SESION
             $_SESSION['usuario'] = [
                 'id' => $usuario['id'],
                 'nombre' => $usuario['nombre'],
@@ -107,18 +66,16 @@ class AuthController
             ];
 
             if ($usuario['rol'] === 'user') {
-                header("Location: /proyecto_TFG/TFG_BackAndFront/public/");
-                exit;
-            } else if ($usuario['rol'] === 'admin') {
-                header("Location: /proyecto_TFG/TFG_BackAndFront/public/admin");
-                exit;
+                header("Location: " . App::baseUrl() . "/");
+            } else {
+                header("Location: " . App::baseUrl() . "/admin");
             }
 
-        } else {
+            exit;
 
-            $_SESSION['error_credenciales'] = "Credenciales incorrectas";
-
-            header("Location: /proyecto_TFG/TFG_BackAndFront/public/login");
+        } catch (\Exception $e) {
+            $_SESSION['error_credenciales'] = $e->getMessage();
+            header("Location: " . App::baseUrl() . "/login");
             exit;
         }
     }
@@ -128,8 +85,7 @@ class AuthController
         $_SESSION = [];
         session_destroy();
 
-        header("Location: /proyecto_TFG/TFG_BackAndFront/public/");
+        header("Location: " . App::baseUrl() . "/");
         exit;
     }
-
 }

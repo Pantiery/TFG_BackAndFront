@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+// Servicio para manejar la subida de imágenes
 class UploadService
 {
     public function subir($file)
