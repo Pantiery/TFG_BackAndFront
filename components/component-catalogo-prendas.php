@@ -61,12 +61,18 @@
                         <strong><?= $prenda['precio_asignado'] ?> €</strong>
 
                         <br>
-
+                        
+                        <button class="btn btn-sm btn-primary mt-2" href="">
+                            Añadir al carrito
+                        </button>
                         <!-- BOTÓN MODAL -->
                         <button class="btn btn-sm btn-primary mt-2"
                                 data-bs-toggle="modal"
                                 data-bs-target="#<?= $modalId ?>">
                             Ver detalle
+                        </button>
+                        <button class="btn btn-sm btn-primary mt-2" href="">
+                            Comprar
                         </button>
                     </div>
 
@@ -98,7 +104,18 @@
                             <p><strong>Precio:</strong> <?= $prenda['precio_asignado'] ?> €</p>
 
                         </div>
-
+                        
+                        <div class="card-footer text-center">
+                            
+                            <button class="btn btn-sm btn-primary mt-2" href="">
+                                Añadir al carrito
+                            </button>
+                            
+                            <button class="btn btn-sm btn-primary mt-2" href="">
+                                Comprar
+                            </button>
+                        </div>
+                        <br>
                     </div>
                 </div>
             </div>
