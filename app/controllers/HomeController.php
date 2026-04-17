@@ -1,13 +1,15 @@
 <?php
 
 namespace App\Controllers;
-class HomeController extends BaseController{
 
-    public function index() {
-
+class HomeController extends BaseController
+{
+    public function index()
+    {
         $user = $_SESSION['usuario'] ?? null;
 
-        require_once __DIR__ . '/../views/prendas/home.php';
+        $this->view('prendas/home', [
+            'user' => $user
+        ]);
     }
-
 }
