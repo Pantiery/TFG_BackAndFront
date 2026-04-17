@@ -1,24 +1,25 @@
 <?php
 
 namespace App\Controllers;
-use App\Models\Prenda;
 use App\Services\PrendaService;
-use App\Core\Database;
-use App\Services\UploadService;
 
 class PrendaController extends BaseController
 {
+
+private $service;
+    public function __construct()
+    {
+        $this->service = new PrendaService();
+    }
 
 // Página para solicitar una prenda
     public function create()
     {
         $this->checkLogin();
 
-        $service = new PrendaService();
-
         $colegioSeleccionado = $_GET['colegio'] ?? null;
 
-        $datos = $service->obtenerDatosFormulario($colegioSeleccionado);
+        $datos = $this->service->obtenerDatosFormulario($colegioSeleccionado);
 
         $tiposPrenda = $datos['tiposPrenda'];
         $colegios = $datos['colegios'];
@@ -39,10 +40,8 @@ class PrendaController extends BaseController
 
     $usuario_id = $_SESSION['usuario']['id'];
 
-    $service = new PrendaService();
-
     try {
-        $service->crearPrenda($data, $file, $usuario_id);
+        $this->service->crearPrenda($data, $file, $usuario_id);
 
         $_SESSION['success_prenda'] = "Prenda solicitada con éxito";
     } catch (\Exception $e) {
@@ -60,9 +59,7 @@ class PrendaController extends BaseController
 
         $usuarioId = $_SESSION['usuario']['id'];
 
-        $service = new PrendaService();
-
-        $datos = $service->obtenerMisVentas($usuarioId);
+        $datos = $this->service->obtenerMisVentas($usuarioId);
 
         $enVenta = $datos['enVenta'];
         $vendidas = $datos['vendidas'];
@@ -75,9 +72,7 @@ class PrendaController extends BaseController
     // Catálogo de prendas
     public function catalogo()
     {
-        $service = new PrendaService();
-
-        $prendas = $service->obtenerCatalogo();
+        $prendas = $this->service->obtenerCatalogo();
 
         require __DIR__ . '/../views/prendas/catalogo.php';
     }
