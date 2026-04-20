@@ -48,7 +48,7 @@ class CarritoService
     $existe = $stmt->fetchColumn();
 
     if ($existe > 0) {
-        return; // 👈 ya está en carrito, no hacemos nada
+        return; // ya está en carrito, no hacemos nada
     }
 
     // 2. insertar si no existe

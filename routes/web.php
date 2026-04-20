@@ -30,9 +30,6 @@ $router->get('/prendas/solicitar', [PrendaController::class, 'create']);
 $router->post('/prendas/solicitar', [PrendaController::class, 'store']);
 
 // RUTAS DE INSERTAR PRENDAS
-// $router->get('/admin/prendas/insertar', [AdminController::class, 'showInsertarPrenda']);
-// $router->post('/admin/prendas/insertar', [AdminController::class, 'insertarPrenda']);
-
 $router->get('/admin/prendas/insertar', [PrendaController::class, 'createAdmin']);
 $router->post('/admin/prendas/insertar', [PrendaController::class, 'storeAdmin']);
 
@@ -42,7 +39,18 @@ $router->get('/prendas/misVentas', [PrendaController::class, 'misVentas']);
 // RUTA PARA VER PRENDAS EN VENTA
 $router->get('/prendas/catalogo', [PrendaController::class, 'catalogo']);
 
+// RUTA PARA VER MIS COMPRAS REALIZADAS
+$router->get('/prendas/misCompras', [PrendaController::class, 'misCompras']);
+
 // RUTA PARA AÑADIR CARRITO
 $router->post('/carrito/add', [CarritoController::class, 'add']);
 $router->get('/carrito', [CarritoController::class, 'index']);
 
+// RUTA PARA ELIMINAR DEL CARRITO
+$router->post('/carrito/remove', [CarritoController::class, 'remove']);
+
+// RUTA PARA FINALIZAR COMPRA
+$router->post('/carrito/checkout', [CarritoController::class, 'checkout']);
+
+// RUTA PARA VER DETALLES DE PRENDA
+$router->get('/prendas/detalles', [PrendaController::class, 'detalles']);
