@@ -88,7 +88,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link active" href="/proyecto_TFG/TFG_BackAndFront/app/views/prendas/carrito.php">
+                                <a class="nav-link active" href="<?= \App\Config\App::baseUrl() ?>/carrito"">
                                     Carrito
                                 </a>
                             </li>

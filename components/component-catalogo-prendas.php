@@ -63,9 +63,13 @@
 
                         <br>
                         
-                        <button class="btn btn-sm btn-primary mt-2" href="">
-                            Añadir al carrito
-                        </button>
+                        <form method="POST" action="<?= \App\Config\App::baseUrl() ?>/carrito/add">
+                            <input type="hidden" name="prenda_id" value="<?= $prenda['id'] ?>">
+                            <button class="btn btn-sm btn-primary mt-2">
+                                Añadir al carrito
+                            </button>
+                        </form>
+
                         <!-- BOTÓN MODAL -->
                         <button class="btn btn-sm btn-primary mt-2"
                                 data-bs-toggle="modal"
@@ -109,9 +113,12 @@
                         
                         <div class="card-footer text-center">
                             
-                            <button class="btn btn-sm btn-primary mt-2" href="">
-                                Añadir al carrito
-                            </button>
+                            <form method="POST" action="<?= \App\Config\App::baseUrl() ?>/carrito/add">
+                                <input type="hidden" name="prenda_id" value="<?= $prenda['id'] ?>">
+                                <button class="btn btn-sm btn-primary mt-2">
+                                    Añadir al carrito
+                                </button>
+                            </form>
                             
                             <button class="btn btn-sm btn-primary mt-2" href="">
                                 Comprar

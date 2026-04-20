@@ -68,6 +68,15 @@ class AuthController extends BaseController
                 'rol' => $usuario['rol']
             ];
 
+            // comprobar si tiene carrito, si no, crearlo
+$carritoService = new \App\Services\CarritoService();
+
+$carrito = $carritoService->getByUserId($usuario['id']);
+
+if (!$carrito) {
+    $carritoService->create($usuario['id']);
+}
+
             if ($usuario['rol'] === 'user') {
                 header("Location: " . App::baseUrl() . "/");
             } else {
