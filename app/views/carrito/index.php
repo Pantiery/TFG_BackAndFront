@@ -3,7 +3,7 @@
 <?php $productos = $productos ?? []; ?>
 
 <div class="container">
-
+    <br>
     <!-- TITULO -->
     <div class="mb-4">
         <h2 class="fw-bold mb-2">Tu carrito</h2>
@@ -131,5 +131,5 @@
     </div>
 
 </div>
-
+<br>
 <?php require_once __DIR__ . '/../layout/footer.php'; ?>

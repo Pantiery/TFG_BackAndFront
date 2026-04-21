@@ -39,7 +39,7 @@ class CarritoService
     // Añadir prenda al carrito
     public function addItem($carritoId, $prendaId)
 {
-    // 1. comprobar si ya existe
+    // comprobar si ya existe
     $sql = "SELECT COUNT(*) FROM item_carrito 
             WHERE carrito_id = ? AND prenda_id = ?";
     $stmt = $this->db->prepare($sql);
@@ -48,14 +48,15 @@ class CarritoService
     $existe = $stmt->fetchColumn();
 
     if ($existe > 0) {
-        return; // ya está en carrito, no hacemos nada
+        return false; // ya está en carrito
     }
 
-    // 2. insertar si no existe
+    // insertar si no existe
     $sql = "INSERT INTO item_carrito (carrito_id, prenda_id)
             VALUES (?, ?)";
     $stmt = $this->db->prepare($sql);
-    $stmt->execute([$carritoId, $prendaId]);
+
+    return $stmt->execute([$carritoId, $prendaId]);
 }
 
     // Obtener productos del carrito

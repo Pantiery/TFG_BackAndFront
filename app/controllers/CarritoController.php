@@ -12,8 +12,14 @@ class CarritoController extends BaseController
     {
         $this->checkLogin();
 
-        $prendaId = $_POST['prenda_id'];
+        $prendaId = $_POST['prenda_id'] ?? null;
         $usuarioId = $_SESSION['usuario']['id'];
+
+        if (!$prendaId) {
+            $_SESSION['mensaje_error'] = "No se ha recibido ninguna prenda.";
+            header("Location: " . \App\Config\App::baseUrl() . "/prendas/catalogo");
+            exit;
+        }
 
         $carritoService = new CarritoService();
 
@@ -23,7 +29,13 @@ class CarritoController extends BaseController
             $carrito = $carritoService->create($usuarioId);
         }
 
-        $carritoService->addItem($carrito['id'], $prendaId);
+        $anadido = $carritoService->addItem($carrito['id'], $prendaId);
+
+        if ($anadido) {
+            $_SESSION['mensaje_exito'] = "Prenda añadida al carrito con éxito";
+        } else {
+            $_SESSION['mensaje_error'] = "Esa prenda ya está en tu carrito";
+        }
 
         header("Location: " . \App\Config\App::baseUrl() . "/prendas/catalogo");
         exit;
