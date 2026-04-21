@@ -88,7 +88,9 @@ class PrendaService
             $stmt->execute(['colegio' => $colegioSeleccionado]);
             $tiposPrenda = $stmt->fetchAll();
         } else {
-            $tiposPrenda = [];
+            $tiposPrenda = $pdo->query("
+                SELECT id, nombre FROM tipos_prenda
+            ")->fetchAll();
         }
 
         $colegios = $pdo->query("SELECT id, nombre FROM colegios")->fetchAll();
@@ -143,5 +145,46 @@ class PrendaService
             'genero_id' => $data['genero'],
             'imagen' => $imagenRuta
         ]);
+    }
+
+        public function filtrar($colegio, $tipo, $estado)
+    {
+        $pdo = Database::getConnection();
+
+        $sql = "
+            SELECT p.*, 
+                c.nombre AS colegio,
+                t.nombre AS tipo,
+                e.nombre AS estado,
+                u.nombre AS vendedor
+            FROM prendas p
+            JOIN colegios c ON p.colegio_id = c.id
+            JOIN tipos_prenda t ON p.tipo_prenda_id = t.id
+            JOIN estados_calidad e ON p.estado_calidad_id = e.id
+            JOIN usuarios u ON p.usuario_id = u.id
+            WHERE p.estado_publicacion = 'publicada'
+        ";
+
+        $params = [];
+
+        if (!empty($colegio)) {
+            $sql .= " AND p.colegio_id = ?";
+            $params[] = $colegio;
+        }
+
+        if (!empty($tipo)) {
+            $sql .= " AND p.tipo_prenda_id = ?";
+            $params[] = $tipo;
+        }
+
+        if (!empty($estado)) {
+            $sql .= " AND p.estado_calidad_id = ?";
+            $params[] = $estado;
+        }
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($params);
+
+        return $stmt->fetchAll();
     }
 }
