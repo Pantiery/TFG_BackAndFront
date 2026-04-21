@@ -82,12 +82,23 @@ class PrendaController extends BaseController
     }
 
     // Catálogo de prendas
-    public function catalogo()
+        public function catalogo()
     {
-        $prendas = $this->service->obtenerCatalogo();
+        $colegio = $_GET['colegio'] ?? null;
+        $tipo = $_GET['tipo'] ?? null;
+        $estado = $_GET['estado'] ?? null;
+
+        // 🔹 datos para filtros (IMPORTANTE)
+        $datos = $this->service->obtenerDatosFormulario($colegio ?: null);
+
+        // 🔹 prendas filtradas
+        $prendas = $this->service->filtrar($colegio, $tipo, $estado);
 
         $this->view('prendas/catalogo', [
-            'prendas' => $prendas
+            'prendas' => $prendas,
+            'colegios' => $datos['colegios'],
+            'tiposPrenda' => $datos['tiposPrenda'], // ← filtrados por colegio
+            'estadosCalidad' => $datos['estados']
         ]);
     }
 

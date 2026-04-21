@@ -26,15 +26,32 @@ class BaseController
 
     // FUNCION PARA CARGAR VISTAS
     protected function view($ruta, $data = [])
-    {
-        extract($data);
+{
+    // 🔥 Cargar carrito SIEMPRE para el header
+    if (isset($_SESSION['usuario'])) {
+        $carritoService = new \App\Services\CarritoService();
 
-        $archivo = __DIR__ . '/../views/' . $ruta . '.php';
+        $carrito = $carritoService->getByUserId($_SESSION['usuario']['id']);
 
-        if (!file_exists($archivo)) {
-            die("Vista no encontrada: " . $ruta);
+        $productos = [];
+
+        if ($carrito) {
+            $productos = $carritoService->getItems($carrito['id']);
         }
 
-        require $archivo;
+        $data['productos'] = $productos;
+    } else {
+        $data['productos'] = [];
     }
+
+    extract($data);
+
+    $archivo = __DIR__ . '/../views/' . $ruta . '.php';
+
+    if (!file_exists($archivo)) {
+        die("Vista no encontrada: " . $ruta);
+    }
+
+    require $archivo;
+}
 }
