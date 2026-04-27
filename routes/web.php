@@ -5,6 +5,7 @@ use App\Controllers\HomeController;
 use App\Controllers\AdminController;
 use App\Controllers\PrendaController;
 use App\Controllers\CarritoController;
+use App\Controllers\VentaController;
 
 // RUTAS DE LA APLICACIÓN
 
@@ -40,7 +41,7 @@ $router->get('/prendas/misVentas', [PrendaController::class, 'misVentas']);
 $router->get('/prendas/catalogo', [PrendaController::class, 'catalogo']);
 
 // RUTA PARA VER MIS COMPRAS REALIZADAS
-$router->get('/prendas/misCompras', [PrendaController::class, 'misCompras']);
+$router->get('/prendas/misCompras', [VentaController::class, 'misCompras']);
 
 // RUTA PARA AÑADIR CARRITO
 $router->post('/carrito/add', [CarritoController::class, 'add']);
@@ -54,3 +55,8 @@ $router->post('/carrito/checkout', [CarritoController::class, 'checkout']);
 
 // RUTA PARA VER DETALLES DE PRENDA
 $router->get('/prendas/detalles', [PrendaController::class, 'detalles']);
+
+// RUTA PARA COMPRAR
+// $router->post('/venta/comprar', [VentaController::class, 'comprar']);
+
+$router->get('/venta/comprar', [VentaController::class, 'comprar']);
