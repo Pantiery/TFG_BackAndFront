@@ -71,7 +71,7 @@
                             <!-- PRECIO -->
                             <div class="col-md-3 text-md-end mt-3 mt-md-0">
                                 <p class="fw-bold fs-5 mb-1">
-                                    <?= number_format($producto['precio_asignado'], 2) ?> €
+                                    <?= number_format($producto['precio_asignado'], 2, ',', '.') ?> €
                                 </p>
                             </div>
 
@@ -99,7 +99,7 @@
 
                 <div class="d-flex justify-content-between mb-3">
                     <span>Subtotal</span>
-                    <span><?= number_format($total, 2) ?> €</span>
+                    <span><?= number_format($total, 2, ',', '.') ?> €</span>
                 </div>
 
                 <div class="d-flex justify-content-between mb-4">
@@ -112,7 +112,7 @@
                 <div class="d-flex justify-content-between align-items-center mt-3 mb-4 total-box">
                     <span class="fw-bold fs-5">Total</span>
                     <span class="fw-bold fs-4">
-                        <?= number_format($total, 2) ?> €
+                        <?= number_format($total, 2, ',', '.') ?> €
                     </span>
                 </div>
 
