@@ -2,186 +2,191 @@
 <html>
 
 <head>
-    <!-- Metadatos -->
     <meta charset="UTF-8">
     <meta name="keywords" content="HTML, CSS, JavaScrip, Bootstrap">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Titulo -->
-    <title>Tu uniforme escolar</title>
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="">
-    <!-- Enlace Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Enlace a CSS -->
-    <link rel="stylesheet" href="/proyecto_TFG/TFG_BackAndFront/public/assets/css/layout.css">
-    <link rel="stylesheet" href="/proyecto_TFG/TFG_BackAndFront/public/assets/css/cards.css">
-    <!-- Iconos -->
 
+    <title>Tu uniforme escolar</title>
+
+    <link rel="icon" type="image/x-icon" href="">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="<?= \App\Config\App::url('/assets/css/layout.css') ?>">
+    <link rel="stylesheet" href="<?= \App\Config\App::url('/assets/css/cards.css') ?>">
 </head>
 
 <body>
-    <section>
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Uniformes segunda mano</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
+<section>
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
 
-                    <?php if (isset($_SESSION['usuario']) && $_SESSION['usuario']['rol'] === 'user'): ?>
+        <a class="navbar-brand" href="<?= \App\Config\App::url('/') ?>">
+            Uniformes segunda mano
+        </a>
 
-                        <ul class="navbar-nav">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-                            <li class="nav-item">
-                                <a class="nav-link active" href="/proyecto_TFG/TFG_BackAndFront/public/">
-                                    Inicio
-                                </a>
-                            </li>
+        <div class="collapse navbar-collapse" id="navbarNav">
 
-                            <li class="nav-item">
-                                <a class="nav-link active" href="/proyecto_TFG/TFG_BackAndFront/public/prendas/catalogo">
-                                    Catálogo
-                                </a>
-                            </li>
+        <?php if (isset($_SESSION['usuario']) && $_SESSION['usuario']['rol'] === 'user'): ?>
 
-                            <li class="nav-item">
-                                <a class="nav-link active" href="/proyecto_TFG/TFG_BackAndFront/public/prendas/solicitar">
-                                    Solicitar Venta
-                                </a>
-                            </li>
+            <ul class="navbar-nav">
 
-                            <li class="nav-item">
-                                <a class="nav-link active" href="/proyecto_TFG/TFG_BackAndFront/public/prendas/misVentas">
-                                    Mis Ventas
-                                </a>
-                            </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="<?= \App\Config\App::url('/') ?>">
+                        Inicio
+                    </a>
+                </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link active" href="">
-                                    Mis Compras
-                                </a>
-                            </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="<?= \App\Config\App::url('/prendas/catalogo') ?>">
+                        Catálogo
+                    </a>
+                </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link text-primary" href="/proyecto_TFG/TFG_BackAndFront/public/logout">
-                                    Cerrar Sesión
-                                </a>
-                            </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="<?= \App\Config\App::url('/prendas/solicitar') ?>">
+                        Solicitar Venta
+                    </a>
+                </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link disabled" href="#">
-                                    👤
-                                    <?= $_SESSION['usuario']['nombre'] . " " . $_SESSION['usuario']['apellido1'] . " " . "(" . $_SESSION['usuario']['rol'] . ")" ?>
-                                </a>
-                            </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="<?= \App\Config\App::url('/prendas/misVentas') ?>">
+                        Mis Ventas
+                    </a>
+                </li>
 
-                        </ul>
+                <li class="nav-item">
+                    <a class="nav-link active" href="<?= \App\Config\App::url('/prendas/misCompras') ?>">
+                        Mis Compras
+                    </a>
+                </li>
 
-                        <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-primary" href="<?= \App\Config\App::url('/logout') ?>">
+                        Cerrar Sesión
+                    </a>
+                </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link active" href="">
-                                    Monedero
-                                </a>
-                            </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">
+                        👤
+                        <?= $_SESSION['usuario']['nombre'] . " " . $_SESSION['usuario']['apellido1'] . " (" . $_SESSION['usuario']['rol'] . ")" ?>
+                    </a>
+                </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link active" href="<?= \App\Config\App::baseUrl() ?>/carrito"">
-                                    Carrito  
-                                    <span class="badge text-bg-dark rounded-pill px-3 py-2 ms-2">
-                                        <?= count($productos ?? []) ?>
-                                    </span>
-                                </a>
-                            </li>
+            </ul>
 
-                        </ul>
+            <ul class="navbar-nav ms-auto">
 
-                    <?php elseif (isset($_SESSION['usuario']) && $_SESSION['usuario']['rol'] === 'admin'): ?>
-                        <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">
+                        Monedero
+                    </a>
+                </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link active" href="/proyecto_TFG/TFG_BackAndFront/public/">
-                                    Inicio
-                                </a>
-                            </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="<?= \App\Config\App::url('/carrito') ?>">
+                        Carrito
+                        <span class="badge text-bg-dark rounded-pill px-3 py-2 ms-2">
+                            <?= count($productos ?? []) ?>
+                        </span>
+                    </a>
+                </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link active" href="">
-                                    Gestión de Prendas
-                                </a>
-                            </li>
+            </ul>
 
-                            <li class="nav-item">
-                                <a class="nav-link active" href="">
-                                    Gestión de Ventas
-                                </a>
-                            </li>
+        <?php elseif (isset($_SESSION['usuario']) && $_SESSION['usuario']['rol'] === 'admin'): ?>
 
-                            <li class="nav-item">
-                                <a class="nav-link active" href="">
-                                    Gestión de Usuarios
-                                </a>
-                            </li>
+            <ul class="navbar-nav">
 
-                            <li class="nav-item">
-                                <a class="nav-link text-primary" href="/proyecto_TFG/TFG_BackAndFront/public/logout">
-                                    Cerrar sesión
-                                </a>
-                            </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="<?= \App\Config\App::url('/') ?>">
+                        Inicio
+                    </a>
+                </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link disabled" href="#">
-                                    👤
-                                    <?= $_SESSION['usuario']['nombre'] . " " . $_SESSION['usuario']['apellido1'] . " " . "(" . $_SESSION['usuario']['rol'] . ")" ?>
-                                </a>
-                            </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">
+                        Gestión de Prendas
+                    </a>
+                </li>
 
-                        </ul>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">
+                        Gestión de Ventas
+                    </a>
+                </li>
 
-                        <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">
+                        Gestión de Usuarios
+                    </a>
+                </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link active" href="">
-                                    Estadísticas
-                                </a>
-                            </li>
+                <li class="nav-item">
+                    <a class="nav-link text-primary" href="<?= \App\Config\App::url('/logout') ?>">
+                        Cerrar sesión
+                    </a>
+                </li>
 
-                        </ul>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">
+                        👤
+                        <?= $_SESSION['usuario']['nombre'] . " " . $_SESSION['usuario']['apellido1'] . " (" . $_SESSION['usuario']['rol'] . ")" ?>
+                    </a>
+                </li>
 
-                    <?php else: ?>
-                        <ul class="navbar-nav">
+            </ul>
 
-                            <li class="nav-item">
-                                <a class="nav-link active" href="/proyecto_TFG/TFG_BackAndFront/public/">
-                                    Inicio
-                                </a>
-                            </li>
+            <ul class="navbar-nav ms-auto">
 
-                            <li class="nav-item">
-                                <a class="nav-link active" href="/proyecto_TFG/TFG_BackAndFront/public/prendas/catalogo">
-                                    Catálogo
-                                </a>
-                            </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">
+                        Estadísticas
+                    </a>
+                </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link text-primary" href="/proyecto_TFG/TFG_BackAndFront/public/login">
-                                    Iniciar sesión
-                                </a>
-                            </li>
+            </ul>
 
-                            <li class="nav-item">
-                                <a class="nav-link active" href="/proyecto_TFG/TFG_BackAndFront/public/register">
-                                    Registrate
-                                </a>
-                            </li>
+        <?php else: ?>
 
-                        </ul>
+            <ul class="navbar-nav">
 
-                    <?php endif; ?>
+                <li class="nav-item">
+                    <a class="nav-link active" href="<?= \App\Config\App::url('/') ?>">
+                        Inicio
+                    </a>
+                </li>
 
-                </div>
-            </div>
-        </nav>
-    </section>
+                <li class="nav-item">
+                    <a class="nav-link active" href="<?= \App\Config\App::url('/prendas/catalogo') ?>">
+                        Catálogo
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-primary" href="<?= \App\Config\App::url('/login') ?>">
+                        Iniciar sesión
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="<?= \App\Config\App::url('/register') ?>">
+                        Regístrate
+                    </a>
+                </li>
+
+            </ul>
+
+        <?php endif; ?>
+
+        </div>
+    </div>
+</nav>
+</section>

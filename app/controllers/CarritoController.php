@@ -34,7 +34,7 @@ class CarritoController extends BaseController
         if ($anadido) {
             $_SESSION['mensaje_exito'] = "Prenda añadida al carrito con éxito";
         } else {
-            $_SESSION['mensaje_error'] = "Esa prenda ya está en tu carrito";
+            $_SESSION['mensaje_error'] = "No se puede añadir la prenda (ya está en el carrito o ha sido vendida)";
         }
 
         header("Location: " . \App\Config\App::baseUrl() . "/prendas/catalogo");
