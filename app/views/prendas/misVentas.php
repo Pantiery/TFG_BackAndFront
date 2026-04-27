@@ -19,7 +19,7 @@
                     <div class="border rounded p-2 mb-2 bg-success-subtle">
                         <strong><?= htmlspecialchars($p['tipo']) ?></strong><br>
                         <?= htmlspecialchars($p['colegio']) ?><br>
-                        <?= $p['precio_asignado'] ?> €
+                        <?= number_format($p['precio_asignado'], 2, ',', '.') ?> €
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -38,7 +38,7 @@
                     <div class="border rounded p-2 mb-2 bg-danger-subtle">
                         <strong><?= htmlspecialchars($p['tipo']) ?></strong><br>
                         <?= htmlspecialchars($p['colegio']) ?><br>
-                        <?= $p['precio_asignado'] ?> €
+                        <?= number_format($p['precio_asignado'], 2, ',', '.') ?> €
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -57,7 +57,7 @@
                     <div class="border rounded p-2 mb-2 bg-warning-subtle">
                         <strong><?= htmlspecialchars($p['tipo']) ?></strong><br>
                         <?= htmlspecialchars($p['colegio']) ?><br>
-                        <?= $p['precio_asignado'] ?> €
+                        <?= number_format($p['precio_asignado'], 2, ',', '.') ?> €
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -76,7 +76,7 @@
                     <div class="border rounded p-2 mb-2 bg-light">
                         <strong><?= htmlspecialchars($p['tipo']) ?></strong><br>
                         <?= htmlspecialchars($p['colegio']) ?><br>
-                        <?= $p['precio_asignado'] ?> €
+                        <?= number_format($p['precio_asignado'], 2, ',', '.') ?> €
                     </div>
                 <?php endforeach; ?>
             </div>
