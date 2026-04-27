@@ -59,7 +59,7 @@
                     </div>
 
                     <div class="card-footer text-center">
-                        <strong><?= $prenda['precio_asignado'] ?> €</strong>
+                        <strong><?= number_format($prenda['precio_asignado'], 2, ',', '.') ?> €</strong>
 
                         <br>
                         
@@ -106,7 +106,7 @@
 
                             <p><strong>Colegio:</strong> <?= htmlspecialchars($prenda['colegio']) ?></p>
                             <p><strong>Estado:</strong> <?= htmlspecialchars($prenda['estado']) ?></p>
-                            <p><strong>Precio:</strong> <?= $prenda['precio_asignado'] ?> €</p>
+                            <p><strong>Precio:</strong> <?= number_format($prenda['precio_asignado'], 2, ',', '.') ?> €</p>
                             <strong>Vendedor:</strong> <?= htmlspecialchars($prenda['vendedor']) ?><br>
 
                         </div>
