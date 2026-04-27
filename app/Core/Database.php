@@ -14,20 +14,22 @@ class Database
         if (self::$connection === null) {
 
             //HOST
-            // $host = 'localhost';
+             $host = 'localhost';
             //NOMBRE BASE DE DATOS
-            // $db = 'uniformes_segunda_mano';
+             $dbname = 'uniformes_segunda_mano';
             //USER
-            // $user = 'root';
+            $user = 'root';
             //PASSWORD VACIO
             $pass = '';
             //CHARSET (que es?)
-
-            $host = 'sql8.freesqldatabase.com';
-            $dbname = 'sql8823386'; // ← tu BD
-            $user = 'sql8823386';
-            $pass = 'gtqVCrJh67';
             $charset = 'utf8mb4';
+
+            // datos para conexión remota (freesqldatabase) no funciona
+            // $host = 'sql8.freesqldatabase.com';
+            // $dbname = 'sql8823386'; // ← tu BD
+            // $user = 'sql8823386';
+            // $pass = 'gtqVCrJh67';
+            
 
             try {
                 self::$connection = new PDO(

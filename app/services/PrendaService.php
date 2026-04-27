@@ -46,7 +46,13 @@ class PrendaService
             'estado' => $estado
         ]);
 
-        return $stmt->fetchColumn();
+        $precio = $stmt->fetchColumn();
+
+        if ($precio === false) {
+            throw new \Exception("No existe precio definido");
+        }
+
+        return $precio;
     }
 
     // Función para obtener el catálogo de prendas publicadas
@@ -128,7 +134,7 @@ class PrendaService
             throw new \Exception("Esa prenda no pertenece a ese colegio");
         }
 
-        // Precio
+        // Obtener precio estándar
         $precio = $this->obtenerPrecio($pdo, $data['tipoPrenda'], $data['estadoPrenda']);
 
         // Imagen

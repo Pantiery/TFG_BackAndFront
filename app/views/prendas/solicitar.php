@@ -102,6 +102,10 @@
                         <input type="file" name="archivoEnviado" class="form-control" required>
                     </div>
 
+                    <p class="text-muted small text-center">
+                        El precio se asignará automáticamente según el tipo y estado de la prenda.
+                    </p>
+
 
                     <button type="submit" class="btn btn-primary w-100">
                         Solicitar venta
