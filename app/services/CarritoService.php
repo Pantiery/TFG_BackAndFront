@@ -20,7 +20,7 @@ class CarritoService
     {
         $sql = 'SELECT * FROM carrito WHERE usuario_id = ? LIMIT 1';
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([ $usuarioId ]);
+        $stmt->execute([$usuarioId]);
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
@@ -31,7 +31,7 @@ class CarritoService
     {
         $sql = 'INSERT INTO carrito (usuario_id) VALUES (?)';
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([ $usuarioId ]);
+        $stmt->execute([$usuarioId]);
 
         return [
             'id' => $this->db->lastInsertId(),
@@ -45,7 +45,7 @@ class CarritoService
         // comprobar si la prenda ya está vendida
         $sqlEstado = 'SELECT estado_publicacion FROM prendas WHERE id = ?';
         $stmtEstado = $this->db->prepare($sqlEstado);
-        $stmtEstado->execute([ $prendaId ]);
+        $stmtEstado->execute([$prendaId]);
 
         $estado = $stmtEstado->fetchColumn();
 
@@ -57,7 +57,7 @@ class CarritoService
         $sql = 'SELECT COUNT(*) FROM item_carrito 
             WHERE carrito_id = ? AND prenda_id = ?';
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([ $carritoId, $prendaId ]);
+        $stmt->execute([$carritoId, $prendaId]);
 
         $existe = $stmt->fetchColumn();
 
@@ -71,7 +71,7 @@ class CarritoService
             VALUES (?, ?)';
         $stmt = $this->db->prepare($sql);
 
-        return $stmt->execute([ $carritoId, $prendaId ]);
+        return $stmt->execute([$carritoId, $prendaId]);
     }
 
     // Obtener productos del carrito
@@ -79,17 +79,19 @@ class CarritoService
     public function getItems($carritoId)
     {
         $sql = 'SELECT 
-            p.*,
-            tp.nombre AS tipo,
-            c.nombre AS colegio_nombre
-        FROM item_carrito ic
-        JOIN prendas p ON ic.prenda_id = p.id
-        LEFT JOIN tipos_prenda tp ON p.tipo_prenda_id = tp.id
-        LEFT JOIN colegios c ON p.colegio_id = c.id
-        WHERE ic.carrito_id = ?';
+                    p.*,
+                    tp.nombre AS tipo,
+                    c.nombre AS colegio_nombre,
+                    ec.nombre AS estado_calidad
+                FROM item_carrito ic
+                JOIN prendas p ON ic.prenda_id = p.id
+                LEFT JOIN tipos_prenda tp ON p.tipo_prenda_id = tp.id
+                LEFT JOIN colegios c ON p.colegio_id = c.id
+                LEFT JOIN estados_calidad ec ON p.estado_calidad_id = ec.id
+                WHERE ic.carrito_id = ?';
 
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([ $carritoId ]);
+        $stmt->execute([$carritoId]);
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -107,7 +109,7 @@ class CarritoService
         }
 
         // 3. Obtener items del carrito
-        return $this->getItems($carrito[ 'id' ]);
+        return $this->getItems($carrito['id']);
     }
 
     // Eliminar item del carrito
@@ -118,7 +120,7 @@ class CarritoService
                 WHERE carrito_id = ? AND prenda_id = ?';
 
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([ $carritoId, $prendaId ]);
+        $stmt->execute([$carritoId, $prendaId]);
     }
 
     // Vaciar carrito
@@ -127,6 +129,6 @@ class CarritoService
     {
         $sql = 'DELETE FROM item_carrito WHERE carrito_id = ?';
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([ $carritoId ]);
+        $stmt->execute([$carritoId]);
     }
 }

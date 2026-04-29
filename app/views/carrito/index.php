@@ -54,7 +54,7 @@
                                 <div class="d-flex flex-wrap gap-3 small text-secondary mb-3">
                                     <span>
                                         <strong>Estado:</strong>
-                                        <?= htmlspecialchars($producto['estado_publicacion']) ?>
+                                        <?= htmlspecialchars($producto['estado_calidad']) ?>
                                     </span>
                                 </div>
 
