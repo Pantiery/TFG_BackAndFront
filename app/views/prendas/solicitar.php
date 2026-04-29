@@ -1,5 +1,14 @@
 <?php require_once __DIR__ . '/../layout/header.php'; ?>
 
+// Variables para evitar warnings si no se pasan desde el controller
+<?php
+$colegios = $colegios ?? [];
+$tiposPrenda = $tiposPrenda ?? [];
+$estados = $estados ?? [];
+$tallas = $tallas ?? [];
+$generos = $generos ?? [];
+?>
+
 <div class="container mt-4 mb-4">
 
     <!-- MENSAJES EXITO O ERROR -->

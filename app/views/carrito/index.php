@@ -15,7 +15,7 @@
         <!-- COLUMNA IZQUIERDA -->
         <div class="col-lg-8">
             <div class="card border-0 shadow-sm rounded-4 p-4 carrito-card">
-                
+
                 <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
                     <h3 class="fs-4 fw-semibold mb-0">Productos añadidos</h3>
                     <span class="badge text-bg-dark rounded-pill px-3 py-2">
@@ -53,7 +53,7 @@
 
                                 <div class="d-flex flex-wrap gap-3 small text-secondary mb-3">
                                     <span>
-                                        <strong>Estado:</strong> 
+                                        <strong>Estado:</strong>
                                         <?= htmlspecialchars($producto['estado_publicacion']) ?>
                                     </span>
                                 </div>
@@ -87,13 +87,19 @@
         <!-- COLUMNA DERECHA -->
         <div class="col-lg-4">
             <div class="card border-0 shadow-sm rounded-4 p-4 resumen-card">
-                
+
                 <?php
                 $total = 0;
-foreach ($productos as $producto) {
-    $total += $producto['precio_asignado'];
-}
-?>
+                $totalComision = 0;
+
+                foreach ($productos as $producto) {
+                    $precio = $producto['precio_asignado'];
+                    $comision = $precio * 0.1;
+
+                    $total += $precio;
+                    $totalComision += $comision;
+                }
+                ?>
 
                 <h3 class="fs-4 fw-semibold mb-4">Resumen del pedido</h3>
 
@@ -101,6 +107,14 @@ foreach ($productos as $producto) {
                     <span>Subtotal</span>
                     <span><?= number_format($total, 2, ',', '.') ?> €</span>
                 </div>
+
+                <div class="d-flex justify-content-between mb-3">
+                    <span>Comisión plataforma (10%)</span>
+                    <span><?= number_format($totalComision, 2, ',', '.') ?> €</span>
+                </div>
+                <p class="text-muted small">
+                    La comisión se descuenta al vendedor, no al comprador.
+                </p>
 
                 <div class="d-flex justify-content-between mb-4">
                     <span>Envío</span>
@@ -122,8 +136,8 @@ foreach ($productos as $producto) {
                     </button>
                 </form>
 
-                <a href="<?= \App\Config\App::baseUrl() ?>/prendas/catalogo" 
-                   class="btn btn-outline-secondary w-100 py-3 fw-semibold">
+                <a href="<?= \App\Config\App::baseUrl() ?>/prendas/catalogo"
+                    class="btn btn-outline-secondary w-100 py-3 fw-semibold">
                     Seguir comprando
                 </a>
 
@@ -134,10 +148,10 @@ foreach ($productos as $producto) {
     <br>
     <!-- MENSAJES DE ÉXITO O ERROR -->
     <?php if (isset($_SESSION['mensaje_exito'])): ?>
-    <div class="alert alert-success">
-        <?= $_SESSION['mensaje_exito'] ?>
-    </div>
-    <?php unset($_SESSION['mensaje_exito']); ?>
+        <div class="alert alert-success">
+            <?= $_SESSION['mensaje_exito'] ?>
+        </div>
+        <?php unset($_SESSION['mensaje_exito']); ?>
     <?php endif; ?>
 
     <?php if (isset($_SESSION['mensaje_error'])): ?>

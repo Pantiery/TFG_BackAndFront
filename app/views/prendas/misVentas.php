@@ -1,5 +1,13 @@
 <?php require_once __DIR__ . '/../layout/header.php'; ?>
 
+// Variables para evitar warnings si no se pasan desde el controller
+<?php
+$enVenta = $enVenta ?? [];
+$vendidas = $vendidas ?? [];
+$pendientes = $pendientes ?? [];
+$rechazadas = $rechazadas ?? [];
+?>
+
 <div class="container-fluid mt-4">
 
     <h2 class="text-center mb-4">Mis prendas</h2>

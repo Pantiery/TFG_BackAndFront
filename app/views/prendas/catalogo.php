@@ -15,7 +15,7 @@ $colegios = $colegios ?? [];
 $tiposPrenda = $tiposPrenda ?? [];
 $estadosCalidad = $estadosCalidad ?? [];
 
-// 🔥 nombres unificados
+// nombres unificados
 $filtroColegio = $_GET['colegio'] ?? '';
 $filtroTipo = $_GET['tipo'] ?? '';
 $filtroEstado = $_GET['estado'] ?? '';
