@@ -76,7 +76,7 @@
                 <li class="nav-item">
                     <a class="nav-link disabled" href="#">
                         👤
-                        <?= $_SESSION['usuario']['nombre'] . " " . $_SESSION['usuario']['apellido1'] . " (" . $_SESSION['usuario']['rol'] . ")" ?>
+                        <?= $_SESSION['usuario']['nombre'] . ' ' . $_SESSION['usuario']['apellido1'] . ' (' . $_SESSION['usuario']['rol'] . ')' ?>
                     </a>
                 </li>
 
@@ -138,7 +138,7 @@
                 <li class="nav-item">
                     <a class="nav-link disabled" href="#">
                         👤
-                        <?= $_SESSION['usuario']['nombre'] . " " . $_SESSION['usuario']['apellido1'] . " (" . $_SESSION['usuario']['rol'] . ")" ?>
+                        <?= $_SESSION['usuario']['nombre'] . ' ' . $_SESSION['usuario']['apellido1'] . ' (' . $_SESSION['usuario']['rol'] . ')' ?>
                     </a>
                 </li>
 

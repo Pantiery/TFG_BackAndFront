@@ -90,10 +90,10 @@
                 
                 <?php
                 $total = 0;
-                foreach ($productos as $producto) {
-                    $total += $producto['precio_asignado'];
-                }
-                ?>
+foreach ($productos as $producto) {
+    $total += $producto['precio_asignado'];
+}
+?>
 
                 <h3 class="fs-4 fw-semibold mb-4">Resumen del pedido</h3>
 

@@ -21,27 +21,32 @@ class Prenda
             'precio' => $data['precio'],
             'talla_id' => $data['talla_id'],
             'genero_id' => $data['genero_id'],
-            'imagen' => $data['imagen']
+            'imagen' => $data['imagen'],
         ]);
     }
 
     // funcion para obtener todas las prendas publicadas
-    public function obtenerPublicadas($pdo)
+    public function obtenerPublicadas($pdo, $usuarioId)
     {
-        $stmt = $pdo->query("
-        SELECT 
-            p.*, 
-            tp.nombre AS tipo, 
-            c.nombre AS colegio, 
-            e.nombre AS estado,
-            u.nombre AS vendedor
-        FROM prendas p
-        JOIN tipos_prenda tp ON p.tipo_prenda_id = tp.id
-        JOIN colegios c ON p.colegio_id = c.id
-        JOIN estados_calidad e ON p.estado_calidad_id = e.id
-        JOIN usuarios u ON p.usuario_id = u.id
-        WHERE p.estado_publicacion = 'publicada'
-    ");
+        $stmt = $pdo->prepare("
+            SELECT 
+                p.*, 
+                tp.nombre AS tipo, 
+                c.nombre AS colegio, 
+                e.nombre AS estado,
+                u.nombre AS vendedor
+            FROM prendas p
+            JOIN tipos_prenda tp ON p.tipo_prenda_id = tp.id
+            JOIN colegios c ON p.colegio_id = c.id
+            JOIN estados_calidad e ON p.estado_calidad_id = e.id
+            JOIN usuarios u ON p.usuario_id = u.id
+            WHERE p.estado_publicacion = 'publicada'
+            AND p.usuario_id != :usuario_id
+        ");
+
+        $stmt->execute([
+            'usuario_id' => $usuarioId,
+        ]);
 
         return $stmt->fetchAll();
     }
@@ -49,18 +54,18 @@ class Prenda
     // funcion para obtener prendas por usuario y estado de publicación
     public function obtenerPorUsuarioYEstado($pdo, $usuarioId, $estado)
     {
-        $stmt = $pdo->prepare("
+        $stmt = $pdo->prepare('
         SELECT p.*, tp.nombre AS tipo, c.nombre AS colegio
         FROM prendas p
         JOIN tipos_prenda tp ON p.tipo_prenda_id = tp.id
         JOIN colegios c ON p.colegio_id = c.id
         WHERE p.usuario_id = :usuario_id
         AND p.estado_publicacion = :estado
-    ");
+    ');
 
         $stmt->execute([
             'usuario_id' => $usuarioId,
-            'estado' => $estado
+            'estado' => $estado,
         ]);
 
         return $stmt->fetchAll();

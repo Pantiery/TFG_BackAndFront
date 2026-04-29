@@ -4,25 +4,23 @@ require __DIR__ . '/../config/secciones-config.php';
 
 $archivo = __DIR__ . '/../data/noticias.json';
 
-if(file_exists($archivo)){
+if (file_exists($archivo)) {
     $noticias = json_decode(file_get_contents($archivo), true);
-}else{
+} else {
     $noticias = [];
 }
 
 /* FILTRAR POR CATEGORIA SI EXISTE */
 
-if(isset($categoria)){
-    
-    $noticias = array_filter($noticias, function($noticia) use ($categoria){
+if (isset($categoria)) {
+    $noticias = array_filter($noticias, function ($noticia) use ($categoria) {
         return $noticia['categoria'] === $categoria;
     });
-
 }
 
 /* ordenar por fecha */
 
-usort($noticias, function($a, $b){
+usort($noticias, function ($a, $b) {
     return strtotime($b['fecha']) - strtotime($a['fecha']);
 });
 
@@ -32,8 +30,8 @@ $ultimas = array_slice($noticias, 0, 8);
 
 /* color botón */
 
-$seccionActual = $SECCIONES[$categoria ?? "noticias"];
-$colorBoton = $seccionActual["color"];
+$seccionActual = $SECCIONES[$categoria ?? 'noticias'];
+$colorBoton = $seccionActual['color'];
 
 ?>
 
@@ -43,10 +41,10 @@ $colorBoton = $seccionActual["color"];
 
 <div class="grid-noticias">
 
-<?php if(!empty($ultimas)): ?>
+<?php if (!empty($ultimas)): ?>
 
     <?php foreach ($ultimas as $noticia): ?>
-        <?php include __DIR__.'/component-card-noticia.php'; ?>
+        <?php include __DIR__ . '/component-card-noticia.php'; ?>
     <?php endforeach; ?>
 
 <?php else: ?>

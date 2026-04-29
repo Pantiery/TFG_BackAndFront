@@ -17,7 +17,7 @@
         </small>
 
         <p class="noticia-texto">
-            <?= substr($noticia['texto'],0,140) ?>...
+            <?= substr($noticia['texto'], 0, 140) ?>...
         </p>
 
     </div>

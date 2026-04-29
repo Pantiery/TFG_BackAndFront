@@ -2,15 +2,15 @@
 
 $archivo = __DIR__ . '/../data/noticias.json';
 
-if(file_exists($archivo)){
+if (file_exists($archivo)) {
     $noticias = json_decode(file_get_contents($archivo), true);
-}else{
+} else {
     $noticias = [];
 }
 
 /* ordenar por fecha */
 
-usort($noticias, function($a,$b){
+usort($noticias, function ($a, $b) {
     return strtotime($b['fecha']) - strtotime($a['fecha']);
 });
 
@@ -18,10 +18,10 @@ usort($noticias, function($a,$b){
 
 <div class="grid-noticias">
 
-<?php if(!empty($noticias)): ?>
+<?php if (!empty($noticias)): ?>
 
     <?php foreach ($noticias as $noticia): ?>
-        <?php include __DIR__.'/component-card-noticia.php'; ?>
+        <?php include __DIR__ . '/component-card-noticia.php'; ?>
     <?php endforeach; ?>
 
 <?php else: ?>

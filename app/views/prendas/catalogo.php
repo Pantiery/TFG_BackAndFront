@@ -1,12 +1,12 @@
 <?php
 
-$titulo = "Catálogo de Prendas";
-$tituloHero = "Explora nuestro catálogo de prendas";        
-$subtituloHero = "Encuentra las mejores prendas de segunda mano para tu uniforme escolar.";
+$titulo = 'Catálogo de Prendas';
+$tituloHero = 'Explora nuestro catálogo de prendas';
+$subtituloHero = 'Encuentra las mejores prendas de segunda mano para tu uniforme escolar.';
 $imagenes = [
-    "/proyecto_TFG/TFG_BackAndFront/public/assets/img/hero/hero-catalogo1.jpg",
-    "/proyecto_TFG/TFG_BackAndFront/public/assets/img/hero/hero-catalogo2.webp",
-    "/proyecto_TFG/TFG_BackAndFront/public/assets/img/hero/hero-catalogo3.webp"
+    '/proyecto_TFG/TFG_BackAndFront/public/assets/img/hero/hero-catalogo1.jpg',
+    '/proyecto_TFG/TFG_BackAndFront/public/assets/img/hero/hero-catalogo2.webp',
+    '/proyecto_TFG/TFG_BackAndFront/public/assets/img/hero/hero-catalogo3.webp',
 ];
 
 require_once __DIR__ . '/../layout/header.php';
@@ -43,7 +43,7 @@ $filtroEstado = $_GET['estado'] ?? '';
 
                         <?php foreach ($colegios as $colegio): ?>
                             <option value="<?= $colegio['id'] ?>"
-                                <?= (string)$filtroColegio === (string)$colegio['id'] ? 'selected' : '' ?>>
+                                <?= (string) $filtroColegio === (string) $colegio['id'] ? 'selected' : '' ?>>
                                 <?= htmlspecialchars($colegio['nombre']) ?>
                             </option>
                         <?php endforeach; ?>
@@ -59,7 +59,7 @@ $filtroEstado = $_GET['estado'] ?? '';
 
                         <?php foreach ($tiposPrenda as $tipo): ?>
                             <option value="<?= $tipo['id'] ?>"
-                                <?= (string)$filtroTipo === (string)$tipo['id'] ? 'selected' : '' ?>>
+                                <?= (string) $filtroTipo === (string) $tipo['id'] ? 'selected' : '' ?>>
                                 <?= htmlspecialchars($tipo['nombre']) ?>
                             </option>
                         <?php endforeach; ?>
@@ -75,7 +75,7 @@ $filtroEstado = $_GET['estado'] ?? '';
 
                         <?php foreach ($estadosCalidad as $estado): ?>
                             <option value="<?= $estado['id'] ?>"
-                                <?= (string)$filtroEstado === (string)$estado['id'] ? 'selected' : '' ?>>
+                                <?= (string) $filtroEstado === (string) $estado['id'] ? 'selected' : '' ?>>
                                 <?= htmlspecialchars(ucfirst($estado['nombre'])) ?>
                             </option>
                         <?php endforeach; ?>

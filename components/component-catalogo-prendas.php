@@ -10,14 +10,16 @@
 
             <?php
             if (
-                !$prenda['tipo'] ||
-                !$prenda['colegio'] ||
-                !$prenda['precio_asignado'] ||
-                $prenda['precio_asignado'] <= 0
-            ) continue;
+                !$prenda['tipo']
+                || !$prenda['colegio']
+                || !$prenda['precio_asignado']
+                || $prenda['precio_asignado'] <= 0
+            ) {
+                continue;
+            }
 
             // ID único para cada modal
-            $modalId = "modalPrenda_" . $prenda['id'];
+            $modalId = 'modalPrenda_' . $prenda['id'];
             ?>
 
             <div class="col-md-3 mb-4">
@@ -42,13 +44,14 @@
                             <?php
                             $badge = 'secondary';
 
-                            if ($prenda['estado'] == 'excelente')
-                                $badge = 'success';
-                            elseif ($prenda['estado'] == 'bueno')
-                                $badge = 'warning';
-                            elseif ($prenda['estado'] == 'aceptable')
-                                $badge = 'danger';
-                            ?>
+            if ($prenda['estado'] == 'excelente') {
+                $badge = 'success';
+            } elseif ($prenda['estado'] == 'bueno') {
+                $badge = 'warning';
+            } elseif ($prenda['estado'] == 'aceptable') {
+                $badge = 'danger';
+            }
+            ?>
 
                             <span class="badge bg-<?= $badge ?>">
                                 <?= htmlspecialchars($prenda['estado']) ?>

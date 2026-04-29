@@ -15,7 +15,7 @@ class UploadService
         $ruta = __DIR__ . '/../../public/uploads/' . $nombre;
 
         if (!move_uploaded_file($file['tmp_name'], $ruta)) {
-            throw new \Exception("Error al subir imagen");
+            throw new \Exception('Error al subir imagen');
         }
 
         return '/uploads/' . $nombre;

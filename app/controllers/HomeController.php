@@ -9,7 +9,7 @@ class HomeController extends BaseController
         $user = $_SESSION['usuario'] ?? null;
 
         $this->view('prendas/home', [
-            'user' => $user
+            'user' => $user,
         ]);
     }
 }

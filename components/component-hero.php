@@ -5,8 +5,9 @@
     <div class="carousel-inner">
 
       <?php foreach ($imagenesHero as $index => $img) { ?>
-        <div class="carousel-item <?php if ($index == 0)
-          echo 'active'; ?>">
+        <div class="carousel-item <?php if ($index == 0) {
+            echo 'active';
+        } ?>">
           <img src="<?php echo $img; ?>" class="d-block w-100">
         </div>
       <?php } ?>

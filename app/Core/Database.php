@@ -12,11 +12,10 @@ class Database
     public static function getConnection()
     {
         if (self::$connection === null) {
-
             //HOST
-             $host = 'localhost';
+            $host = 'localhost';
             //NOMBRE BASE DE DATOS
-             $dbname = 'uniformes_segunda_mano';
+            $dbname = 'uniformes_segunda_mano';
             //USER
             $user = 'root';
             //PASSWORD VACIO
@@ -29,23 +28,20 @@ class Database
             // $dbname = 'sql8823386'; // ← tu BD
             // $user = 'sql8823386';
             // $pass = 'gtqVCrJh67';
-            
 
             try {
                 self::$connection = new PDO(
                     "mysql:host=$host;dbname=$dbname;charset=utf8",
                     $user,
-                    $pass
+                    $pass,
                 );
 
                 self::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
             } catch (PDOException $e) {
-                die("Error de conexión: " . $e->getMessage());
+                die('Error de conexión: ' . $e->getMessage());
             }
         }
 
         return self::$connection;
     }
 }
-

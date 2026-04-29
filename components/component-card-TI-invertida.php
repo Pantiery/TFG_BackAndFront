@@ -2,7 +2,7 @@
     <div class="container seccion-montaña">
         <div class="row align-items-center g-4">
 
-        <?php if(!empty($tituloExtra)): ?>
+        <?php if (!empty($tituloExtra)): ?>
 <h2 class="seccion-subtitulo text-center mb-4"><?= $tituloExtra ?></h2>
 <?php endif; ?>
 
