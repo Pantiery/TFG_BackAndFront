@@ -19,8 +19,7 @@
 </head>
 
 <body>
-    <section>
-        <nav class="navbar navbar-expand-lg navbar-light">
+        <nav class="navbar navbar-expand-xxl navbar-light">
             <div class="container-fluid">
 
                 <a class="navbar-brand" href="<?= \App\Config\App::url('/') ?>">
@@ -35,7 +34,7 @@
 
                     <?php if (isset($_SESSION['usuario']) && $_SESSION['usuario']['rol'] === 'user'): ?>
 
-                        <ul class="navbar-nav">
+                        <ul class="navbar-nav mx-auto">
 
                             <li class="nav-item">
                                 <a class="nav-link active" href="<?= \App\Config\App::url('/') ?>">
@@ -189,4 +188,3 @@
                 </div>
             </div>
         </nav>
-    </section>

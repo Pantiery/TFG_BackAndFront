@@ -1,6 +1,6 @@
 /* GENERALES */
 html, body {
-  height: 100%;
+  min-height: 100vh;
   margin: 0;
 }
 
@@ -15,7 +15,7 @@ main {
   flex: 1;
   padding: 0;
   margin: 0;
-  
+  width: 100%;
 }
 
 p.parrafo-info {
@@ -23,7 +23,51 @@ p.parrafo-info {
   color: rgb(40, 34, 34);
 }
 
+/* 🔥 NAVBAR MÓVIL (VERSIÓN CORRECTA) */
+@media (max-width: 768px) {
+
+  .navbar-collapse {
+    background-color: #4cb1e0;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .navbar-collapse .navbar-nav {
+    width: 100%;
+    align-items: center;
+  }
+
+  .navbar-collapse .nav-item {
+    width: 100%;
+  }
+
+  .navbar-collapse .nav-link {
+    display: block;
+    width: 100%;
+  }
+
+}
+
 /* HEADER */
+@media (max-width: 768px) {
+
+  .navbar-nav .nav-link {
+    display: block;
+    text-align: center;  
+    padding: 10px 0;     
+  }
+
+  .navbar-nav .nav-item {
+    width: 100%;
+  }
+
+}
+
+.navbar-nav .nav-link:hover {
+  background-color: rgba(0,0,0,0.05);
+  border-radius: 5px;
+}
+
 .navbar {
   background-color: #4cb1e0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -31,7 +75,6 @@ p.parrafo-info {
 }
 
 .navbar-nav .nav-link {
-  display: flex;
   color: #555;
   font-size: 1rem;
   margin: 0 10px;
@@ -51,7 +94,31 @@ footer {
   background-color: #4cb1e0;
   color: #222;
   padding: 20px 0;
-  border-top: none;
+}
+
+/* móvil */
+@media (max-width: 768px) {
+  footer {
+    padding: 15px 0;
+  }
+
+  footer h5,
+  footer h6 {
+    font-size: 1rem;
+  }
+
+  footer p,
+  footer a {
+    font-size: 0.9rem;
+  }
+
+  footer .row {
+    gap: 10px;
+  }
+}
+
+footer .row > div {
+  text-align: center;
 }
 
 /* FORMULARIO LOGIN */
@@ -169,4 +236,37 @@ footer {
 /* OPCIONES (limitado por navegador) */
 .casilla option {
     background-color: #f8f9fa;
+}
+
+/*RESPONSIVE*/
+/* SOLUCIÓN GLOBAL RESPONSIVE */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: hidden;
+  overflow-y: auto; /* 👈 asegura scroll normal */
+}
+
+/* Evita que imágenes rompan el layout */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Evita que cualquier elemento se salga */
+.container,
+.container-fluid {
+  overflow-x: hidden;
+}
+
+.footer {
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .footer {
+    text-align: left;
+  }
 }

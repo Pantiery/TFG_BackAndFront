@@ -1,15 +1,15 @@
 <footer class="footer">
 
     <div class="container py-4">
-        <div class="row">
+        <div class="row g-3">
             <!-- Logo -->
-            <div class="col-md-4 mb-3">
+            <div class="col-md-4 mb-3 text-center text-md-start">
                 <h5 class="footer-title">Uniformes segunda mano</h5>
                 <p class="footer-text">Proyecto TFG</p>
             </div>
 
             <!-- Enlaces -->
-            <div class="col-md-4 mb-3">
+            <div class="col-md-4 mb-3 text-center text-md-start">
                 <h6 class="footer-title">Enlaces</h6>
                 <ul class="list-unstyled">
                     <li><a href="#" class="footer-link">Inicio</a></li>
@@ -19,7 +19,7 @@
             </div>
 
             <!-- Info -->
-            <div class="col-md-4 mb-3">
+            <div class="col-md-4 mb-3 text-center text-md-start">
                 <h6 class="footer-title">Información</h6>
                 <p class="footer-text">© 2026 Uniformes segunda mano</p>
             </div>

@@ -1,6 +1,9 @@
+<?php
+/** @var array $prendas */
+?>
 <div class="container-fluid mt-4">
 
-    <div class="row">
+    <div class="row g-3">
 
         <?php if (empty($prendas)): ?>
             <p class="text-center">No hay prendas disponibles</p>

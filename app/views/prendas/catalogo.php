@@ -24,26 +24,29 @@ $filtroEstado = $_GET['estado'] ?? '';
 <main>
     <?php require_once __DIR__ . '/../../../components/component-hero-basico.php'; ?>
 
-    <section class="w-100 mt-4 py-4 bg-light border-bottom text-center">
-        <div class="px-3 px-md-4">
+    <!-- // Sección de filtros -->
+    <section class="w-100 mt-4 py-4 bg-light border-bottom">
+
+        <div class="container">
 
             <div class="text-center mb-3">
                 <h2 class="h4 mb-1 text-dark">Buscar prendas</h2>
                 <p class="text-muted mb-0">Filtra por colegio, tipo de prenda o estado.</p>
             </div>
 
-            <form method="GET" class="row g-3 align-items-end">
+            <form method="GET" class="row g-3 justify-content-center align-items-end">
 
                 <!-- COLEGIO -->
                 <div class="col-12 col-md-6 col-lg-3">
                     <label class="form-label text-dark">Colegio</label>
-                    <select name="colegio" class="form-select"onchange="window.location.href='?colegio=' + this.value">
-                        
+                    <select name="colegio" class="form-select"
+                        onchange="window.location.href='?colegio=' + this.value">
+
                         <option value="">Todos los colegios</option>
 
                         <?php foreach ($colegios as $colegio): ?>
                             <option value="<?= $colegio['id'] ?>"
-                                <?= (string) $filtroColegio === (string) $colegio['id'] ? 'selected' : '' ?>>
+                                <?= (string)$filtroColegio === (string)$colegio['id'] ? 'selected' : '' ?>>
                                 <?= htmlspecialchars($colegio['nombre']) ?>
                             </option>
                         <?php endforeach; ?>
@@ -54,12 +57,14 @@ $filtroEstado = $_GET['estado'] ?? '';
                 <!-- TIPO PRENDA -->
                 <div class="col-12 col-md-6 col-lg-3">
                     <label class="form-label text-dark">Tipo de prenda</label>
-                    <select name="tipo" class="form-select"onchange="window.location.href='?colegio=<?= $filtroColegio ?>&tipo=' + this.value">
+                    <select name="tipo" class="form-select"
+                        onchange="window.location.href='?colegio=<?= $filtroColegio ?>&tipo=' + this.value">
+
                         <option value="">Todos los tipos</option>
 
                         <?php foreach ($tiposPrenda as $tipo): ?>
                             <option value="<?= $tipo['id'] ?>"
-                                <?= (string) $filtroTipo === (string) $tipo['id'] ? 'selected' : '' ?>>
+                                <?= (string)$filtroTipo === (string)$tipo['id'] ? 'selected' : '' ?>>
                                 <?= htmlspecialchars($tipo['nombre']) ?>
                             </option>
                         <?php endforeach; ?>
@@ -70,12 +75,14 @@ $filtroEstado = $_GET['estado'] ?? '';
                 <!-- ESTADO -->
                 <div class="col-12 col-md-6 col-lg-3">
                     <label class="form-label text-dark">Estado</label>
-                    <select name="estado" class="form-select"onchange="window.location.href='?colegio=<?= $filtroColegio ?>&tipo=<?= $filtroTipo ?>&estado=' + this.value">
+                    <select name="estado" class="form-select"
+                        onchange="window.location.href='?colegio=<?= $filtroColegio ?>&tipo=<?= $filtroTipo ?>&estado=' + this.value">
+
                         <option value="">Todos los estados</option>
 
                         <?php foreach ($estadosCalidad as $estado): ?>
                             <option value="<?= $estado['id'] ?>"
-                                <?= (string) $filtroEstado === (string) $estado['id'] ? 'selected' : '' ?>>
+                                <?= (string)$filtroEstado === (string)$estado['id'] ? 'selected' : '' ?>>
                                 <?= htmlspecialchars(ucfirst($estado['nombre'])) ?>
                             </option>
                         <?php endforeach; ?>
@@ -83,16 +90,18 @@ $filtroEstado = $_GET['estado'] ?? '';
                     </select>
                 </div>
 
-                <!-- BOTONES -->
-                <div class="col-12 col-md-6 col-lg-3 d-flex gap-2">
-                    <a href="<?= strtok($_SERVER['REQUEST_URI'], '?') ?>" 
-                       class="btn btn-outline-secondary w-100">
+                <!-- BOTÓN -->
+                <div class="col-12 col-md-6 col-lg-3 d-flex">
+                    <a href="<?= strtok($_SERVER['REQUEST_URI'], '?') ?>"
+                        class="btn btn-outline-secondary w-100">
                         Limpiar
                     </a>
                 </div>
 
             </form>
+
         </div>
+
     </section>
 
     <div class="container mt-3">

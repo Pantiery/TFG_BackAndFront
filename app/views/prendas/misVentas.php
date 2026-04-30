@@ -12,7 +12,7 @@ $rechazadas = $rechazadas ?? [];
 
     <h2 class="text-center mb-4">Mis prendas</h2>
 
-    <div class="row">
+    <div class="row g-3">
 
         <!-- EN VENTA -->
         <div class="col-md-6 mb-4">
