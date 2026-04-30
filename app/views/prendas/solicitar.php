@@ -1,6 +1,6 @@
 <?php require_once __DIR__ . '/../layout/header.php'; ?>
 
-// Variables para evitar warnings si no se pasan desde el controller
+<!-- Variables para evitar warnings si no se pasan desde el controller -->
 <?php
 $colegios = $colegios ?? [];
 $tiposPrenda = $tiposPrenda ?? [];
@@ -111,10 +111,12 @@ $generos = $generos ?? [];
                         <input type="file" name="archivoEnviado" class="form-control" required>
                     </div>
 
-                    <p class="text-muted small text-center">
-                        El precio se asignará automáticamente según el tipo y estado de la prenda.
+                    <p class="small text-center parrafo-info">
+                        El precio se asignará automáticamente según el tipo y estado de la prenda y tendra una comisión del 10% para cubrir los gastos de gestión y mantenimiento de la plataforma.
                     </p>
-
+                    <p class="small text-center parrafo-info">
+                        La venta esta sujeta a la aprobación del equipo de administración, que verificará que la prenda cumpla con los requisitos de calidad y autenticidad.
+                    </p>
 
                     <button type="submit" class="btn btn-primary w-100">
                         Solicitar venta

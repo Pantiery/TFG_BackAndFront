@@ -1,6 +1,6 @@
 <?php require_once __DIR__ . '/../layout/header.php'; ?>
 
-// Variables para evitar warnings si no se pasan desde el controller
+<!-- Variables para evitar warnings si no se pasan desde el controller -->
 <?php
 $enVenta = $enVenta ?? [];
 $vendidas = $vendidas ?? [];
@@ -46,7 +46,14 @@ $rechazadas = $rechazadas ?? [];
                     <div class="border rounded p-2 mb-2 bg-danger-subtle">
                         <strong><?= htmlspecialchars($p['tipo']) ?></strong><br>
                         <?= htmlspecialchars($p['colegio']) ?><br>
+                        Precio de venta:
                         <?= number_format($p['precio_asignado'], 2, ',', '.') ?> €
+                        
+                        <?php if (!empty($p['importe_vendedor'])): ?>
+                            <div class="text-success">
+                                Ganancia neta: <?= number_format($p['importe_vendedor'], 2, ',', '.') ?> €
+                            </div>
+                        <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
             </div>

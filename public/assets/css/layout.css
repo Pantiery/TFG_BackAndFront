@@ -18,6 +18,11 @@ main {
   
 }
 
+p.parrafo-info {
+  font-weight: bold;
+  color: rgb(40, 34, 34);
+}
+
 /* HEADER */
 .navbar {
   background-color: #4cb1e0;

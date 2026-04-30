@@ -4,6 +4,21 @@
 
 <div class="container">
     <br>
+    <!-- MENSAJES DE ÉXITO O ERROR -->
+    <?php if (isset($_SESSION['mensaje_exito'])): ?>
+        <div class="alert alert-success">
+            <?= $_SESSION['mensaje_exito'] ?>
+        </div>
+        <?php unset($_SESSION['mensaje_exito']); ?>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['mensaje_error'])): ?>
+        <div class="alert alert-danger">
+            <?= $_SESSION['mensaje_error'] ?>
+        </div>
+        <?php unset($_SESSION['mensaje_error']); ?>
+    <?php endif; ?>
+    <br>
     <!-- TITULO -->
     <div class="mb-4">
         <h2 class="fw-bold mb-2">Tu carrito</h2>
@@ -145,22 +160,6 @@
         </div>
 
     </div>
-    <br>
-    <!-- MENSAJES DE ÉXITO O ERROR -->
-    <?php if (isset($_SESSION['mensaje_exito'])): ?>
-        <div class="alert alert-success">
-            <?= $_SESSION['mensaje_exito'] ?>
-        </div>
-        <?php unset($_SESSION['mensaje_exito']); ?>
-    <?php endif; ?>
-
-    <?php if (isset($_SESSION['mensaje_error'])): ?>
-        <div class="alert alert-danger">
-            <?= $_SESSION['mensaje_error'] ?>
-        </div>
-        <?php unset($_SESSION['mensaje_error']); ?>
-    <?php endif; ?>
-
 </div>
 <br>
 <?php require_once __DIR__ . '/../layout/footer.php'; ?>

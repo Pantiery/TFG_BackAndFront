@@ -16,7 +16,7 @@ class VentaService
                 VALUES (?, 'pendiente', 0)";
 
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([ $usuarioId ]);
+        $stmt->execute([$usuarioId]);
 
         return $pdo->lastInsertId();
     }
@@ -37,19 +37,19 @@ class VentaService
             // 🔥 comprobar si la prenda ya está vendida
             $sqlCheck = 'SELECT COUNT(*) FROM detalle_venta WHERE prenda_id = ?';
             $stmtCheck = $pdo->prepare($sqlCheck);
-            $stmtCheck->execute([ $item[ 'id' ] ]);
+            $stmtCheck->execute([$item['id']]);
 
             if ($stmtCheck->fetchColumn() > 0) {
                 throw new \Exception('Una de las prendas ya ha sido vendida');
             }
 
-            $precio = $item[ 'precio_asignado' ];
+            $precio = $item['precio_asignado'];
             $comision = $precio * 0.1;
             $importe = $precio - $comision;
 
             $stmt->execute([
                 $ventaId,
-                $item[ 'id' ],
+                $item['id'],
                 $precio,
                 $comision,
                 $importe,
@@ -58,7 +58,7 @@ class VentaService
             // Actualizar estado de prenda a 'vendida'
             $sqlUpdate = "UPDATE prendas SET estado_publicacion = 'vendida' WHERE id = ?";
             $stmtUpdate = $pdo->prepare($sqlUpdate);
-            $stmtUpdate->execute([ $item[ 'id' ] ]);
+            $stmtUpdate->execute([$item['id']]);
         }
     }
 
@@ -71,12 +71,12 @@ class VentaService
         $total = 0;
 
         foreach ($items as $item) {
-            $total += $item[ 'precio_asignado' ];
+            $total += $item['precio_asignado'];
         }
 
         $sql = 'UPDATE ventas SET total = ? WHERE id = ?';
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([ $total, $ventaId ]);
+        $stmt->execute([$total, $ventaId]);
     }
 
     // Obtener compras por usuario
@@ -102,8 +102,46 @@ class VentaService
             ORDER BY v.fecha DESC';
 
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([ $usuarioId ]);
+        $stmt->execute([$usuarioId]);
 
         return $stmt->fetchAll();
+    }
+
+    // Obtener ventas pendientes por usuario
+    public function obtenerVentasPendientes($usuarioId)
+    {
+        $pdo = Database::getConnection();
+
+        $stmt = $pdo->prepare("
+        SELECT 
+            dv.*, 
+            p.usuario_id,
+            p.imagen,
+            tp.nombre AS tipo,
+            c.nombre AS colegio
+        FROM detalle_venta dv
+        JOIN prendas p ON dv.prenda_id = p.id
+        JOIN ventas v ON dv.venta_id = v.id
+        JOIN tipos_prenda tp ON p.tipo_prenda_id = tp.id
+        JOIN colegios c ON p.colegio_id = c.id
+        WHERE p.usuario_id = ?
+        AND v.estado_pago = 'pendiente'
+    ");
+
+        $stmt->execute([$usuarioId]);
+
+        return $stmt->fetchAll();
+    }
+
+    // CALCULAR TOTAL PENDIENTE
+    public function calcularTotalPendiente($ventas)
+    {
+        $total = 0;
+
+        foreach ($ventas as $v) {
+            $total += $v['importe_vendedor'];
+        }
+
+        return $total;
     }
 }

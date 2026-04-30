@@ -60,3 +60,6 @@ $router->get('/prendas/detalles', [PrendaController::class, 'detalles']);
 // $router->post('/venta/comprar', [VentaController::class, 'comprar']);
 
 $router->get('/venta/comprar', [VentaController::class, 'comprar']);
+
+// RUTA PARA VER MIS VENTAS
+$router->get('/monedero', [VentaController::class, 'monedero']);

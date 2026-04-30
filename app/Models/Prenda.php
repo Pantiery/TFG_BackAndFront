@@ -55,10 +55,15 @@ class Prenda
     public function obtenerPorUsuarioYEstado($pdo, $usuarioId, $estado)
     {
         $stmt = $pdo->prepare('
-        SELECT p.*, tp.nombre AS tipo, c.nombre AS colegio
+        SELECT 
+            p.*, 
+            tp.nombre AS tipo, 
+            c.nombre AS colegio,
+            dv.importe_vendedor
         FROM prendas p
         JOIN tipos_prenda tp ON p.tipo_prenda_id = tp.id
         JOIN colegios c ON p.colegio_id = c.id
+        LEFT JOIN detalle_venta dv ON dv.prenda_id = p.id
         WHERE p.usuario_id = :usuario_id
         AND p.estado_publicacion = :estado
     ');
