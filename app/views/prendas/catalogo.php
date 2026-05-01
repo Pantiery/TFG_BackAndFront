@@ -34,6 +34,7 @@ $filtroEstado = $_GET['estado'] ?? '';
                 <p class="text-muted mb-0">Filtra por colegio, tipo de prenda o estado.</p>
             </div>
 
+            <!-- FORMULARIO DE FILTROS -->
             <form method="GET" class="row g-3 justify-content-center align-items-end">
 
                 <!-- COLEGIO -->
@@ -106,6 +107,7 @@ $filtroEstado = $_GET['estado'] ?? '';
 
     <div class="container mt-3">
 
+    <!-- MENSAJES DE ÉXITO O ERROR -->
         <?php if (isset($_SESSION['mensaje_exito'])): ?>
             <div class="alert alert-success alert-dismissible fade show">
                 <?= htmlspecialchars($_SESSION['mensaje_exito']) ?>

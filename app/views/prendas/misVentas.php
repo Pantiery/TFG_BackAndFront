@@ -8,6 +8,8 @@ $pendientes = $pendientes ?? [];
 $rechazadas = $rechazadas ?? [];
 ?>
 
+<main>
+
 <div class="container-fluid mt-4">
 
     <h2 class="text-center mb-4">Mis prendas</h2>
@@ -100,5 +102,7 @@ $rechazadas = $rechazadas ?? [];
     </div>
 
 </div>
+
+</main>
 
 <?php require_once __DIR__ . '/../layout/footer.php'; ?>

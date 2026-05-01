@@ -1,5 +1,6 @@
 /* GENERALES */
-html, body {
+html,
+body {
   min-height: 100vh;
   margin: 0;
 }
@@ -24,7 +25,7 @@ p.parrafo-info {
 }
 
 /* 🔥 NAVBAR MÓVIL (VERSIÓN CORRECTA) */
-@media (max-width: 768px) {
+@media (max-width: 1400px) {
 
   .navbar-collapse {
     background-color: #4cb1e0;
@@ -34,7 +35,7 @@ p.parrafo-info {
 
   .navbar-collapse .navbar-nav {
     width: 100%;
-    align-items: center;
+    align-items: center !important;
   }
 
   .navbar-collapse .nav-item {
@@ -44,27 +45,13 @@ p.parrafo-info {
   .navbar-collapse .nav-link {
     display: block;
     width: 100%;
-  }
-
-}
-
-/* HEADER */
-@media (max-width: 768px) {
-
-  .navbar-nav .nav-link {
-    display: block;
-    text-align: center;  
-    padding: 10px 0;     
-  }
-
-  .navbar-nav .nav-item {
-    width: 100%;
+    text-align: center;
   }
 
 }
 
 .navbar-nav .nav-link:hover {
-  background-color: rgba(0,0,0,0.05);
+  background-color: rgba(0, 0, 0, 0.05);
   border-radius: 5px;
 }
 
@@ -117,7 +104,7 @@ footer {
   }
 }
 
-footer .row > div {
+footer .row>div {
   text-align: center;
 }
 
@@ -130,7 +117,7 @@ footer .row > div {
   padding: 25px;
   background: gray;
   border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .grid-layout .form-control {
@@ -154,7 +141,8 @@ footer .row > div {
 /* HERO */
 .hero {
   position: relative;
-  height: 50vh; /* 👈 mantenemos control real */
+  height: 50vh;
+  /* 👈 mantenemos control real */
   overflow: hidden;
 }
 
@@ -166,7 +154,8 @@ footer .row > div {
 
 .carousel-item img {
   width: 100%;
-  height: 100% !important; /* 👈 esto es lo importante */
+  height: 100% !important;
+  /* 👈 esto es lo importante */
   object-fit: cover;
   display: block;
 }
@@ -176,7 +165,7 @@ footer .row > div {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0, 0, 0, 0.4);
   top: 0;
   left: 0;
   z-index: 1;
@@ -213,29 +202,30 @@ footer .row > div {
 
 /* FORMULARIO SOLICITAR */
 .formulario-solicitar {
-    background-color: #6f7071;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 20px; /* mejora visual */
+  background-color: #6f7071;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  /* mejora visual */
 }
 
 /* CAMPOS DEL FORM */
 .casilla {
-    background-color: #f8f9fa;
-    border: 1px solid #ced4da;
-    transition: background-color 0.2s ease;
+  background-color: #f8f9fa;
+  border: 1px solid #ced4da;
+  transition: background-color 0.2s ease;
 }
 
 /* FOCUS */
 .casilla:focus {
-    background-color: #e9ecef;
-    box-shadow: none;
-    border-color: #adb5bd;
+  background-color: #e9ecef;
+  box-shadow: none;
+  border-color: #adb5bd;
 }
 
 /* OPCIONES (limitado por navegador) */
 .casilla option {
-    background-color: #f8f9fa;
+  background-color: #f8f9fa;
 }
 
 /*RESPONSIVE*/
@@ -244,9 +234,11 @@ footer .row > div {
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   overflow-x: hidden;
-  overflow-y: auto; /* 👈 asegura scroll normal */
+  overflow-y: auto;
+  /* 👈 asegura scroll normal */
 }
 
 /* Evita que imágenes rompan el layout */
