@@ -1,7 +1,11 @@
 <?php require_once __DIR__ . '/../layout/header.php'; ?>
 
+<main>
+
 <div class="container mt-4 mb-4 text-center">
     <h1 class="text-primary">PANEL ADMINISTRADOR FALTA HERO</h1>
 </div>
+
+</main>
 
 <?php require_once __DIR__ . '/../layout/footer.php'; ?>

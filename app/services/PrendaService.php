@@ -168,21 +168,26 @@ class PrendaService
         $pdo = Database::getConnection();
 
         $sql = "
-            SELECT p.*, 
-                c.nombre AS colegio,
-                t.nombre AS tipo,
-                e.nombre AS estado,
-                u.nombre AS vendedor
-            FROM prendas p
-            JOIN colegios c ON p.colegio_id = c.id
-            JOIN tipos_prenda t ON p.tipo_prenda_id = t.id
-            JOIN estados_calidad e ON p.estado_calidad_id = e.id
-            JOIN usuarios u ON p.usuario_id = u.id
-            WHERE p.estado_publicacion = 'publicada'
-            AND p.usuario_id != ?
-        ";
+        SELECT p.*, 
+            c.nombre AS colegio,
+            t.nombre AS tipo,
+            e.nombre AS estado,
+            u.nombre AS vendedor
+        FROM prendas p
+        JOIN colegios c ON p.colegio_id = c.id
+        JOIN tipos_prenda t ON p.tipo_prenda_id = t.id
+        JOIN estados_calidad e ON p.estado_calidad_id = e.id
+        JOIN usuarios u ON p.usuario_id = u.id
+        WHERE p.estado_publicacion = 'publicada'
+    ";
 
-        $params = [$usuarioId];
+        $params = [];
+
+        // SOLO SI HAY USUARIO LOGEADO
+        if ($usuarioId !== null) {
+            $sql .= " AND p.usuario_id != ?";
+            $params[] = $usuarioId;
+        }
 
         if (!empty($colegio)) {
             $sql .= ' AND p.colegio_id = ?';

@@ -1,5 +1,6 @@
 <?php require_once __DIR__ . '/../layout/header.php'; ?>
 
+<main>
 
 <form method="POST" class="grid-layout">
   
@@ -20,6 +21,7 @@
   <?php endif; ?>
 
 </form>
+</main> 
 
 
 

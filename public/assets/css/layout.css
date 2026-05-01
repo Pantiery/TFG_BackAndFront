@@ -142,7 +142,6 @@ footer .row>div {
 .hero {
   position: relative;
   height: 50vh;
-  /* 👈 mantenemos control real */
   overflow: hidden;
 }
 
@@ -234,23 +233,10 @@ footer .row>div {
   box-sizing: border-box;
 }
 
-html,
-body {
-  overflow-x: hidden;
-  overflow-y: auto;
-  /* 👈 asegura scroll normal */
-}
-
 /* Evita que imágenes rompan el layout */
 img {
   max-width: 100%;
   height: auto;
-}
-
-/* Evita que cualquier elemento se salga */
-.container,
-.container-fluid {
-  overflow-x: hidden;
 }
 
 .footer {

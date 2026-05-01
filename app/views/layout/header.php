@@ -19,7 +19,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-xxl navbar-light">
+    <nav class="navbar navbar-expand-xxl navbar-light sticky-top">
         <div class="container-fluid">
 
             <a class="navbar-brand" href="<?= \App\Config\App::url('/') ?>">
@@ -78,7 +78,7 @@
 
                 <?php elseif (isset($_SESSION['usuario']) && $_SESSION['usuario']['rol'] === 'admin'): ?>
 
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav mx-auto">
 
                         <li class="nav-item">
                             <a class="nav-link active" href="<?= \App\Config\App::url('/') ?>">
@@ -117,10 +117,6 @@
                             </a>
                         </li>
 
-                    </ul>
-
-                    <ul class="navbar-nav ms-auto">
-
                         <li class="nav-item">
                             <a class="nav-link active" href="#">
                                 Estadísticas
@@ -131,7 +127,7 @@
 
                 <?php else: ?>
 
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav mx-auto">
 
                         <li class="nav-item">
                             <a class="nav-link active" href="<?= \App\Config\App::url('/') ?>">

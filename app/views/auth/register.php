@@ -1,6 +1,6 @@
 <?php require_once __DIR__ . '/../layout/header.php'; ?>
 
-
+<main>
 
 <form method="POST" action="/proyecto_TFG/TFG_BackAndFront/public/register" class="grid-layout">
 
@@ -39,5 +39,7 @@
 <?php endif; ?>
 
 </form>
+
+</main>
 
 <?php require_once __DIR__ . '/../layout/footer.php'; ?>
