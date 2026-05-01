@@ -49,6 +49,8 @@
   <!-- Contenido del hero -->
   <div class="hero-principal hero-content text-center">
 
+        <img src="<?= \App\Config\App::url('/assets/img/logo/logoUniformes.png') ?>" alt="Icono" class="mb-3">
+
     <h1 class="seccion-titulo display-4">
       <?= $tituloHero ?>
     </h1>

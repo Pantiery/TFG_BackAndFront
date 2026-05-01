@@ -8,7 +8,8 @@
 
     <title>Tu uniforme escolar</title>
 
-    <link rel="icon" type="image/x-icon" href="">
+    <!-- favicon -->
+    <link rel="icon" type="image/x-icon" href="<?= \App\Config\App::url('/assets/img/logo/logoUniformes.png') ?>">
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -16,14 +17,22 @@
     <!-- CSS -->
     <link rel="stylesheet" href="<?= \App\Config\App::url('/assets/css/layout.css') ?>">
     <link rel="stylesheet" href="<?= \App\Config\App::url('/assets/css/cards.css') ?>">
+
+
 </head>
 
 <body>
     <nav class="navbar navbar-expand-xxl navbar-light sticky-top">
         <div class="container-fluid">
 
-            <a class="navbar-brand" href="<?= \App\Config\App::url('/') ?>">
-                Uniformes segunda mano
+            <a class="navbar-brand d-flex align-items-center" href="<?= \App\Config\App::url('/') ?>">
+                <img src="<?= \App\Config\App::url('/assets/img/logo/logoUniformes.png') ?>"
+                    alt="Logo"
+                    width="100"
+                    height="100"
+                    class="me-2">
+
+                <span>UniColegio</span>
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
