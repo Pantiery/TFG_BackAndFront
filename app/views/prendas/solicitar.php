@@ -9,6 +9,8 @@ $tallas = $tallas ?? [];
 $generos = $generos ?? [];
 ?>
 
+<main>
+
 <div class="container mt-4 mb-4">
 
     <!-- MENSAJES EXITO O ERROR -->
@@ -131,5 +133,6 @@ $generos = $generos ?? [];
     </div>
 
 </div>
+</main>
 
 <?php require_once __DIR__ . '/../layout/footer.php'; ?>

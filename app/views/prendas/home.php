@@ -13,11 +13,15 @@ $imagenes = [
 require_once __DIR__ . '/../layout/header.php';
 ?>
 
+<main>
+
 <?php require_once __DIR__ . '/../../../components/component-hero-basico.php'; ?>
 <div class="presentacion">
 <h1>Compra el uniforme de tu colegio al mejor precio</h1>
 
 <p>Bienvenido a nuestra tienda de uniforme de colegios. Encuentra el uniforme perfecto para tu colegio.</p>
 </div>
+
+</main>
 
 <?php require_once __DIR__ . '/../layout/footer.php'; ?>

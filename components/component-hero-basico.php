@@ -1,3 +1,9 @@
+<?php
+/** @var array $imagenes */
+/** @var string $tituloHero */
+/** @var string $subtituloHero */
+?>
+
 <!-- Seccion-Hero -->
 <section class="hero">
 

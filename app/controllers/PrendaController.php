@@ -39,10 +39,6 @@ class PrendaController extends BaseController
             header('Location: ' . App::url('/prendas/solicitar'));
             exit;
         }
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            header('Location: ' . App::url('/prendas/solicitar'));
-            exit;
-        }
 
         $data = $_POST;
         $file = $_FILES['archivoEnviado'] ?? null;

@@ -1,6 +1,7 @@
 /* GENERALES */
-html, body {
-  height: 100%;
+html,
+body {
+  min-height: 100vh;
   margin: 0;
 }
 
@@ -15,7 +16,7 @@ main {
   flex: 1;
   padding: 0;
   margin: 0;
-  
+  width: 100%;
 }
 
 p.parrafo-info {
@@ -23,7 +24,37 @@ p.parrafo-info {
   color: rgb(40, 34, 34);
 }
 
-/* HEADER */
+/* 🔥 NAVBAR MÓVIL (VERSIÓN CORRECTA) */
+@media (max-width: 1400px) {
+
+  .navbar-collapse {
+    background-color: #4cb1e0;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .navbar-collapse .navbar-nav {
+    width: 100%;
+    align-items: center !important;
+  }
+
+  .navbar-collapse .nav-item {
+    width: 100%;
+  }
+
+  .navbar-collapse .nav-link {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+}
+
+.navbar-nav .nav-link:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+}
+
 .navbar {
   background-color: #4cb1e0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -31,7 +62,6 @@ p.parrafo-info {
 }
 
 .navbar-nav .nav-link {
-  display: flex;
   color: #555;
   font-size: 1rem;
   margin: 0 10px;
@@ -51,7 +81,31 @@ footer {
   background-color: #4cb1e0;
   color: #222;
   padding: 20px 0;
-  border-top: none;
+}
+
+/* móvil */
+@media (max-width: 768px) {
+  footer {
+    padding: 15px 0;
+  }
+
+  footer h5,
+  footer h6 {
+    font-size: 1rem;
+  }
+
+  footer p,
+  footer a {
+    font-size: 0.9rem;
+  }
+
+  footer .row {
+    gap: 10px;
+  }
+}
+
+footer .row>div {
+  text-align: center;
 }
 
 /* FORMULARIO LOGIN */
@@ -63,7 +117,7 @@ footer {
   padding: 25px;
   background: gray;
   border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .grid-layout .form-control {
@@ -87,7 +141,8 @@ footer {
 /* HERO */
 .hero {
   position: relative;
-  height: 50vh; /* 👈 mantenemos control real */
+  height: 50vh;
+  /* 👈 mantenemos control real */
   overflow: hidden;
 }
 
@@ -99,7 +154,8 @@ footer {
 
 .carousel-item img {
   width: 100%;
-  height: 100% !important; /* 👈 esto es lo importante */
+  height: 100% !important;
+  /* 👈 esto es lo importante */
   object-fit: cover;
   display: block;
 }
@@ -109,7 +165,7 @@ footer {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0, 0, 0, 0.4);
   top: 0;
   left: 0;
   z-index: 1;
@@ -146,27 +202,63 @@ footer {
 
 /* FORMULARIO SOLICITAR */
 .formulario-solicitar {
-    background-color: #6f7071;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 20px; /* mejora visual */
+  background-color: #6f7071;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  /* mejora visual */
 }
 
 /* CAMPOS DEL FORM */
 .casilla {
-    background-color: #f8f9fa;
-    border: 1px solid #ced4da;
-    transition: background-color 0.2s ease;
+  background-color: #f8f9fa;
+  border: 1px solid #ced4da;
+  transition: background-color 0.2s ease;
 }
 
 /* FOCUS */
 .casilla:focus {
-    background-color: #e9ecef;
-    box-shadow: none;
-    border-color: #adb5bd;
+  background-color: #e9ecef;
+  box-shadow: none;
+  border-color: #adb5bd;
 }
 
 /* OPCIONES (limitado por navegador) */
 .casilla option {
-    background-color: #f8f9fa;
+  background-color: #f8f9fa;
+}
+
+/*RESPONSIVE*/
+/* SOLUCIÓN GLOBAL RESPONSIVE */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  /* 👈 asegura scroll normal */
+}
+
+/* Evita que imágenes rompan el layout */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Evita que cualquier elemento se salga */
+.container,
+.container-fluid {
+  overflow-x: hidden;
+}
+
+.footer {
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .footer {
+    text-align: left;
+  }
 }

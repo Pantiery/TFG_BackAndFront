@@ -1,5 +1,5 @@
 <?php require_once __DIR__ . '/../layout/header.php'; ?>
-
+<main>
 <div class="container mt-4">
     <h2>Mis compras</h2>
 
@@ -65,5 +65,6 @@
 
     <?php endif; ?>
 </div>
+</main>
 
 <?php require_once __DIR__ . '/../layout/footer.php'; ?>

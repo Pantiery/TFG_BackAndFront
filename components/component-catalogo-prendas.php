@@ -1,11 +1,16 @@
+<?php
+/** @var array $prendas */
+?>
+
 <div class="container-fluid mt-4">
 
-    <div class="row">
+    <div class="row g-3">
 
+        <!-- Si no hay prendas, mostrar mensaje -->
         <?php if (empty($prendas)): ?>
             <p class="text-center">No hay prendas disponibles</p>
         <?php endif; ?>
-
+        <!-- Si hay prendas, mostrarlas en tarjetas -->
         <?php foreach ($prendas as $prenda): ?>
 
             <?php
@@ -21,7 +26,7 @@
             // ID único para cada modal
             $modalId = 'modalPrenda_' . $prenda['id'];
             ?>
-
+            <!-- Tarjeta de prenda -->
             <div class="col-md-3 mb-4">
 
                 <div class="card h-100 shadow-sm">
@@ -79,9 +84,6 @@
                                 data-bs-target="#<?= $modalId ?>">
                             Ver detalle
                         </button>
-                        <button class="btn btn-sm btn-primary mt-2" href="">
-                            Comprar
-                        </button>
                     </div>
 
                 </div>
@@ -122,10 +124,6 @@
                                     Añadir al carrito
                                 </button>
                             </form>
-                            
-                            <button class="btn btn-sm btn-primary mt-2" href="">
-                                Comprar
-                            </button>
                         </div>
                         <br>
                     </div>
