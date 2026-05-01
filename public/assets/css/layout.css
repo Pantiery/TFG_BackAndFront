@@ -192,6 +192,11 @@ footer .row>div {
   color: white;
 }
 
+.carousel-control-prev,
+.carousel-control-next {
+  z-index: 5;
+}
+
 /* PRESENTACIÓN */
 .presentacion {
   max-width: 800px;

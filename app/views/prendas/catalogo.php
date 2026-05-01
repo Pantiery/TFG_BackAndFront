@@ -5,7 +5,7 @@ $tituloHero = 'Explora nuestro catálogo de prendas';
 $subtituloHero = 'Encuentra las mejores prendas de segunda mano para tu uniforme escolar.';
 $imagenes = [
     '/proyecto_TFG/TFG_BackAndFront/public/assets/img/hero/hero-catalogo1.jpg',
-    '/proyecto_TFG/TFG_BackAndFront/public/assets/img/hero/hero-catalogo2.webp',
+    '/proyecto_TFG/TFG_BackAndFront/public/assets/img/hero/hero-catalogo2.avif',
     '/proyecto_TFG/TFG_BackAndFront/public/assets/img/hero/hero-catalogo3.webp',
 ];
 
