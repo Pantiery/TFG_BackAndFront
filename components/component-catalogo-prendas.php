@@ -29,7 +29,7 @@
             <!-- Tarjeta de prenda -->
             <div class="col-md-3 mb-4">
 
-                <div class="card h-100 shadow-sm">
+                <div class="card card-prenda h-100 shadow-sm">
 
                     <?php if (!empty($prenda['imagen'])): ?>
                         <img src="/proyecto_TFG/TFG_BackAndFront/public<?= $prenda['imagen'] ?>"
@@ -43,20 +43,20 @@
                             <?= htmlspecialchars($prenda['tipo']) ?>
                         </h5>
 
-                        <p class="card-text">
+                        <p class="info-colegio">
                             <strong>Colegio:</strong> <?= htmlspecialchars($prenda['colegio']) ?><br>
 
                             <?php
                             $badge = 'secondary';
 
-            if ($prenda['estado'] == 'excelente') {
-                $badge = 'success';
-            } elseif ($prenda['estado'] == 'bueno') {
-                $badge = 'warning';
-            } elseif ($prenda['estado'] == 'aceptable') {
-                $badge = 'danger';
-            }
-            ?>
+                            if ($prenda['estado'] == 'excelente') {
+                                $badge = 'success';
+                            } elseif ($prenda['estado'] == 'bueno') {
+                                $badge = 'warning';
+                            } elseif ($prenda['estado'] == 'aceptable') {
+                                $badge = 'danger';
+                            }
+                            ?>
 
                             <span class="badge bg-<?= $badge ?>">
                                 <?= htmlspecialchars($prenda['estado']) ?>
@@ -71,19 +71,22 @@
 
                         <br>
                         
-                        <form method="POST" action="<?= \App\Config\App::baseUrl() ?>/carrito/add">
-                            <input type="hidden" name="prenda_id" value="<?= $prenda['id'] ?>">
-                            <button class="btn btn-sm btn-primary mt-2">
-                                Añadir al carrito
-                            </button>
-                        </form>
+                        <div class="card-botones">
 
-                        <!-- BOTÓN MODAL -->
-                        <button class="btn btn-sm btn-primary mt-2"
-                                data-bs-toggle="modal"
-                                data-bs-target="#<?= $modalId ?>">
-                            Ver detalle
-                        </button>
+                            <form method="POST" action="<?= \App\Config\App::baseUrl() ?>/carrito/add" class="m-0">
+                                <input type="hidden" name="prenda_id" value="<?= $prenda['id'] ?>">
+                                <button type="submit" class="btn btn-add-carrito">
+                                    Añadir al carrito
+                                </button>
+                            </form>
+
+                            <button class="btn btn-ver-detalle"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#<?= $modalId ?>">
+                                Ver detalle
+                            </button>
+
+                        </div>
                     </div>
 
                 </div>
@@ -117,15 +120,22 @@
                         </div>
                         
                         <div class="card-footer text-center">
-                            
-                            <form method="POST" action="<?= \App\Config\App::baseUrl() ?>/carrito/add">
-                                <input type="hidden" name="prenda_id" value="<?= $prenda['id'] ?>">
-                                <button class="btn btn-sm btn-primary mt-2">
-                                    Añadir al carrito
+                            <div class="card-botones">
+
+                                <form method="POST" action="<?= \App\Config\App::baseUrl() ?>/carrito/add" class="m-0">
+                                    <input type="hidden" name="prenda_id" value="<?= $prenda['id'] ?>">
+                                    <button type="submit" class="btn btn-add-carrito">
+                                        Añadir al carrito
+                                    </button>
+                                </form>
+
+                                <button type="button" class="btn btn-ver-detalle" data-bs-dismiss="modal">
+                                    Cerrar
                                 </button>
-                            </form>
+
+                            </div>
                         </div>
-                        <br>
+                        <br>    
                     </div>
                 </div>
             </div>

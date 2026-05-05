@@ -15,7 +15,22 @@ body {
   background-color: rgb(23, 60, 81);
   color: white;
   font-size: 18px;
+  font-family: 'Lato', sans-serif;
   /* 🔥 tamaño general */
+}
+
+h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+h2, h3 {
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+}
+
+p, label, input, select, textarea, button, a {
+    font-family: 'Lato', sans-serif;
 }
 
 main {
@@ -89,6 +104,7 @@ footer {
   background-color: #4cb1e0;
   color: #222;
   padding: 20px 0;
+  font-family: 'Lato', sans-serif;
 }
 
 footer .row>div {
@@ -98,16 +114,19 @@ footer .row>div {
 @media (max-width: 768px) {
   footer {
     padding: 15px 0;
+    font-family: 'Lato', sans-serif;
   }
 
   footer h5,
   footer h6 {
     font-size: 1rem;
+    font-family: 'Lato', sans-serif;
   }
 
   footer p,
   footer a {
     font-size: 0.9rem;
+    font-family: 'Lato', sans-serif;
   }
 
   footer .row {
@@ -240,4 +259,105 @@ img {
   .footer {
     text-align: left;
   }
+}
+
+/* CARD */
+
+.card-prenda {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #ffffff;
+  color: #333;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.card-prenda:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card-prenda img {
+  height: 200px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.card-prenda .card-body {
+  padding: 15px;
+}
+
+.card-prenda .card-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+}
+
+.card-prenda .info-colegio {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.badge-estado {
+  display: inline-block;
+  background-color: #28a745;
+  color: white;
+  font-size: 0.75rem;
+  padding: 3px 8px;
+  border-radius: 6px;
+  margin-top: 5px;
+}
+
+.card-precio {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #4cb1e0;
+  margin: 10px 0;
+}
+
+/* BOTONES CARDS */
+
+.card-botones {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.card-botones form,
+.card-botones > button {
+  flex: 1;
+}
+
+.card-botones .btn {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-add-carrito {
+  background-color: #4cb1e0;
+  border: none;
+  color: white;
+}
+
+.btn-add-carrito:hover {
+  background-color: #3a97c2;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.btn-ver-detalle {
+  background-color: transparent;
+  border: 2px solid #4cb1e0;
+  color: #4cb1e0;
+}
+
+.btn-ver-detalle:hover {
+  background-color: #4cb1e0;
+  color: white;
+  transform: translateY(-1px);
 }

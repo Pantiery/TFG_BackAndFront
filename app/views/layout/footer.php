@@ -21,7 +21,7 @@
             <!-- Info -->
             <div class="col-md-4 mb-3 text-center text-md-start">
                 <h6 class="footer-title">Información</h6>
-                <p class="footer-text">© 2026 Uniformes segunda mano</p>
+                <p class="footer-text">© 2026 UniColegio</p>
             </div>
 
         </div>
