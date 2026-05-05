@@ -1,4 +1,51 @@
 .modal-content {
     background-color: #fff;
     color: #000;
+    font-family: 'Lato', sans-serif;
+}
+
+/* BOTON */
+
+.card-botones {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.card-botones form,
+.card-botones > button {
+  flex: 1;
+}
+
+.card-botones .btn {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-add-carrito {
+  background-color: #4cb1e0;
+  border: none;
+  color: white;
+}
+
+.btn-add-carrito:hover {
+  background-color: #3a97c2;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.btn-ver-detalle {
+  background-color: transparent;
+  border: 2px solid #4cb1e0;
+  color: #4cb1e0;
+}
+
+.btn-ver-detalle:hover {
+  background-color: #4cb1e0;
+  color: white;
+  transform: translateY(-1px);
 }

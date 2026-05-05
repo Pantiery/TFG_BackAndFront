@@ -18,6 +18,11 @@
     <link rel="stylesheet" href="<?= \App\Config\App::url('/assets/css/layout.css') ?>">
     <link rel="stylesheet" href="<?= \App\Config\App::url('/assets/css/cards.css') ?>">
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@400;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
 
 </head>
 
