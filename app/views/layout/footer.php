@@ -31,5 +31,6 @@
     
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/proyecto_TFG/TFG_BackAndFront/public/assets/js/validaciones.js"></script>
+<script src="/proyecto_TFG/TFG_BackAndFront/public/assets/js/mensajes.js"></script>
 </body>
 </html>
