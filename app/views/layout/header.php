@@ -46,23 +46,23 @@
                     <ul class="navbar-nav mx-auto">
 
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= \App\Config\App::url('/') ?>">Inicio</a>
+                            <a class="nav-link active" href="<?= \App\Config\App::url('/') ?>">Inicio</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= \App\Config\App::url('/prendas/catalogo') ?>">Catálogo</a>
+                            <a class="nav-link active" href="<?= \App\Config\App::url('/prendas/catalogo') ?>">Catálogo</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= \App\Config\App::url('/prendas/solicitar') ?>">Solicitar Venta</a>
+                            <a class="nav-link active" href="<?= \App\Config\App::url('/prendas/solicitar') ?>">Solicitar Venta</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= \App\Config\App::url('/prendas/misVentas') ?>">Mis Ventas</a>
+                            <a class="nav-link active" href="<?= \App\Config\App::url('/prendas/misVentas') ?>">Mis Ventas</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= \App\Config\App::url('/prendas/misCompras') ?>">Mis Compras</a>
+                            <a class="nav-link active" href="<?= \App\Config\App::url('/prendas/misCompras') ?>">Mis Compras</a>
                         </li>
 
                         <li class="nav-item">
@@ -72,11 +72,18 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= \App\Config\App::url('/monedero') ?>">Monedero</a>
+                            <a class="nav-link disabled" href="#">
+                                👤
+                                <?= $_SESSION['usuario']['nombre'] . ' ' . $_SESSION['usuario']['apellido1'] . ' (' . $_SESSION['usuario']['rol'] . ')' ?>
+                            </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= \App\Config\App::url('/carrito') ?>">
+                            <a class="nav-link active" href="<?= \App\Config\App::url('/monedero') ?>">Monedero</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link active" href="<?= \App\Config\App::url('/carrito') ?>">
                                 Carrito
                                 <span class="badge text-bg-dark rounded-pill ms-2">
                                     <?= count($productos ?? []) ?>

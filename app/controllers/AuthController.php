@@ -12,7 +12,7 @@ class AuthController extends BaseController
 
     public function showLogin()
     {
-        if (isset($_SESSION[ 'usuario' ])) {
+        if (isset($_SESSION['usuario'])) {
             header('Location: ' . App::url('/'));
             exit;
         }
@@ -24,7 +24,7 @@ class AuthController extends BaseController
 
     public function showRegister()
     {
-        if (isset($_SESSION[ 'usuario' ])) {
+        if (isset($_SESSION['usuario'])) {
             header('Location: ' . App::url('/'));
             exit;
         }
@@ -44,7 +44,7 @@ class AuthController extends BaseController
             header('Location: ' . App::url('/login'));
             exit;
         } catch (\Exception $e) {
-            $_SESSION[ 'error_campos' ] = $e->getMessage();
+            $_SESSION['error_campos'] = $e->getMessage();
             header('Location: ' . App::url('/register'));
             exit;
         }
@@ -62,33 +62,30 @@ class AuthController extends BaseController
             // Regenerar el ID de sesión para prevenir ataques de fijación de sesión
             session_regenerate_id(true);
 
-            $_SESSION[ 'usuario' ] = [
-                'id' => $usuario[ 'id' ],
-                'nombre' => $usuario[ 'nombre' ],
-                'apellido1' => $usuario[ 'apellido1' ],
-                'apellido2' => $usuario[ 'apellido2' ],
-                'email' => $usuario[ 'email' ],
-                'rol' => $usuario[ 'rol' ],
+            $_SESSION['usuario'] = [
+                'id' => $usuario['id'],
+                'nombre' => $usuario['nombre'],
+                'apellido1' => $usuario['apellido1'],
+                'apellido2' => $usuario['apellido2'],
+                'email' => $usuario['email'],
+                'rol' => $usuario['rol'],
             ];
 
             // comprobar si tiene carrito, si no, crearlo
             $carritoService = new \App\Services\CarritoService();
 
-            $carrito = $carritoService->getByUserId($usuario[ 'id' ]);
+            $carrito = $carritoService->getByUserId($usuario['id']);
 
             if (!$carrito) {
-                $carritoService->create($usuario[ 'id' ]);
+                $carritoService->create($usuario['id']);
             }
 
-            if ($usuario[ 'rol' ] === 'user') {
-                header('Location: ' . App::url('/'));
-            } else {
-                header('Location: ' . App::url('/admin'));
-            }
+            header('Location: ' . App::url('/'));
+            exit;
 
             exit;
         } catch (\Exception $e) {
-            $_SESSION[ 'error_credenciales' ] = $e->getMessage();
+            $_SESSION['error_credenciales'] = $e->getMessage();
             header('Location: ' . App::url('/login'));
             exit;
         }

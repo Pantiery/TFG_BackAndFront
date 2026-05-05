@@ -38,8 +38,8 @@ p.parrafo-info {
 
 /* 🔥 TEXTO HEADER MÁS GRANDE */
 .navbar-brand span {
-  font-size: 1.6rem;
-  font-weight: 600;
+  font-size: 0.9rem;
+  font-weight: 300;
 }
 
 .navbar-nav .nav-link {
