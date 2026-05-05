@@ -29,7 +29,7 @@ class BaseController
     // FUNCION PARA CARGAR VISTAS
     protected function view($ruta, $data = [])
     {
-        // 🔥 Cargar carrito SIEMPRE para el header
+        // Cargar carrito SIEMPRE para el header
         if (isset($_SESSION[ 'usuario' ])) {
             $carritoService = new \App\Services\CarritoService();
 

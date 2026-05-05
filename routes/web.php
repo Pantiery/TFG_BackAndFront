@@ -3,6 +3,7 @@
 use App\Controllers\AuthController;
 use App\Controllers\HomeController;
 use App\Controllers\AdminController;
+use App\Controllers\UserController;
 use App\Controllers\PrendaController;
 use App\Controllers\CarritoController;
 use App\Controllers\VentaController;
@@ -63,3 +64,10 @@ $router->get('/venta/comprar', [VentaController::class, 'comprar']);
 
 // RUTA PARA VER MIS VENTAS
 $router->get('/monedero', [VentaController::class, 'monedero']);
+
+// RUTA PARA VER USUARIOS (ADMIN)
+$router->get('/admin/usuarios', [UserController::class, 'index']);
+
+// RUTAS PARA BLOQUEAR/ACTIVAR USUARIOS (ADMIN)
+$router->get('/admin/usuarios/bloquear', [UserController::class, 'bloquear']);
+$router->get('/admin/usuarios/activar', [UserController::class, 'activar']);
