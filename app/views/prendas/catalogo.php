@@ -107,7 +107,7 @@ $filtroEstado = $_GET['estado'] ?? '';
 
     <div class="container mt-3">
 
-    <!-- MENSAJES DE ÉXITO O ERROR -->
+        <!-- MENSAJES DE ÉXITO O ERROR -->
         <?php if (isset($_SESSION['mensaje_exito'])): ?>
             <div class="alert alert-success alert-dismissible fade show">
                 <?= htmlspecialchars($_SESSION['mensaje_exito']) ?>

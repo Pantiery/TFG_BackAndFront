@@ -16,9 +16,9 @@ $generos = $generos ?? [];
     <!-- MENSAJES EXITO O ERROR -->
     <?php if (isset($_SESSION['success_prenda'])): ?>
         <div class="alert alert-success text-center">
-            <?= $_SESSION['success_prenda'] ?>
+            <?= $_SESSION['mensaje_exito'] ?>
         </div>
-        <?php unset($_SESSION['success_prenda']); ?>
+        <?php unset($_SESSION['mensaje_exito']); ?>
     <?php endif; ?>
 
     <?php if (isset($_SESSION['error_campos'])): ?>

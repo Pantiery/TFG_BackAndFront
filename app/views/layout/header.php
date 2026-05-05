@@ -120,7 +120,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">
+                            <a class="nav-link active" href="<?= \App\Config\App::url('/admin/usuarios') ?>">
                                 Gestión de Usuarios
                             </a>
                         </li>
