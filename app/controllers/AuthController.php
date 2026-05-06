@@ -82,10 +82,9 @@ class AuthController extends BaseController
 
             header('Location: ' . App::url('/'));
             exit;
-
-            exit;
+            
         } catch (\Exception $e) {
-            $_SESSION['error_credenciales'] = $e->getMessage();
+            $_SESSION['mensaje_error'] = $e->getMessage();
             header('Location: ' . App::url('/login'));
             exit;
         }

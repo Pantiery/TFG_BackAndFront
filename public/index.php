@@ -11,6 +11,9 @@ if (isset($_SESSION['ultima_actividad'])) {
         session_unset();
         session_destroy();
 
+        session_start();
+        $_SESSION['mensaje_error'] = 'Tu sesión ha expirado por inactividad. Vuelve a iniciar sesión.';
+
         header('Location: ' . \App\Config\App::url('/login'));
         exit;
     }
