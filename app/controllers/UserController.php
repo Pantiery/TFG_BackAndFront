@@ -9,13 +9,7 @@ class UserController extends BaseController
     // LISTADO DE USUARIOS PARA ADMIN
     public function index()
     {
-        $this->checkLogin();
-
-        // SOLO ADMIN
-        if ($_SESSION['usuario']['rol'] !== 'admin') {
-            header('Location: ' . \App\Config\App::baseUrl());
-            exit;
-        }
+        $this->checkAdmin();
 
         // 🔗 CONEXIÓN (TU FORMA CORRECTA)
         $pdo = \App\Core\Database::getConnection();

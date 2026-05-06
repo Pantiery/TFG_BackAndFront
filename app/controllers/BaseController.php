@@ -9,7 +9,10 @@ class BaseController
     // METODOS PARA VERIFICAR ACCESO A RUTAS PROTEGIDAS
     protected function checkLogin()
     {
-        if (!isset($_SESSION[ 'usuario' ])) {
+        if (!isset($_SESSION['usuario'])) {
+
+            $_SESSION['mensaje_error'] = 'Debes iniciar sesión para acceder a esta página';
+
             header('Location: ' . App::url('/login'));
             exit;
         }
@@ -20,7 +23,10 @@ class BaseController
     {
         $this->checkLogin();
 
-        if ($_SESSION[ 'usuario' ][ 'rol' ] !== 'admin') {
+        if ($_SESSION['usuario']['rol'] !== 'admin') {
+
+            $_SESSION['mensaje_error'] = 'No tienes permisos para acceder a esta sección';
+
             header('Location: ' . App::url('/'));
             exit;
         }
@@ -30,20 +36,20 @@ class BaseController
     protected function view($ruta, $data = [])
     {
         // Cargar carrito SIEMPRE para el header
-        if (isset($_SESSION[ 'usuario' ])) {
+        if (isset($_SESSION['usuario'])) {
             $carritoService = new \App\Services\CarritoService();
 
-            $carrito = $carritoService->getByUserId($_SESSION[ 'usuario' ][ 'id' ]);
+            $carrito = $carritoService->getByUserId($_SESSION['usuario']['id']);
 
             $productos = [];
 
             if ($carrito) {
-                $productos = $carritoService->getItems($carrito[ 'id' ]);
+                $productos = $carritoService->getItems($carrito['id']);
             }
 
-            $data[ 'productos' ] = $productos;
+            $data['productos'] = $productos;
         } else {
-            $data[ 'productos' ] = [];
+            $data['productos'] = [];
         }
 
         extract($data);
