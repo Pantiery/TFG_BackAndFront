@@ -1,4 +1,4 @@
-<div class="container mt-5 pt-5">
+
 
     <?php if (isset($_SESSION['mensaje_error'])): ?>
         <div class="alert alert-danger text-center">
@@ -13,5 +13,3 @@
         </div>
         <?php unset($_SESSION['mensaje_exito']); ?>
     <?php endif; ?>
-
-</div>
