@@ -6,102 +6,146 @@ $enVenta = $enVenta ?? [];
 $vendidas = $vendidas ?? [];
 $pendientes = $pendientes ?? [];
 $rechazadas = $rechazadas ?? [];
+
+$totalEnVenta = count($enVenta);
+$totalVendidas = count($vendidas);
+$totalPendientes = count($pendientes);
+$totalRechazadas = count($rechazadas);
 ?>
 
 <main>
 
-<div class="container-fluid mt-4">
-
-    <h2 class="text-center mb-4">Mis prendas</h2>
-
-    <div class="row g-3">
-
-        <!-- EN VENTA -->
-        <div class="col-md-6 mb-4">
-            <div class="card p-3 h-100">
-                <h5 class="text-center text-success mb-3">En venta</h5>
-
-                <?php if (empty($enVenta)): ?>
-                    <p class="text-center text-muted">No hay prendas</p>
-                <?php endif; ?>
-
-                <?php foreach ($enVenta as $p): ?>
-                    <div class="border rounded p-2 mb-2 bg-success-subtle">
-                        <strong><?= htmlspecialchars($p['tipo']) ?></strong><br>
-                        <?= htmlspecialchars($p['colegio']) ?><br>
-                        <?= number_format($p['precio_asignado'], 2, ',', '.') ?> €
-                    </div>
-                <?php endforeach; ?>
-            </div>
+    <section class="misventas-hero">
+        <div class="misventas-contenedor">
+            <span class="home-etiqueta">Panel del vendedor</span>
+            <h1>Mis ventas</h1>
+            <p>
+                Consulta el estado de tus prendas, revisa cuáles están publicadas, pendientes de aprobación,
+                vendidas o rechazadas, y controla tus ganancias de forma sencilla.
+            </p>
         </div>
+    </section>
 
-        <!-- VENDIDAS -->
-        <div class="col-md-6 mb-4">
-            <div class="card p-3 h-100">
-                <h5 class="text-center text-danger mb-3">Vendidas</h5>
+    <section class="misventas-seccion">
+        <div class="misventas-contenedor">
 
-                <?php if (empty($vendidas)): ?>
-                    <p class="text-center text-muted">No hay prendas</p>
-                <?php endif; ?>
+            <div class="misventas-resumen">
+                <div class="misventas-resumen-card">
+                    <span class="misventas-numero"><?= $totalEnVenta ?></span>
+                    <p>En venta</p>
+                </div>
 
-                <?php foreach ($vendidas as $p): ?>
-                    <div class="border rounded p-2 mb-2 bg-danger-subtle">
-                        <strong><?= htmlspecialchars($p['tipo']) ?></strong><br>
-                        <?= htmlspecialchars($p['colegio']) ?><br>
-                        Precio de venta:
-                        <?= number_format($p['precio_asignado'], 2, ',', '.') ?> €
-                        
-                        <?php if (!empty($p['importe_vendedor'])): ?>
-                            <div class="text-success">
-                                Ganancia neta: <?= number_format($p['importe_vendedor'], 2, ',', '.') ?> €
+                <div class="misventas-resumen-card">
+                    <span class="misventas-numero"><?= $totalVendidas ?></span>
+                    <p>Vendidas</p>
+                </div>
+
+                <div class="misventas-resumen-card">
+                    <span class="misventas-numero"><?= $totalPendientes ?></span>
+                    <p>Pendientes</p>
+                </div>
+
+                <div class="misventas-resumen-card">
+                    <span class="misventas-numero"><?= $totalRechazadas ?></span>
+                    <p>Rechazadas</p>
+                </div>
+            </div>
+
+            <div class="misventas-grid">
+
+                <article class="misventas-card">
+                    <div class="misventas-card-header">
+                        <h2>En venta</h2>
+                        <span class="misventas-badge badge-publicada">Publicadas</span>
+                    </div>
+
+                    <?php if (empty($enVenta)): ?>
+                        <p class="misventas-vacio">No tienes prendas publicadas actualmente.</p>
+                    <?php endif; ?>
+
+                    <?php foreach ($enVenta as $p): ?>
+                        <div class="misventas-item item-publicada">
+                            <div>
+                                <h3><?= htmlspecialchars($p['tipo']) ?></h3>
+                                <p><?= htmlspecialchars($p['colegio']) ?></p>
                             </div>
-                        <?php endif; ?>
+                            <strong><?= number_format($p['precio_asignado'], 2, ',', '.') ?> €</strong>
+                        </div>
+                    <?php endforeach; ?>
+                </article>
+
+                <article class="misventas-card">
+                    <div class="misventas-card-header">
+                        <h2>Vendidas</h2>
+                        <span class="misventas-badge badge-vendida">Finalizadas</span>
                     </div>
-                <?php endforeach; ?>
+
+                    <?php if (empty($vendidas)): ?>
+                        <p class="misventas-vacio">Todavía no tienes prendas vendidas.</p>
+                    <?php endif; ?>
+
+                    <?php foreach ($vendidas as $p): ?>
+                        <div class="misventas-item item-vendida">
+                            <div>
+                                <h3><?= htmlspecialchars($p['tipo']) ?></h3>
+                                <p><?= htmlspecialchars($p['colegio']) ?></p>
+                                <small>Precio de venta: <?= number_format($p['precio_asignado'], 2, ',', '.') ?> €</small>
+                            </div>
+
+                            <?php if (!empty($p['importe_vendedor'])): ?>
+                                <strong class="misventas-ganancia">
+                                    <?= number_format($p['importe_vendedor'], 2, ',', '.') ?> € netos
+                                </strong>
+                            <?php endif; ?>
+                        </div>
+                    <?php endforeach; ?>
+                </article>
+
+                <article class="misventas-card">
+                    <div class="misventas-card-header">
+                        <h2>Pendientes</h2>
+                        <span class="misventas-badge badge-pendiente">En revisión</span>
+                    </div>
+
+                    <?php if (empty($pendientes)): ?>
+                        <p class="misventas-vacio">No tienes solicitudes pendientes de revisión.</p>
+                    <?php endif; ?>
+
+                    <?php foreach ($pendientes as $p): ?>
+                        <div class="misventas-item item-pendiente">
+                            <div>
+                                <h3><?= htmlspecialchars($p['tipo']) ?></h3>
+                                <p><?= htmlspecialchars($p['colegio']) ?></p>
+                            </div>
+                            <strong><?= number_format($p['precio_asignado'], 2, ',', '.') ?> €</strong>
+                        </div>
+                    <?php endforeach; ?>
+                </article>
+
+                <article class="misventas-card">
+                    <div class="misventas-card-header">
+                        <h2>Rechazadas</h2>
+                        <span class="misventas-badge badge-rechazada">No publicadas</span>
+                    </div>
+
+                    <?php if (empty($rechazadas)): ?>
+                        <p class="misventas-vacio">No tienes prendas rechazadas.</p>
+                    <?php endif; ?>
+
+                    <?php foreach ($rechazadas as $p): ?>
+                        <div class="misventas-item item-rechazada">
+                            <div>
+                                <h3><?= htmlspecialchars($p['tipo']) ?></h3>
+                                <p><?= htmlspecialchars($p['colegio']) ?></p>
+                            </div>
+                            <strong><?= number_format($p['precio_asignado'], 2, ',', '.') ?> €</strong>
+                        </div>
+                    <?php endforeach; ?>
+                </article>
+
             </div>
         </div>
-
-        <!-- PENDIENTES -->
-        <div class="col-md-6 mb-4">
-            <div class="card p-3 h-100">
-                <h5 class="text-center text-warning mb-3">Pendientes</h5>
-
-                <?php if (empty($pendientes)): ?>
-                    <p class="text-center text-muted">No hay prendas</p>
-                <?php endif; ?>
-
-                <?php foreach ($pendientes as $p): ?>
-                    <div class="border rounded p-2 mb-2 bg-warning-subtle">
-                        <strong><?= htmlspecialchars($p['tipo']) ?></strong><br>
-                        <?= htmlspecialchars($p['colegio']) ?><br>
-                        <?= number_format($p['precio_asignado'], 2, ',', '.') ?> €
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        </div>
-
-        <!-- RECHAZADAS -->
-        <div class="col-md-6 mb-4">
-            <div class="card p-3 h-100">
-                <h5 class="text-center text-secondary mb-3">Rechazadas</h5>
-
-                <?php if (empty($rechazadas)): ?>
-                    <p class="text-center text-muted">No hay prendas</p>
-                <?php endif; ?>
-
-                <?php foreach ($rechazadas as $p): ?>
-                    <div class="border rounded p-2 mb-2 bg-light">
-                        <strong><?= htmlspecialchars($p['tipo']) ?></strong><br>
-                        <?= htmlspecialchars($p['colegio']) ?><br>
-                        <?= number_format($p['precio_asignado'], 2, ',', '.') ?> €
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        </div>
-
-    </div>
-
-</div>
+    </section>
 
 </main>
 
