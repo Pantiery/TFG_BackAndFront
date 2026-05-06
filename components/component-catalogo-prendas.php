@@ -2,13 +2,13 @@
 /** @var array $prendas */
 ?>
 
-<div class="container-fluid mt-4">
+<div class="catalogo-grid-contenedor">
 
-    <div class="row g-3">
+    <div class="catalogo-grid-prendas">
 
         <!-- Si no hay prendas, mostrar mensaje -->
         <?php if (empty($prendas)): ?>
-            <p class="text-center">No hay prendas disponibles</p>
+            <div class="catalogo-vacio"><h3>No hay prendas disponibles</h3><p>Prueba a cambiar los filtros o vuelve más tarde para consultar nuevas publicaciones.</p></div>
         <?php endif; ?>
         <!-- Si hay prendas, mostrarlas en tarjetas -->
         <?php foreach ($prendas as $prenda): ?>
@@ -27,23 +27,22 @@
             $modalId = 'modalPrenda_' . $prenda['id'];
             ?>
             <!-- Tarjeta de prenda -->
-            <div class="col-md-3 mb-4">
+            <div class="catalogo-col-prenda">
 
-                <div class="card card-prenda h-100 shadow-sm">
+                <div class="card h-100 shadow-sm">
 
                     <?php if (!empty($prenda['imagen'])): ?>
                         <img src="/proyecto_TFG/TFG_BackAndFront/public<?= $prenda['imagen'] ?>"
-                             class="card-img-top"
-                             style="height:200px; object-fit:cover;">
+                             class="card-img-top catalogo-card-img">
                     <?php endif; ?>
 
-                    <div class="card-body">
+                    <div class="card-body catalogo-card-body">
 
                         <h5 class="card-title">
                             <?= htmlspecialchars($prenda['tipo']) ?>
                         </h5>
 
-                        <p class="info-colegio">
+                        <p class="card-text">
                             <strong>Colegio:</strong> <?= htmlspecialchars($prenda['colegio']) ?><br>
 
                             <?php
@@ -58,7 +57,7 @@
                             }
                             ?>
 
-                            <span class="badge bg-<?= $badge ?>">
+                            <span class="badge bg-<?= $badge ?> catalogo-badge-estado">
                                 <?= htmlspecialchars($prenda['estado']) ?>
                             </span>
                             
@@ -96,20 +95,20 @@
             <!-- MODAL -->
             <div class="modal fade" id="<?= $modalId ?>" tabindex="-1">
                 <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
+                    <div class="modal-content catalogo-modal-content">
 
-                        <div class="modal-header">
+                        <div class="modal-header catalogo-modal-header">
                             <h5 class="modal-title">
                                 <?= htmlspecialchars($prenda['tipo']) ?>
                             </h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                         </div>
 
-                        <div class="modal-body text-center">
+                        <div class="modal-body catalogo-modal-body">
 
                             <?php if (!empty($prenda['imagen'])): ?>
                                 <img src="/proyecto_TFG/TFG_BackAndFront/public<?= $prenda['imagen'] ?>"
-                                     style="max-width:100%; height:auto; margin-bottom:15px;">
+                                     class="catalogo-modal-img">
                             <?php endif; ?>
 
                             <p><strong>Colegio:</strong> <?= htmlspecialchars($prenda['colegio']) ?></p>
@@ -135,7 +134,7 @@
 
                             </div>
                         </div>
-                        <br>    
+                        <br>
                     </div>
                 </div>
             </div>

@@ -47,6 +47,7 @@ class AuthService
         ]);
     }
 
+    // Login
     public function login($data)
     {
         $pdo = Database::getConnection();
@@ -61,6 +62,10 @@ class AuthService
 
         if (!$usuario || !password_verify($password, $usuario['password'])) {
             throw new \Exception('Credenciales incorrectas');
+        }
+
+        if ($usuario['activo'] == 0) {
+            throw new \Exception("El usuario esta bloqueado, contacta con el administrador para más información");
         }
 
         return $usuario;
