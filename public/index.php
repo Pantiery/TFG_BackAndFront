@@ -11,7 +11,7 @@ if (isset($_SESSION['ultima_actividad'])) {
         session_unset();
         session_destroy();
 
-        header('Location: /proyecto_TFG/TFG_BackAndFront/public/login');
+        header('Location: ' . \App\Config\App::url('/login'));
         exit;
     }
 }
