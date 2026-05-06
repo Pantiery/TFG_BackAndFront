@@ -9,6 +9,13 @@
     <?php unset($_SESSION['mensaje_error']); ?>
   <?php endif; ?>
 
+  <?php if (isset($_SESSION['mensaje_exito'])): ?>
+    <div class="alert alert-success text-center">
+      <?= $_SESSION['mensaje_exito'] ?>
+    </div>
+    <?php unset($_SESSION['mensaje_exito']); ?>
+  <?php endif; ?>
+
   <form method="POST" class="grid-layout">
 
     <h2>Login</h2>
