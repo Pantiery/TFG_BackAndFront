@@ -20,7 +20,7 @@ class VentaController extends BaseController
 
         if (empty($items)) {
             $_SESSION['mensaje_error'] = 'El carrito está vacío';
-            header('Location: /carrito');
+            header('Location: ' . \App\Config\App::url('/carrito'));
             exit;
         }
 

@@ -13,13 +13,10 @@ class Database
     {
         if (self::$connection === null) {
             //HOST
-            $host = 'localhost';
-            //NOMBRE BASE DE DATOS
-            $dbname = 'uniformes_segunda_mano';
-            //USER
-            $user = 'root';
-            //PASSWORD VACIO
-            $pass = '';
+            $host = $_ENV['DB_HOST'];
+            $dbname = $_ENV['DB_NAME'];
+            $user = $_ENV['DB_USER'];
+            $pass = $_ENV['DB_PASS'];
             //CHARSET (que es?)
             $charset = 'utf8mb4';
 

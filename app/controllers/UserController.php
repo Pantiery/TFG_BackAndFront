@@ -9,13 +9,7 @@ class UserController extends BaseController
     // LISTADO DE USUARIOS PARA ADMIN
     public function index()
     {
-        $this->checkLogin();
-
-        // SOLO ADMIN
-        if ($_SESSION['usuario']['rol'] !== 'admin') {
-            header('Location: ' . \App\Config\App::baseUrl());
-            exit;
-        }
+        $this->checkAdmin();
 
         // 🔗 CONEXIÓN (TU FORMA CORRECTA)
         $pdo = \App\Core\Database::getConnection();
@@ -62,7 +56,7 @@ class UserController extends BaseController
         $stmt = $pdo->prepare("UPDATE usuarios SET activo = 0 WHERE id = ?");
         $stmt->execute([$id]);
 
-        $_SESSION['mensaje'] = 'Usuario bloqueado correctamente';
+        $_SESSION['mensaje_exito'] = 'Usuario bloqueado correctamente';
 
         header('Location: ' . \App\Config\App::url('/admin/usuarios'));
         exit;
@@ -94,7 +88,7 @@ class UserController extends BaseController
         $stmt = $pdo->prepare("UPDATE usuarios SET activo = 1 WHERE id = ?");
         $stmt->execute([$id]);
 
-        $_SESSION['mensaje'] = 'Usuario activado correctamente';
+        $_SESSION['mensaje_exito'] = 'Usuario activado correctamente';
 
         header('Location: ' . \App\Config\App::url('/admin/usuarios'));
         exit;

@@ -3,12 +3,12 @@
     <div class="container mt-5">
         <h2 class="mb-4">Listado de usuarios</h2>
 
-        <?php if (isset($_SESSION['mensaje'])): ?>
-            <div class="alert alert-success">
-                <?= $_SESSION['mensaje'] ?>
-            </div>
-            <?php unset($_SESSION['mensaje']); ?>
-        <?php endif; ?>
+    <?php if (isset($_SESSION['mensaje_exito'])): ?>
+        <div class="alert alert-success">
+            <?= $_SESSION['mensaje_exito'] ?>
+        </div>
+        <?php unset($_SESSION['mensaje_exito']); ?>
+    <?php endif; ?>
 
         <table class="table table-bordered table-striped">
             <thead class="table-dark">

@@ -24,18 +24,11 @@
 
         <button type="submit" class="btn btn-primary">Registrarme</button>
 
-        <?php if (isset($_SESSION['error_registro'])): ?>
+        <?php if (isset($_SESSION['mensaje_error'])): ?>
             <div class="alert alert-danger">
-                <?= $_SESSION['error_registro'] ?>
+                <?= $_SESSION['mensaje_error'] ?>
             </div>
-            <?php unset($_SESSION['error_registro']); ?>
-        <?php endif; ?>
-
-        <?php if (isset($_SESSION['error_campos'])): ?>
-            <div class="alert alert-danger">
-                <?= $_SESSION['error_campos'] ?>
-            </div>
-            <?php unset($_SESSION['error_campos']); ?>
+            <?php unset($_SESSION['mensaje_error']); ?>
         <?php endif; ?>
 
     </form>

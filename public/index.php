@@ -11,7 +11,10 @@ if (isset($_SESSION['ultima_actividad'])) {
         session_unset();
         session_destroy();
 
-        header('Location: /proyecto_TFG/TFG_BackAndFront/public/login');
+        session_start();
+        $_SESSION['mensaje_error'] = 'Tu sesión ha expirado por inactividad. Vuelve a iniciar sesión.';
+
+        header('Location: ' . \App\Config\App::url('/login'));
         exit;
     }
 }
@@ -39,7 +42,9 @@ $uri = str_replace('/proyecto_TFG/TFG_BackAndFront/public', '', $uri);
 $method = $_SERVER['REQUEST_METHOD'];
 
 use App\Core\Router;
+use App\Core\Env;
 
+Env::load(__DIR__ . '/../.env');
 $router = new Router();
 
 // cargar rutas

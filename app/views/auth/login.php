@@ -2,6 +2,20 @@
 
 <main>
 
+  <?php if (isset($_SESSION['mensaje_error'])): ?>
+    <div class="alert alert-danger text-center">
+      <?= $_SESSION['mensaje_error'] ?>
+    </div>
+    <?php unset($_SESSION['mensaje_error']); ?>
+  <?php endif; ?>
+
+  <?php if (isset($_SESSION['mensaje_exito'])): ?>
+    <div class="alert alert-success text-center">
+      <?= $_SESSION['mensaje_exito'] ?>
+    </div>
+    <?php unset($_SESSION['mensaje_exito']); ?>
+  <?php endif; ?>
+
   <form method="POST" class="grid-layout">
 
     <h2>Login</h2>
@@ -13,13 +27,6 @@
     <input type="password" name="password" class="form-control" required>
 
     <button type="submit" class="btn btn-primary">Entrar</button>
-    
-    <?php if (isset($_SESSION['error_credenciales'])): ?>
-      <div class="alert alert-danger">
-        <?= $_SESSION['error_credenciales'] ?>
-      </div>
-      <?php unset($_SESSION['error_credenciales']); ?>
-    <?php endif; ?>
 
   </form>
 </main>

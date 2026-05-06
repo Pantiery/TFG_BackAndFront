@@ -41,10 +41,13 @@ class AuthController extends BaseController
         try {
             $service->registrar($_POST);
 
+            $_SESSION['mensaje_exito'] = 'Registro completado correctamente. Ya puedes iniciar sesión.';
+
             header('Location: ' . App::url('/login'));
             exit;
+            
         } catch (\Exception $e) {
-            $_SESSION['error_campos'] = $e->getMessage();
+            $_SESSION['mensaje_error'] = $e->getMessage();
             header('Location: ' . App::url('/register'));
             exit;
         }
@@ -82,10 +85,8 @@ class AuthController extends BaseController
 
             header('Location: ' . App::url('/'));
             exit;
-
-            exit;
         } catch (\Exception $e) {
-            $_SESSION['error_credenciales'] = $e->getMessage();
+            $_SESSION['mensaje_error'] = $e->getMessage();
             header('Location: ' . App::url('/login'));
             exit;
         }
