@@ -21,11 +21,11 @@ $generos = $generos ?? [];
         <?php unset($_SESSION['mensaje_exito']); ?>
     <?php endif; ?>
 
-    <?php if (isset($_SESSION['error_campos'])): ?>
+    <?php if (isset($_SESSION['mensaje_error'])): ?>
         <div class="alert alert-danger text-center">
-            <?= $_SESSION['error_campos'] ?>
+            <?= $_SESSION['mensaje_error'] ?>
         </div>
-        <?php unset($_SESSION['error_campos']); ?>
+        <?php unset($_SESSION['mensaje_error']); ?>
     <?php endif; ?>
 
     <h2 class="text-center mb-4">Solicitar venta de prenda</h2>
