@@ -14,7 +14,7 @@ $generos = $generos ?? [];
 <div class="container mt-4 mb-4">
 
     <!-- MENSAJES EXITO O ERROR -->
-    <?php if (isset($_SESSION['success_prenda'])): ?>
+    <?php if (isset($_SESSION['mensaje_exito'])): ?>
         <div class="alert alert-success text-center">
             <?= $_SESSION['mensaje_exito'] ?>
         </div>

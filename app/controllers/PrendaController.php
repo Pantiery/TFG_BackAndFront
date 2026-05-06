@@ -46,7 +46,7 @@ class PrendaController extends BaseController
 
         // Validación básica de archivo ( antes del service )
         if (!$file || $file['error'] !== UPLOAD_ERR_OK) {
-            $_SESSION['error_campos'] = 'Debes subir una imagen válida';
+            $_SESSION['mensaje_error'] = 'Debes subir una imagen válida';
             header('Location: ' . App::url('/prendas/solicitar'));
             exit;
         }
@@ -54,9 +54,9 @@ class PrendaController extends BaseController
         try {
             $this->service->crearPrenda($data, $file, $usuario_id);
 
-            $_SESSION['success_prenda'] = 'Prenda solicitada con éxito';
+            $_SESSION['mensaje_exito'] = 'Prenda solicitada con éxito';
         } catch (\Exception $e) {
-            $_SESSION['error_campos'] = $e->getMessage();
+            $_SESSION['mensaje_error'] = $e->getMessage();
         }
 
         header('Location: ' . App::url('/prendas/solicitar'));
@@ -127,7 +127,7 @@ class PrendaController extends BaseController
 
         // Validación archivo
         if (!$file || $file['error'] !== UPLOAD_ERR_OK) {
-            $_SESSION['error_campos'] = 'Debes subir una imagen válida';
+            $_SESSION['mensaje_error'] = 'Debes subir una imagen válida';
             header('Location: ' . App::url('/admin/prendas/insertar'));
             exit;
         }
@@ -135,9 +135,9 @@ class PrendaController extends BaseController
         try {
             $this->service->crearPrenda($data, $file, $usuario_id);
 
-            $_SESSION['success_prenda'] = 'Prenda insertada correctamente';
+            $_SESSION['mensaje_exito'] = 'Prenda insertada correctamente';
         } catch (\Exception $e) {
-            $_SESSION['error_campos'] = $e->getMessage();
+            $_SESSION['mensaje_error'] = $e->getMessage();
         }
 
         header('Location: ' . App::url('/admin/prendas/insertar'));

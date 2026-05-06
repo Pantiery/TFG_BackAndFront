@@ -21,13 +21,6 @@
 
     <button type="submit" class="btn btn-primary">Entrar</button>
 
-    <?php if (isset($_SESSION['mensaje_error'])): ?>
-      <div class="alert alert-danger">
-        <?= $_SESSION['mensaje_error'] ?>
-      </div>
-      <?php unset($_SESSION['mensaje_error']); ?>
-    <?php endif; ?>
-
   </form>
 </main>
 
