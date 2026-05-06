@@ -39,7 +39,9 @@ $uri = str_replace('/proyecto_TFG/TFG_BackAndFront/public', '', $uri);
 $method = $_SERVER['REQUEST_METHOD'];
 
 use App\Core\Router;
+use App\Core\Env;
 
+Env::load(__DIR__ . '/../.env');
 $router = new Router();
 
 // cargar rutas
