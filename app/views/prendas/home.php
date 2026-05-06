@@ -19,7 +19,7 @@ require_once __DIR__ . '/../layout/header.php';
 <div class="presentacion">
 <h1>Compra el uniforme de tu colegio al mejor precio</h1>
 
-<p>Bienvenido a nuestra tienda de uniforme de colegios. Encuentra el uniforme perfecto para tu colegio.</p>
+<h2>Bienvenido a nuestra tienda de uniforme de colegios. Encuentra el uniforme perfecto para tu colegio.</h2>
 </div>
 
 </main>
