@@ -3,11 +3,11 @@
 <div class="container mt-5">
     <h2 class="mb-4">Listado de usuarios</h2>
 
-    <?php if (isset($_SESSION['mensaje'])): ?>
+    <?php if (isset($_SESSION['mensaje_exito'])): ?>
         <div class="alert alert-success">
-            <?= $_SESSION['mensaje'] ?>
+            <?= $_SESSION['mensaje_exito'] ?>
         </div>
-        <?php unset($_SESSION['mensaje']); ?>
+        <?php unset($_SESSION['mensaje_exito']); ?>
     <?php endif; ?>
 
     <table class="table table-bordered table-striped">
