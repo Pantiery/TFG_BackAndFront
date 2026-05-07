@@ -5,13 +5,14 @@ namespace App\Services;
 use App\Core\Database;
 use App\Services\UploadService;
 
+// Servicio para manejar la lógica relacionada con las prendas ( creación, validación, filtrado, etc. )
 class PrendaService
 {
     private $prendaModel;
 
     public function __construct()
     {
-        $this->prendaModel = new \App\Models\Prenda();
+        $this->prendaModel = new \App\Models\PrendaModel();
     }
 
     // Validar que el tipo de prenda sea compatible con el colegio seleccionado
@@ -58,11 +59,15 @@ class PrendaService
         return $precio;
     }
 
+    // Obtener prendas publicadas para el catálogo ( excluyendo las del usuario logeado )
+
     public function obtenerCatalogo($usuarioId)
     {
         $pdo = Database::getConnection();
         return $this->prendaModel->obtenerPublicadas($pdo, $usuarioId);
     }
+
+    // Obtener prendas del usuario según su estado ( en venta, vendidas, pendientes, rechazadas )
 
     public function obtenerMisVentas($usuarioId)
     {
@@ -75,6 +80,8 @@ class PrendaService
             'rechazadas' => $this->prendaModel->obtenerPorUsuarioYEstado($pdo, $usuarioId, 'rechazada'),
         ];
     }
+
+    // Obtener datos necesarios para el formulario de creación de prenda ( tipos, colegios, estados, tallas, géneros )
 
     public function obtenerDatosFormulario($colegioSeleccionado = null)
     {
@@ -104,13 +111,13 @@ class PrendaService
         ];
     }
 
-    // 🔥 MÉTODO IMPORTANTE MEJORADO
+    // Crear una nueva prenda con validación de datos, subida de imagen y manejo de errores
 
     public function crearPrenda($data, $file, $usuario_id)
     {
         $pdo = Database::getConnection();
 
-        // 🔹 1. Validar campos obligatorios
+        // 1. Validar campos obligatorios
         $campos = ['tipoPrenda', 'colegio', 'estadoPrenda', 'talla', 'genero'];
 
         foreach ($campos as $campo) {
@@ -119,33 +126,33 @@ class PrendaService
             }
         }
 
-        // 🔹 2. Validar tipos numéricos
+        // 2. Validar tipos numéricos
         foreach ($campos as $campo) {
             if (!is_numeric($data[$campo])) {
                 throw new \Exception("Datos inválidos en {$campo}");
             }
         }
 
-        // 🔹 3. Convertir a enteros ( seguridad extra )
+        // 3. Convertir a enteros ( seguridad extra )
         $tipo = (int) $data['tipoPrenda'];
         $colegio = (int) $data['colegio'];
         $estado = (int) $data['estadoPrenda'];
         $talla = (int) $data['talla'];
         $genero = (int) $data['genero'];
 
-        // 🔹 4. Validar relación tipo ↔ colegio
+        // 4. Validar relación tipo ↔ colegio
         if (!$this->validarTipoColegio($pdo, $colegio, $tipo)) {
             throw new \Exception('Esa prenda no pertenece a ese colegio');
         }
 
-        // 🔹 5. Obtener precio ( ya valida internamente )
+        // 5. Obtener precio ( ya valida internamente )
         $precio = $this->obtenerPrecio($pdo, $tipo, $estado);
 
-        // 🔹 6. Subir imagen ( puede lanzar excepción )
+        // 6. Subir imagen ( puede lanzar excepción )
         $uploadService = new UploadService();
         $imagenRuta = $uploadService->subir($file);
 
-        // 🔹 7. Guardar en BD con control de errores
+        // 7. Guardar en BD con control de errores
         try {
             $this->prendaModel->crear($pdo, [
                 'usuario_id' => $usuario_id,
@@ -162,7 +169,8 @@ class PrendaService
         }
     }
 
-    // FILTRAR CATALOGO ( método mejorado con validación y seguridad )
+    // Filtrar prendas en el catálogo según colegio, tipo y estado de calidad ( excluyendo las del usuario logeado )
+
     public function filtrar($colegio, $tipo, $estado, $usuarioId)
     {
         $pdo = Database::getConnection();
@@ -183,7 +191,8 @@ class PrendaService
 
         $params = [];
 
-        // SOLO SI HAY USUARIO LOGEADO
+        // Excluir prendas del usuario logeado
+        
         if ($usuarioId !== null) {
             $sql .= " AND p.usuario_id != ?";
             $params[] = $usuarioId;

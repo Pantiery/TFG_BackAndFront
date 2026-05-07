@@ -2,6 +2,8 @@
 
 <main>
 
+<!-- Mostrar mensajes de error o éxito si existen -->
+
   <?php if (isset($_SESSION['mensaje_error'])): ?>
     <div class="alert alert-danger text-center">
       <?= $_SESSION['mensaje_error'] ?>

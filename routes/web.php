@@ -26,6 +26,10 @@ $router->post('/register', [AuthController::class, 'register']);
 
 // RUTA DE ADMIN
 $router->get('/admin', [AdminController::class, 'index']);
+$router->get('/admin/prendas-pendientes', [AdminController::class, 'prendasPendientes']);
+$router->get('/admin/prenda/revisar', [AdminController::class, 'revisarPrenda']);
+$router->get('/admin/prenda/aprobar', [AdminController::class, 'aprobarPrenda']);
+$router->get('/admin/prenda/rechazar', [AdminController::class, 'rechazarPrenda']);
 
 // RUTAS DE PRENDAS
 $router->get('/prendas/solicitar', [PrendaController::class, 'create']);
