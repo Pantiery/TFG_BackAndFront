@@ -110,7 +110,9 @@ class PrendaModel
     {
         $stmt = $pdo->prepare("
         UPDATE prendas
-        SET estado_publicacion = 'publicada'
+        SET
+        estado_publicacion = 'publicada',
+        fecha_publicacion = NOW()
         WHERE id = :id
     ");
 
