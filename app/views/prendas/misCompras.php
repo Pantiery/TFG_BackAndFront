@@ -1,70 +1,142 @@
 <?php require_once __DIR__ . '/../layout/header.php'; ?>
 <main>
-<div class="container mt-4">
-    <h2>Mis compras</h2>
+    <section class="miscompras-hero">
+        <div class="miscompras-contenedor">
+            <span class="home-etiqueta">Historial de compras</span>
+            <h1>Mis compras</h1>
+            <p>
+                Consulta las compras realizadas en UniColegio, revisa las prendas adquiridas
+                y comprueba el importe total de cada pedido.
+            </p>
+        </div>
+    </section>
 
-    <?php if (empty($compras)): ?>
-        <p>No has realizado compras todavía.</p>
-    <?php else: ?>
+    <section class="miscompras-seccion">
+        <div class="miscompras-contenedor">
 
-        <?php
-        $compras = $compras ?? [];
+            <?php if (empty($compras)): ?>
 
-        $ventasAgrupadas = [];
+                <div class="miscompras-vacio">
+                    <h2>Aún no has realizado ninguna compra</h2>
+                    <p>
+                        Cuando compres una prenda del catálogo, aparecerá aquí con su fecha,
+                        precio y colegio correspondiente.
+                    </p>
+                    <a href="<?= \App\Config\App::baseUrl() ?>/prendas/catalogo" class="btn-home btn-home-principal">
+                        Ir al catálogo
+                    </a>
+                </div>
 
-        foreach ($compras as $compra) {
-            $ventasAgrupadas[$compra['venta_id']][] = $compra;
-        }
-        ?>
+            <?php else: ?>
 
-        <?php $contador = 1; ?>
+                <?php
+                $compras = $compras ?? [];
+                $ventasAgrupadas = [];
 
-        <?php foreach ($ventasAgrupadas as $ventaId => $productos): ?>
+                foreach ($compras as $compra) {
+                    $ventasAgrupadas[$compra['venta_id']][] = $compra;
+                }
 
-            <div class="card mb-3 p-3">
+                $totalCompras = count($ventasAgrupadas);
+                $totalPrendas = count($compras);
+                $totalGastado = 0;
 
-                <h5>Compra <?= $contador ?> (ID: <?= $ventaId ?>)</h5>
+                foreach ($ventasAgrupadas as $productosResumen) {
+                    $totalGastado += (float) $productosResumen[0]['total'];
+                }
+                ?>
 
-                <?php $contador++; ?>
-
-                <h5>
-                    <?= date('d/m/Y', strtotime($productos[0]['fecha'])) ?>
-                </h5>
-
-                <p><strong>Total:</strong>
-                    <?= number_format($productos[0]['total'], 2) ?> €
-                </p>
-
-                <?php foreach ($productos as $producto): ?>
-
-                    <div class="d-flex gap-3 mb-2">
-
-                        <?php if (!empty($producto['imagen'])): ?>
-                            <img src="<?= \App\Config\App::baseUrl() . $producto['imagen'] ?>" width="80">
-                        <?php endif; ?>
-
-                        <div>
-                            <p>
-                                <?= htmlspecialchars($producto['tipo']) ?> - <?= htmlspecialchars($producto['colegio']) ?>
-                            </p>
-                            <p>
-                                Precio: <?= number_format($producto['precio_unitario'], 2) ?> €
-                            </p>
-                        </div>
-
+                <div class="miscompras-resumen">
+                    <div class="miscompras-resumen-card">
+                        <span class="miscompras-numero"><?= $totalCompras ?></span>
+                        <p>Compra(s) realizadas</p>
                     </div>
 
-                <?php endforeach; ?>
-                <p class="text-muted small">
-                    <?= count($productos) ?> producto(s)
-                </p>
+                    <div class="miscompras-resumen-card">
+                        <span class="miscompras-numero"><?= $totalPrendas ?></span>
+                        <p>Prenda(s) compradas</p>
+                    </div>
 
-            </div>
+                    <div class="miscompras-resumen-card">
+                        <span class="miscompras-numero"><?= number_format($totalGastado, 2, ',', '.') ?> €</span>
+                        <p>Total gastado</p>
+                    </div>
+                </div>
 
-        <?php endforeach; ?>
+                <div class="miscompras-cabecera-listado">
+                    <div>
+                        <span class="miscompras-etiqueta">Compras registradas</span>
+                        <h2>Historial de pedidos</h2>
+                    </div>
+                    <p>
+                        Cada tarjeta agrupa las prendas incluidas en una misma compra.
+                    </p>
+                </div>
 
-    <?php endif; ?>
-</div>
+                <div class="miscompras-grid">
+                    <?php $contador = 1; ?>
+
+                    <?php foreach ($ventasAgrupadas as $ventaId => $productos): ?>
+
+                        <article class="miscompras-card">
+                            <div class="miscompras-card-header">
+                                <div>
+                                    <h3>Compra <?= $contador ?></h3>
+                                    <p>ID de venta: <?= $ventaId ?></p>
+                                </div>
+
+                                <span class="miscompras-fecha">
+                                    <?= date('d/m/Y', strtotime($productos[0]['fecha'])) ?>
+                                </span>
+                            </div>
+
+                            <?php $contador++; ?>
+
+                            <div class="miscompras-total">
+                                <span>Total</span>
+                                <strong><?= number_format($productos[0]['total'], 2, ',', '.') ?> €</strong>
+                            </div>
+
+                            <div class="miscompras-productos">
+                                <?php foreach ($productos as $producto): ?>
+
+                                    <div class="miscompras-producto">
+
+                                        <?php if (!empty($producto['imagen'])): ?>
+                                            <img src="<?= \App\Config\App::baseUrl() . $producto['imagen'] ?>" alt="Imagen de la prenda">
+                                        <?php else: ?>
+                                            <div class="miscompras-img-placeholder">Sin imagen</div>
+                                        <?php endif; ?>
+
+                                        <div class="miscompras-producto-info">
+                                            <h4>
+                                                <?= htmlspecialchars($producto['tipo']) ?>
+                                            </h4>
+                                            <p>
+                                                <strong>Colegio:</strong> <?= htmlspecialchars($producto['colegio']) ?>
+                                            </p>
+                                            <p>
+                                                <strong>Precio:</strong> <?= number_format($producto['precio_unitario'], 2, ',', '.') ?> €
+                                            </p>
+                                        </div>
+
+                                    </div>
+
+                                <?php endforeach; ?>
+                            </div>
+
+                            <p class="miscompras-cantidad">
+                                <?= count($productos) ?> producto(s)
+                            </p>
+                        </article>
+
+                    <?php endforeach; ?>
+                </div>
+
+            <?php endif; ?>
+
+        </div>
+    </section>
 </main>
 
 <?php require_once __DIR__ . '/../layout/footer.php'; ?>

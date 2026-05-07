@@ -137,7 +137,7 @@ $filtroEstado = $_GET['estado'] ?? '';
         <div class="catalogo-contenedor">
             <div class="catalogo-listado-cabecera">
                 <div>
-                    <span class="home-etiqueta">Uniformes publicados</span>
+                    <span class="miscompras-etiqueta">Uniformes publicados</span>
                     <h2>Resultados del catálogo</h2>
                 </div>
                 <p>Selecciona una prenda para ver más información o añadirla directamente al carrito.</p>

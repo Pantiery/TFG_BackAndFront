@@ -1,60 +1,87 @@
 <?php require_once __DIR__ . '/../layout/header.php'; ?>
+<!-- Variables para que no de error -->
+<?php
+$total = $total ?? 0;
+$ventas = $ventas ?? [];
+?>
 
 <main>
 
-<div class="container mt-4">
+    <section class="monedero-hero">
+        <div class="monedero-contenedor">
+            <span class="home-etiqueta">Saldo de ventas</span>
+            <h1>Mi monedero</h1>
+            <p>
+                Consulta el dinero pendiente de recibir por tus prendas vendidas. El importe aparece como pendiente
+                hasta que el administrador marque el pago como realizado.
+            </p>
+        </div>
+    </section>
 
-    <h2 class="mb-4">Mi monedero</h2>
+    <section class="monedero-seccion">
+        <div class="monedero-contenedor monedero-grid">
 
-    <!-- TOTAL -->
-    <div class="card p-4 mb-4 shadow-sm text-center">
-        <h4 class="text-muted">Saldo pendiente</h4>
-        <h2 class="text-success fw-bold">
-            <?= number_format($total, 2, ',', '.') ?> €
-        </h2>
-    </div>
+            <aside class="monedero-resumen-card">
+                <span class="monedero-icono">€</span>
+                <p class="monedero-label">Saldo pendiente</p>
+                <h2><?= number_format($total, 2, ',', '.') ?> €</h2>
+                <p class="monedero-texto">
+                    Este total corresponde a las ventas que todavía están pendientes de pago.
+                </p>
+            </aside>
 
-    <!-- LISTADO -->
-    <div class="card p-4 shadow-sm">
-
-        <h5 class="mb-3">Ventas pendientes de cobro</h5>
-
-        <?php if (empty($ventas)): ?>
-            <p class="text-muted">No tienes dinero pendiente.</p>
-        <?php else: ?>
-
-            <?php foreach ($ventas as $venta): ?>
-
-                <div class="border-bottom py-3 d-flex align-items-center gap-3">
-
-                    <!-- IMAGEN -->
-                    <?php if (!empty($venta['imagen'])): ?>
-                        <img src="<?= \App\Config\App::baseUrl() . $venta['imagen'] ?>" width="70" class="rounded">
-                    <?php endif; ?>
-
-                    <!-- INFO -->
-                    <div class="flex-grow-1">
-                        <strong><?= htmlspecialchars($venta['tipo']) ?></strong><br>
-                        <span class="text-muted small">
-                            <?= htmlspecialchars($venta['colegio']) ?>
-                        </span>
+            <section class="monedero-listado-card">
+                <div class="monedero-listado-header">
+                    <div>
+                        <h2>Ventas pendientes de cobro</h2>
+                        <p>Prendas vendidas cuyo pago aún no ha sido confirmado.</p>
                     </div>
 
-                    <!-- IMPORTE -->
-                    <div class="text-success fw-bold">
-                        +<?= number_format($venta['importe_vendedor'], 2, ',', '.') ?> €
-                    </div>
-
+                    <span class="monedero-badge">
+                        <?= count($ventas) ?> pendiente<?= count($ventas) === 1 ? '' : 's' ?>
+                    </span>
                 </div>
 
-            <?php endforeach; ?>
+                <?php if (empty($ventas)): ?>
+                    <div class="monedero-vacio">
+                        <h3>No tienes dinero pendiente</h3>
+                        <p>Cuando vendas una prenda y el pago esté pendiente, aparecerá aquí.</p>
+                    </div>
+                <?php else: ?>
 
-        <?php endif; ?>
+                    <div class="monedero-listado">
+                        <?php foreach ($ventas as $venta): ?>
 
-    </div>
+                            <article class="monedero-item">
+                                <div class="monedero-item-info">
+                                    <?php if (!empty($venta['imagen'])): ?>
+                                        <img src="<?= \App\Config\App::baseUrl() . $venta['imagen'] ?>"
+                                             alt="<?= htmlspecialchars($venta['tipo']) ?>"
+                                             class="monedero-img">
+                                    <?php else: ?>
+                                        <div class="monedero-img monedero-img-placeholder">Sin imagen</div>
+                                    <?php endif; ?>
 
-</div>
-<br>
+                                    <div>
+                                        <h3><?= htmlspecialchars($venta['tipo']) ?></h3>
+                                        <p><?= htmlspecialchars($venta['colegio']) ?></p>
+                                        <span class="monedero-estado">Pendiente de pago</span>
+                                    </div>
+                                </div>
+
+                                <div class="monedero-importe">
+                                    +<?= number_format($venta['importe_vendedor'], 2, ',', '.') ?> €
+                                </div>
+                            </article>
+
+                        <?php endforeach; ?>
+                    </div>
+
+                <?php endif; ?>
+            </section>
+
+        </div>
+    </section>
 
 </main>
 

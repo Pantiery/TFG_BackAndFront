@@ -1273,3 +1273,505 @@ img {
     padding: 40px 0;
   }
 } 
+
+/* MIS COMPRAS */
+.miscompras-contenedor {
+  width: min(1200px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.miscompras-hero {
+  background-color: #f8fafc;
+  color: #1f2d3d;
+  padding: 55px 0;
+  text-align: center;
+}
+
+.miscompras-hero h1 {
+  font-size: 2.4rem;
+  margin: 12px 0 15px;
+}
+
+.miscompras-hero p {
+  max-width: 850px;
+  margin: 0 auto;
+  color: #4b5563;
+  line-height: 1.7;
+}
+
+.miscompras-seccion {
+  padding: 60px 0;
+  background: linear-gradient(135deg, rgb(23, 60, 81), #2f7fa5);
+}
+
+.miscompras-resumen {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 32px;
+}
+
+.miscompras-resumen-card {
+  background-color: white;
+  color: #1f2d3d;
+  border-radius: 14px;
+  padding: 22px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.miscompras-numero {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #4cb1e0;
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+
+.miscompras-resumen-card p {
+  margin: 0;
+  color: #4b5563;
+  font-weight: 700;
+}
+
+.miscompras-cabecera-listado {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 25px;
+  color: white;
+  margin-bottom: 26px;
+}
+
+.miscompras-cabecera-listado h2 {
+  margin: 12px 0 0;
+}
+
+.miscompras-cabecera-listado p {
+  max-width: 520px;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.miscompras-etiqueta {
+  display: inline-block;
+  background-color: white;
+  color: rgb(23, 60, 81);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.miscompras-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.miscompras-card {
+  background-color: white;
+  color: #1f2d3d;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.16);
+}
+
+.miscompras-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 18px;
+}
+
+.miscompras-card-header h3 {
+  margin: 0 0 4px;
+  font-size: 1.35rem;
+  color: rgb(23, 60, 81);
+}
+
+.miscompras-card-header p {
+  margin: 0;
+  color: #4b5563;
+}
+
+.miscompras-fecha {
+  background-color: rgba(76, 177, 224, 0.14);
+  color: rgb(23, 60, 81);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.miscompras-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  background-color: #f8fafc;
+  border-left: 5px solid #4cb1e0;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 18px;
+}
+
+.miscompras-total span {
+  color: #4b5563;
+  font-weight: 700;
+}
+
+.miscompras-total strong {
+  color: rgb(23, 60, 81);
+  font-size: 1.25rem;
+}
+
+.miscompras-productos {
+  display: grid;
+  gap: 14px;
+}
+
+.miscompras-producto {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  background-color: #f8fafc;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.miscompras-producto img,
+.miscompras-img-placeholder {
+  width: 95px;
+  height: 95px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background-color: #e5e7eb;
+}
+
+.miscompras-img-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.miscompras-producto-info h4 {
+  margin: 0 0 6px;
+  font-size: 1.1rem;
+  color: rgb(23, 60, 81);
+}
+
+.miscompras-producto-info p {
+  margin: 0 0 4px;
+  color: #4b5563;
+}
+
+.miscompras-producto-info p:last-child {
+  margin-bottom: 0;
+}
+
+.miscompras-cantidad {
+  margin: 16px 0 0;
+  color: #4b5563;
+  font-weight: 700;
+  text-align: right;
+}
+
+.miscompras-vacio {
+  background-color: white;
+  color: #1f2d3d;
+  border-radius: 16px;
+  padding: 35px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.16);
+}
+
+.miscompras-vacio p {
+  max-width: 650px;
+  margin: 0 auto 24px;
+  color: #4b5563;
+  line-height: 1.7;
+}
+
+@media (max-width: 992px) {
+  .miscompras-resumen,
+  .miscompras-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .miscompras-cabecera-listado {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 576px) {
+  .miscompras-hero h1 {
+    font-size: 1.9rem;
+  }
+
+  .miscompras-card-header,
+  .miscompras-total,
+  .miscompras-producto {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .miscompras-producto img,
+  .miscompras-img-placeholder {
+    width: 100%;
+    height: 180px;
+  }
+
+  .miscompras-cantidad {
+    text-align: left;
+  }
+
+  .miscompras-hero,
+  .miscompras-seccion {
+    padding: 40px 0;
+  }
+}
+
+/* MONEDERO */
+.monedero-contenedor {
+  width: min(1200px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.monedero-hero {
+  background-color: #f8fafc;
+  color: #1f2d3d;
+  padding: 55px 0;
+  text-align: center;
+}
+
+.monedero-hero h1 {
+  font-size: 2.4rem;
+  margin: 12px 0 15px;
+}
+
+.monedero-hero p {
+  max-width: 850px;
+  margin: 0 auto;
+  color: #4b5563;
+  line-height: 1.7;
+}
+
+.monedero-seccion {
+  padding: 60px 0;
+  background: linear-gradient(135deg, rgb(23, 60, 81), #2f7fa5);
+}
+
+.monedero-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 30px;
+  align-items: start;
+}
+
+.monedero-resumen-card,
+.monedero-listado-card {
+  background-color: white;
+  color: #1f2d3d;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.16);
+}
+
+.monedero-resumen-card {
+  padding: 35px 28px;
+  text-align: center;
+  position: sticky;
+  top: 120px;
+}
+
+.monedero-icono {
+  width: 54px;
+  height: 54px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: rgba(76, 177, 224, 0.16);
+  color: rgb(23, 60, 81);
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.monedero-label {
+  color: #4b5563;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.monedero-resumen-card h2 {
+  color: #198754;
+  font-size: 2.6rem;
+  margin-bottom: 14px;
+}
+
+.monedero-texto {
+  color: #4b5563;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.monedero-listado-card {
+  padding: 28px;
+}
+
+.monedero-listado-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.monedero-listado-header h2 {
+  margin-bottom: 6px;
+}
+
+.monedero-listado-header p {
+  color: #4b5563;
+  margin: 0;
+}
+
+.monedero-badge {
+  background-color: rgba(76, 177, 224, 0.16);
+  color: rgb(23, 60, 81);
+  padding: 7px 13px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.monedero-listado {
+  display: grid;
+  gap: 14px;
+}
+
+.monedero-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  background-color: #f8fafc;
+  border-left: 5px solid #198754;
+  border-radius: 14px;
+  padding: 15px 18px;
+}
+
+.monedero-item-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.monedero-img {
+  width: 78px;
+  height: 78px;
+  object-fit: cover;
+  border-radius: 12px;
+  flex-shrink: 0;
+  background-color: #e9eef3;
+}
+
+.monedero-img-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4b5563;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.monedero-item h3 {
+  margin: 0 0 4px;
+  font-size: 1.15rem;
+  color: rgb(23, 60, 81);
+}
+
+.monedero-item p {
+  margin: 0 0 7px;
+  color: #4b5563;
+}
+
+.monedero-estado {
+  display: inline-block;
+  background-color: rgba(255, 193, 7, 0.22);
+  color: #8a6d00;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.monedero-importe {
+  color: #198754;
+  font-size: 1.25rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.monedero-vacio {
+  background-color: #f8fafc;
+  color: #1f2d3d;
+  border-radius: 14px;
+  padding: 28px;
+  text-align: center;
+}
+
+.monedero-vacio h3 {
+  margin-bottom: 8px;
+}
+
+.monedero-vacio p {
+  color: #4b5563;
+  margin: 0;
+}
+
+@media (max-width: 992px) {
+  .monedero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .monedero-resumen-card {
+    position: static;
+  }
+}
+
+@media (max-width: 576px) {
+  .monedero-hero h1 {
+    font-size: 1.9rem;
+  }
+
+  .monedero-listado-header,
+  .monedero-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .monedero-item-info {
+    align-items: flex-start;
+  }
+
+  .monedero-resumen-card,
+  .monedero-listado-card {
+    padding: 22px;
+  }
+
+  .monedero-hero,
+  .monedero-seccion {
+    padding: 40px 0;
+  }
+}
