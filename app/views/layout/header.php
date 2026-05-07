@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="<?= \App\Config\App::url('/assets/css/misVentas.css') ?>">
     <link rel="stylesheet" href="<?= \App\Config\App::url('/assets/css/monedero.css') ?>">
     <link rel="stylesheet" href="<?= \App\Config\App::url('/assets/css/solicitar.css') ?>">
+    <link rel="stylesheet" href="<?= \App\Config\App::url('/assets/css/admin.css') ?>">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -116,7 +117,8 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">
+                            <a class="nav-link active"
+                                href="<?= \App\Config\App::url('/admin/prendas-pendientes') ?>">
                                 Gestión de Prendas
                             </a>
                         </li>

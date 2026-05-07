@@ -1,4 +1,4 @@
-<?php require_once __DIR__ . '/../layout/header.php'; ?>
+<?php require __DIR__ . '/../layout/header.php'; ?>
 
 <main>
 
@@ -11,12 +11,13 @@
             </span>
 
             <h1>
-                Gestión de usuarios
+                Gestión de prendas
             </h1>
 
             <p>
-                Administra los usuarios registrados en la plataforma,
-                controla accesos y bloquea cuentas cuando sea necesario.
+                Revisa las solicitudes pendientes enviadas por los usuarios,
+                valida el estado de las prendas y decide si pueden publicarse
+                en el catálogo.
             </p>
 
         </div>
@@ -29,11 +30,11 @@
 
             <?php require __DIR__ . '/../layout/messages.php'; ?>
 
-            <?php if (empty($usuarios)): ?>
+            <?php if (empty($pendientes)): ?>
 
                 <div class="admin-vacio">
 
-                    No hay usuarios registrados.
+                    No hay prendas pendientes de revisión.
 
                 </div>
 
@@ -41,40 +42,50 @@
 
                 <div class="admin-grid">
 
-                    <?php foreach ($usuarios as $user): ?>
+                    <?php foreach ($pendientes as $prenda): ?>
 
                         <article class="admin-card">
+
+                            <img
+                                src="<?= \App\Config\App::url($prenda['imagen']) ?>"
+                                alt="Prenda">
 
                             <div class="admin-card-body">
 
                                 <h3>
-                                    <?= htmlspecialchars($user['nombre'] . ' ' . $user['apellido1']) ?>
+                                    <?= htmlspecialchars($prenda['tipo']) ?>
                                 </h3>
 
                                 <p class="admin-info">
-                                    <strong>Email:</strong>
-                                    <?= htmlspecialchars($user['email']) ?>
+                                    <strong>Colegio:</strong>
+                                    <?= htmlspecialchars($prenda['colegio']) ?>
                                 </p>
 
                                 <p class="admin-info">
-                                    <strong>Rol:</strong>
-                                    <?= htmlspecialchars($user['rol']) ?>
+                                    <strong>Vendedor:</strong>
+                                    <?= htmlspecialchars($prenda['vendedor'] . ' ' . $prenda['apellido1']) ?>
                                 </p>
 
                                 <p class="admin-info">
 
                                     <strong>Estado:</strong>
 
-                                    <?php if ($user['activo'] == 1): ?>
+                                    <?php if ($prenda['estado'] === 'excelente'): ?>
 
                                         <span class="admin-badge badge-excelente">
-                                            Activo
+                                            Excelente
+                                        </span>
+
+                                    <?php elseif ($prenda['estado'] === 'bueno'): ?>
+
+                                        <span class="admin-badge badge-bueno">
+                                            Bueno
                                         </span>
 
                                     <?php else: ?>
 
                                         <span class="admin-badge badge-aceptable">
-                                            Bloqueado
+                                            Aceptable
                                         </span>
 
                                     <?php endif; ?>
@@ -83,25 +94,12 @@
 
                                 <div class="admin-actions">
 
-                                    <?php if ($user['activo'] == 1): ?>
+                                    <a href="<?= \App\Config\App::url('/admin/prenda/revisar?id=' . $prenda['id']) ?>"
+                                        class="btn btn-primary">
 
-                                        <a href="<?= \App\Config\App::url('/admin/usuarios/bloquear?id=' . $user['id']) ?>"
-                                            class="btn btn-danger">
+                                        Revisar
 
-                                            Bloquear
-
-                                        </a>
-
-                                    <?php else: ?>
-
-                                        <a href="<?= \App\Config\App::url('/admin/usuarios/activar?id=' . $user['id']) ?>"
-                                            class="btn btn-success">
-
-                                            Activar
-
-                                        </a>
-
-                                    <?php endif; ?>
+                                    </a>
 
                                 </div>
 
