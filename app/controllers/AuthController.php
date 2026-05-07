@@ -8,8 +8,7 @@ use App\Services\AuthService;
 
 class AuthController extends BaseController
 {
-    // REDIRECCION A LOGIN
-
+    // Redirigir a login si ya está autenticado
     public function showLogin()
     {
         if (isset($_SESSION['usuario'])) {
@@ -20,8 +19,7 @@ class AuthController extends BaseController
         $this->view('auth/login');
     }
 
-    // REDIRECCION A REGISTRO
-
+    // Redirigir a registro si ya está autenticado
     public function showRegister()
     {
         if (isset($_SESSION['usuario'])) {
@@ -32,8 +30,7 @@ class AuthController extends BaseController
         $this->view('auth/register');
     }
 
-    // REGISTRO USUARIO
-
+    // Registrar nuevo usuario
     public function register()
     {
         $service = new AuthService();
@@ -45,7 +42,6 @@ class AuthController extends BaseController
 
             header('Location: ' . App::url('/login'));
             exit;
-            
         } catch (\Exception $e) {
             $_SESSION['mensaje_error'] = $e->getMessage();
             header('Location: ' . App::url('/register'));
@@ -53,8 +49,7 @@ class AuthController extends BaseController
         }
     }
 
-    // FUNCION PARA HACER LOGIN
-
+    // Función para iniciar sesión
     public function login()
     {
         $service = new AuthService();
@@ -92,12 +87,29 @@ class AuthController extends BaseController
         }
     }
 
+    // Función para cerrar sesión
     public function logout()
     {
         $_SESSION = [];
         session_destroy();
 
         header('Location: ' . App::url('/'));
+        exit;
+    }
+
+    // Mostrar vista recuperar contraseña
+    public function showRecuperar()
+    {
+        $this->view('auth/recuperar');
+    }
+
+    // Procesar recuperación de contraseña
+    public function recuperarPassword()
+    {
+        $_SESSION['mensaje_exito'] =
+            'Si el correo existe en el sistema, se ha enviado un enlace de recuperación.';
+
+        header('Location: ' . \App\Config\App::url('/login'));
         exit;
     }
 }

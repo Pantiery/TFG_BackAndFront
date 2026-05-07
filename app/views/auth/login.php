@@ -27,6 +27,8 @@
 
     <label>Contraseña</label>
     <input type="password" name="password" class="form-control" required>
+    <p><a href="<?= \App\Config\App::url('/recuperar') ?>">¿Olvidaste tu contraseña?</a></p>
+    <p><a href="<?= \App\Config\App::url('/register') ?>">¿No tienes cuenta? Regístrate aquí</a></p>
 
     <button type="submit" class="btn btn-primary">Entrar</button>
 

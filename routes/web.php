@@ -75,3 +75,7 @@ $router->get('/admin/usuarios', [UserController::class, 'index']);
 // RUTAS PARA BLOQUEAR/ACTIVAR USUARIOS (ADMIN)
 $router->get('/admin/usuarios/bloquear', [UserController::class, 'bloquear']);
 $router->get('/admin/usuarios/activar', [UserController::class, 'activar']);
+
+// RUTAS PARA RECUPERAR CONTRASEÑA
+$router->get('/recuperar', [AuthController::class, 'showRecuperar']);
+$router->post('/recuperar', [AuthController::class, 'recuperarPassword']);

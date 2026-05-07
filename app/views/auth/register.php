@@ -22,6 +22,8 @@
         <input type="password" name="password" class="form-control" minlength="8"
             pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$" required>
 
+            <p>La contraseña debe tener al menos 8 caracteres, incluyendo letras y números, una mayúscula y al menos un carácter especial.</p>
+
         <button type="submit" class="btn btn-primary">Registrarme</button>
 
         <?php if (isset($_SESSION['mensaje_error'])): ?>
