@@ -94,7 +94,11 @@ class CarritoController extends BaseController
         $carrito = $carritoService->getByUserId($usuarioId);
 
         if ($carrito) {
+
             $carritoService->removeItem($carrito['id'], $prendaId);
+
+            $_SESSION['mensaje_exito'] =
+                'Producto eliminado del carrito correctamente';
         }
 
         header('Location: ' . \App\Config\App::baseUrl() . '/carrito');

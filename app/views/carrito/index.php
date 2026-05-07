@@ -7,19 +7,7 @@
     <div class="container">
         <br>
         <!-- MENSAJES DE ÉXITO O ERROR -->
-        <?php if (isset($_SESSION['mensaje_exito'])): ?>
-            <div class="alert alert-success">
-                <?= $_SESSION['mensaje_exito'] ?>
-            </div>
-            <?php unset($_SESSION['mensaje_exito']); ?>
-        <?php endif; ?>
-
-        <?php if (isset($_SESSION['mensaje_error'])): ?>
-            <div class="alert alert-danger">
-                <?= $_SESSION['mensaje_error'] ?>
-            </div>
-            <?php unset($_SESSION['mensaje_error']); ?>
-        <?php endif; ?>
+        <?php require __DIR__ . '/../layout/messages.php'; ?>
         <br>
         <!-- TITULO -->
         <div class="mb-4">
