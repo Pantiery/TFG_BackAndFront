@@ -1,0 +1,264 @@
+/* MIS COMPRAS */
+.miscompras-contenedor {
+  width: min(1200px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.miscompras-hero {
+  background-color: #f8fafc;
+  color: #1f2d3d;
+  padding: 55px 0;
+  text-align: center;
+}
+
+.miscompras-hero h1 {
+  font-size: 2.4rem;
+  margin: 12px 0 15px;
+}
+
+.miscompras-hero p {
+  max-width: 850px;
+  margin: 0 auto;
+  color: #4b5563;
+  line-height: 1.7;
+}
+
+.miscompras-seccion {
+  padding: 60px 0;
+  background: linear-gradient(135deg, rgb(23, 60, 81), #2f7fa5);
+}
+
+.miscompras-resumen {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 32px;
+}
+
+.miscompras-resumen-card {
+  background-color: white;
+  color: #1f2d3d;
+  border-radius: 14px;
+  padding: 22px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.miscompras-numero {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #4cb1e0;
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+
+.miscompras-resumen-card p {
+  margin: 0;
+  color: #4b5563;
+  font-weight: 700;
+}
+
+.miscompras-cabecera-listado {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 25px;
+  color: white;
+  margin-bottom: 26px;
+}
+
+.miscompras-cabecera-listado h2 {
+  margin: 12px 0 0;
+}
+
+.miscompras-cabecera-listado p {
+  max-width: 520px;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.miscompras-etiqueta {
+  display: inline-block;
+  background-color: white;
+  color: rgb(23, 60, 81);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.miscompras-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.miscompras-card {
+  background-color: white;
+  color: #1f2d3d;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.16);
+}
+
+.miscompras-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 18px;
+}
+
+.miscompras-card-header h3 {
+  margin: 0 0 4px;
+  font-size: 1.35rem;
+  color: rgb(23, 60, 81);
+}
+
+.miscompras-card-header p {
+  margin: 0;
+  color: #4b5563;
+}
+
+.miscompras-fecha {
+  background-color: rgba(76, 177, 224, 0.14);
+  color: rgb(23, 60, 81);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.miscompras-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  background-color: #f8fafc;
+  border-left: 5px solid #4cb1e0;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 18px;
+}
+
+.miscompras-total span {
+  color: #4b5563;
+  font-weight: 700;
+}
+
+.miscompras-total strong {
+  color: rgb(23, 60, 81);
+  font-size: 1.25rem;
+}
+
+.miscompras-productos {
+  display: grid;
+  gap: 14px;
+}
+
+.miscompras-producto {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  background-color: #f8fafc;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.miscompras-producto img,
+.miscompras-img-placeholder {
+  width: 95px;
+  height: 95px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background-color: #e5e7eb;
+}
+
+.miscompras-img-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.miscompras-producto-info h4 {
+  margin: 0 0 6px;
+  font-size: 1.1rem;
+  color: rgb(23, 60, 81);
+}
+
+.miscompras-producto-info p {
+  margin: 0 0 4px;
+  color: #4b5563;
+}
+
+.miscompras-producto-info p:last-child {
+  margin-bottom: 0;
+}
+
+.miscompras-cantidad {
+  margin: 16px 0 0;
+  color: #4b5563;
+  font-weight: 700;
+  text-align: right;
+}
+
+.miscompras-vacio {
+  background-color: white;
+  color: #1f2d3d;
+  border-radius: 16px;
+  padding: 35px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.16);
+}
+
+.miscompras-vacio p {
+  max-width: 650px;
+  margin: 0 auto 24px;
+  color: #4b5563;
+  line-height: 1.7;
+}
+
+@media (max-width: 992px) {
+  .miscompras-resumen,
+  .miscompras-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .miscompras-cabecera-listado {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 576px) {
+  .miscompras-hero h1 {
+    font-size: 1.9rem;
+  }
+
+  .miscompras-card-header,
+  .miscompras-total,
+  .miscompras-producto {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .miscompras-producto img,
+  .miscompras-img-placeholder {
+    width: 100%;
+    height: 180px;
+  }
+
+  .miscompras-cantidad {
+    text-align: left;
+  }
+
+  .miscompras-hero,
+  .miscompras-seccion {
+    padding: 40px 0;
+  }
+}

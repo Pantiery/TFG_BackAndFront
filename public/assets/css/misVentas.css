@@ -1,0 +1,201 @@
+/* MIS VENTAS */
+.misventas-contenedor {
+  width: min(1200px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.misventas-hero {
+  background-color: #f8fafc;
+  color: #1f2d3d;
+  padding: 55px 0;
+  text-align: center;
+}
+
+.misventas-hero h1 {
+  font-size: 2.4rem;
+  margin: 12px 0 15px;
+}
+
+.misventas-hero p {
+  max-width: 850px;
+  margin: 0 auto;
+  color: #4b5563;
+  line-height: 1.7;
+}
+
+.misventas-seccion {
+  padding: 60px 0;
+  background: linear-gradient(135deg, rgb(23, 60, 81), #2f7fa5);
+}
+
+.misventas-resumen {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 30px;
+}
+
+.misventas-resumen-card {
+  background-color: white;
+  color: #1f2d3d;
+  border-radius: 14px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.misventas-numero {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #4cb1e0;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.misventas-resumen-card p {
+  margin: 0;
+  color: #4b5563;
+  font-weight: 700;
+}
+
+.misventas-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.misventas-card {
+  background-color: white;
+  color: #1f2d3d;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.16);
+}
+
+.misventas-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.misventas-card-header h2 {
+  margin: 0;
+  font-size: 1.35rem;
+}
+
+.misventas-badge {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.badge-publicada {
+  background-color: rgba(40, 167, 69, 0.15);
+  color: #198754;
+}
+
+.badge-vendida {
+  background-color: rgba(220, 53, 69, 0.15);
+  color: #dc3545;
+}
+
+.badge-pendiente {
+  background-color: rgba(255, 193, 7, 0.22);
+  color: #8a6d00;
+}
+
+.badge-rechazada {
+  background-color: rgba(108, 117, 125, 0.16);
+  color: #6c757d;
+}
+
+.misventas-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  border-left: 5px solid #4cb1e0;
+  background-color: #f8fafc;
+}
+
+.misventas-item h3 {
+  margin: 0 0 4px;
+  font-size: 1.05rem;
+}
+
+.misventas-item p,
+.misventas-item small {
+  margin: 0;
+  color: #4b5563;
+}
+
+.misventas-item strong {
+  color: rgb(23, 60, 81);
+  white-space: nowrap;
+}
+
+.misventas-ganancia {
+  color: #198754 !important;
+}
+
+.item-publicada {
+  border-left-color: #198754;
+}
+
+.item-vendida {
+  border-left-color: #dc3545;
+}
+
+.item-pendiente {
+  border-left-color: #ffc107;
+}
+
+.item-rechazada {
+  border-left-color: #6c757d;
+}
+
+.misventas-vacio {
+  background-color: #f8fafc;
+  color: #4b5563;
+  text-align: center;
+  padding: 18px;
+  border-radius: 12px;
+  margin: 0;
+}
+
+@media (max-width: 992px) {
+  .misventas-resumen,
+  .misventas-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .misventas-hero h1 {
+    font-size: 1.9rem;
+  }
+
+  .misventas-resumen,
+  .misventas-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .misventas-card-header,
+  .misventas-item {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .misventas-hero,
+  .misventas-seccion {
+    padding: 40px 0;
+  }
+}
