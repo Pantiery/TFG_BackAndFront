@@ -10,6 +10,7 @@ class CarritoController extends BaseController
     // AÑADIR AL CARRITO
     public function add()
     {
+        // Verificar que el usuario está logueado
         $this->checkLogin();
 
         $prendaId = $_POST['prenda_id'] ?? null;

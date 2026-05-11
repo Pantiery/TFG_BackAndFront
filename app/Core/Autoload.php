@@ -20,6 +20,6 @@ spl_autoload_register(function ($class) {
     if (file_exists($file)) {
         require $file;
     } else {
-        die('❌ No se encontró la clase: ' . $file);
+        die(' No se encontró la clase: ' . $file);
     }
 });

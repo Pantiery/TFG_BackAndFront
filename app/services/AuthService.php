@@ -11,11 +11,19 @@ class AuthService
     {
         $pdo = Database::getConnection();
 
-        $nombre = $data['nombre'] ?? '';
-        $apellido1 = $data['apellido1'] ?? '';
-        $apellido2 = $data['apellido2'] ?? '';
-        $email = $data['email'] ?? '';
-        $password = $data['password'] ?? '';
+        $nombre = trim($data['nombre'] ?? '');
+        $apellido1 = trim($data['apellido1'] ?? '');
+        $apellido2 = trim($data['apellido2'] ?? '');
+        $email = trim($data['email'] ?? '');
+        $password = trim($data['password'] ?? '');
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw new \Exception('El email no es válido');
+        }
+
+        if (strlen($password) < 8) {
+            throw new \Exception('La contraseña debe tener al menos 8 caracteres');
+        }
 
         if (!$nombre || !$apellido1 || !$email || !$password) {
             throw new \Exception('Todos los campos obligatorios deben ser completados');
@@ -52,8 +60,12 @@ class AuthService
     {
         $pdo = Database::getConnection();
 
-        $email = $data['email'] ?? '';
-        $password = $data['password'] ?? '';
+        $email = trim($data['email'] ?? '');
+        $password = trim($data['password'] ?? '');
+
+         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw new \Exception('El email no es válido');
+        }
 
         $stmt = $pdo->prepare('SELECT * FROM usuarios WHERE email = :email');
         $stmt->execute(['email' => $email]);
