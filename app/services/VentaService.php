@@ -206,7 +206,6 @@ class VentaService
         $estado = null,
         $desde = null,
         $hasta = null,
-        $comprador = null,
         $vendedor = null
     ) {
         $pdo = Database::getConnection();
@@ -269,13 +268,6 @@ class VentaService
 
             $sql .= " AND DATE(v.fecha) <= ?";
             $params[] = $hasta;
-        }
-
-        if (!empty($comprador)) {
-
-            $sql .= " AND LOWER(comprador.nombre) LIKE LOWER(?)";
-
-            $params[] = "%{$comprador}%";
         }
 
         if (!empty($vendedor)) {
@@ -364,6 +356,20 @@ class VentaService
         $stmt->execute([$ventaId]);
 
         return $stmt->fetchAll();
+    }
+
+    // Obtener venta por ID
+    public function obtenerVentaPorId($ventaId)
+    {
+        $pdo = Database::getConnection();
+
+        $sql = "SELECT * FROM ventas WHERE id = ?";
+
+        $stmt = $pdo->prepare($sql);
+
+        $stmt->execute([$ventaId]);
+
+        return $stmt->fetch();
     }
 
     // Marcar venta como pagada

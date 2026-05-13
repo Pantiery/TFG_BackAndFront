@@ -30,7 +30,7 @@ require __DIR__ . '/../layout/header.php';
 
     <section class="admin-seccion">
 
-        <div class="admin-contenedor">
+        <div class="admin-contenedor-wide">
 
             <a href="<?= \App\Config\App::url('/admin/prendas-pendientes') ?>"
                 class="btn btn-light admin-btn-volver">

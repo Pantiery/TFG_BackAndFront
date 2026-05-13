@@ -30,6 +30,11 @@
   margin: 0 auto;
 }
 
+.admin-contenedor-wide {
+  width: min(1700px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
 .admin-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -192,17 +197,6 @@
   font-size: 3rem !important;
 }
 
-/* TABLA */
-
-.admin-ventas-page table {
-
-  background: white;
-
-  border-radius: 15px;
-
-  overflow: hidden;
-}
-
 .admin-ventas-page thead th {
 
   padding: 1rem;
@@ -272,4 +266,56 @@
 
     font-size: 0.85rem;
   }
+}
+
+/* =========================
+   TABLA RESPONSIVE VENTAS
+========================= */
+
+.admin-tabla {
+
+  width: 100%;
+
+  overflow-x: auto;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+.admin-tabla table {
+
+  min-width: 1400px;
+
+  width: 100%;
+
+  background: white;
+
+  border-radius: 18px;
+
+  overflow: hidden;
+
+  margin-bottom: 0;
+}
+
+.admin-tabla th,
+.admin-tabla td {
+
+  white-space: nowrap;
+
+  vertical-align: middle;
+}
+
+/* DETALLE PEDIDO */
+
+.admin-tabla td:nth-child(3) {
+
+  min-width: 320px;
+
+  white-space: normal;
+}
+
+/* ACCIÓN */
+
+.admin-tabla td:last-child {
+
+  min-width: 190px;
 }

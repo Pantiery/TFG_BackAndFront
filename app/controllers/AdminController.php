@@ -134,7 +134,6 @@ class AdminController extends BaseController
         $estado = $_GET['estado'] ?? null;
         $desde = $_GET['desde'] ?? null;
         $hasta = $_GET['hasta'] ?? null;
-        $comprador = trim($_GET['comprador'] ?? '');
         $vendedor = trim($_GET['vendedor'] ?? '');
 
         $ventaService = new \App\Services\VentaService();
@@ -143,7 +142,6 @@ class AdminController extends BaseController
             $estado,
             $desde,
             $hasta,
-            $comprador,
             $vendedor
         );
 
@@ -179,7 +177,7 @@ class AdminController extends BaseController
         ]);
     }
 
-    // Marcar venta como pagada
+    // Marcar una venta como pagada
     public function marcarPagada()
     {
         $this->checkAdmin();
@@ -196,6 +194,28 @@ class AdminController extends BaseController
 
         $ventaService = new \App\Services\VentaService();
 
+        // Obtener venta
+        $venta = $ventaService->obtenerVentaPorId($ventaId);
+
+        // Validar existencia
+        if (!$venta) {
+
+            $_SESSION['mensaje_error'] = 'La venta no existe';
+
+            header('Location: ' . \App\Config\App::url('/admin/ventas'));
+            exit;
+        }
+
+        // Evitar doble pago
+        if ($venta['estado_pago'] === 'pagado') {
+
+            $_SESSION['mensaje_error'] = 'Esta venta ya está pagada';
+
+            header('Location: ' . \App\Config\App::url('/admin/ventas'));
+            exit;
+        }
+
+        // Marcar pagada
         $ventaService->marcarVentaPagada($ventaId);
 
         $_SESSION['mensaje_exito'] = 'Pago marcado correctamente';

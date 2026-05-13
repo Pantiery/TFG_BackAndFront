@@ -26,7 +26,7 @@
 
     <section class="admin-seccion">
 
-        <div class="admin-contenedor">
+        <div class="admin-contenedor-wide">
 
             <?php require __DIR__ . '/../layout/messages.php'; ?>
 
