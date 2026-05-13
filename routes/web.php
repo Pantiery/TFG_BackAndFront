@@ -30,6 +30,8 @@ $router->get('/admin/prendas-pendientes', [AdminController::class, 'prendasPendi
 $router->get('/admin/prenda/revisar', [AdminController::class, 'revisarPrenda']);
 $router->get('/admin/prenda/aprobar', [AdminController::class, 'aprobarPrenda']);
 $router->get('/admin/prenda/rechazar', [AdminController::class, 'rechazarPrenda']);
+$router->get('/admin/ventas', [AdminController::class, 'ventas']);
+$router->get('/admin/ventas/pagar', [AdminController::class, 'marcarPagada']);
 
 // RUTAS DE PRENDAS
 $router->get('/prendas/solicitar', [PrendaController::class, 'create']);

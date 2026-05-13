@@ -149,3 +149,127 @@
     font-size: 1.9rem;
   }
 }
+
+/* =========================
+   GESTIÓN DE VENTAS
+========================= */
+
+.admin-ventas-page {
+
+  min-height: 100vh;
+}
+
+/* TITULO */
+
+.admin-ventas-page h1 {
+
+  font-size: 4rem;
+  font-weight: bold;
+
+  margin-bottom: 3rem;
+}
+
+/* CARDS */
+
+.admin-ventas-page .card {
+
+  border-radius: 20px;
+
+  overflow: hidden;
+
+  transition: 0.3s;
+}
+
+.admin-ventas-page .card:hover {
+
+  transform: translateY(-4px);
+}
+
+/* ICONOS */
+
+.admin-ventas-page .fs-1 {
+
+  font-size: 3rem !important;
+}
+
+/* TABLA */
+
+.admin-ventas-page table {
+
+  background: white;
+
+  border-radius: 15px;
+
+  overflow: hidden;
+}
+
+.admin-ventas-page thead th {
+
+  padding: 1rem;
+
+  font-size: 1rem;
+
+  text-align: center;
+
+  vertical-align: middle;
+}
+
+.admin-ventas-page tbody td {
+
+  padding: 1rem;
+
+  vertical-align: middle;
+
+  text-align: center;
+}
+
+/* BADGES */
+
+.admin-ventas-page .badge {
+
+  font-size: 0.9rem;
+
+  border-radius: 10px;
+}
+
+/* BOTONES */
+
+.admin-ventas-page .btn-success {
+
+  border-radius: 10px;
+
+  font-weight: bold;
+
+  padding: 0.5rem 1rem;
+}
+
+/* FILTROS */
+
+.admin-ventas-page .form-control,
+.admin-ventas-page .form-select {
+
+  height: 50px;
+
+  border-radius: 12px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 992px) {
+
+  .admin-ventas-page {
+
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .admin-ventas-page h1 {
+
+    font-size: 2.5rem;
+  }
+
+  .admin-ventas-page table {
+
+    font-size: 0.85rem;
+  }
+}

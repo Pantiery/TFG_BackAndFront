@@ -6,6 +6,8 @@ use App\Core\Database;
 
 class VentaService
 {
+    // VENTAS
+
     // Crear venta y devolver ID
 
     public function crearVenta($usuarioId)
@@ -79,7 +81,10 @@ class VentaService
         $stmt->execute([$total, $ventaId]);
     }
 
+    // COMPRAS
+
     // Obtener compras por usuario
+
     public function obtenerComprasPorUsuario($usuarioId)
     {
         $pdo = Database::getConnection();
@@ -107,7 +112,10 @@ class VentaService
         return $stmt->fetchAll();
     }
 
+    // VENTAS DEL VENDEDOR
+
     // Obtener ventas pendientes por usuario
+
     public function obtenerVentasPendientes($usuarioId)
     {
         $pdo = Database::getConnection();
@@ -133,7 +141,7 @@ class VentaService
         return $stmt->fetchAll();
     }
 
-    // CALCULAR TOTAL PENDIENTE
+    // Calcular total pendiente para el vendedor
     public function calcularTotalPendiente($ventas)
     {
         $total = 0;
@@ -143,5 +151,228 @@ class VentaService
         }
 
         return $total;
+    }
+
+    // Obtener ventas por usuario (historial)
+    public function obtenerVentasPorUsuario($usuarioId)
+    {
+        $pdo = Database::getConnection();
+
+        $sql = "
+            SELECT 
+                v.id AS venta_id,
+                v.fecha,
+                v.estado_pago,
+
+                dv.precio_unitario,
+                dv.comision,
+                dv.importe_vendedor,
+
+                p.imagen,
+
+                tp.nombre AS tipo,
+                c.nombre AS colegio
+
+            FROM detalle_venta dv
+
+            JOIN ventas v 
+                ON dv.venta_id = v.id
+
+            JOIN prendas p 
+                ON dv.prenda_id = p.id
+
+            JOIN tipos_prenda tp 
+                ON p.tipo_prenda_id = tp.id
+
+            JOIN colegios c 
+                ON p.colegio_id = c.id
+
+            WHERE p.usuario_id = ?
+
+            ORDER BY v.fecha DESC
+        ";
+
+        $stmt = $pdo->prepare($sql);
+
+        $stmt->execute([$usuarioId]);
+
+        return $stmt->fetchAll();
+    }
+
+    // ADMIN
+
+    // Obtener todas las ventas agrupadas (admin)
+    public function obtenerTodasLasVentas(
+        $estado = null,
+        $desde = null,
+        $hasta = null,
+        $comprador = null,
+        $vendedor = null
+    ) {
+        $pdo = Database::getConnection();
+
+        $sql = "
+        SELECT 
+            v.id AS venta_id,
+            v.fecha,
+            v.estado_pago,
+            v.total,
+
+            dv.precio_unitario,
+            dv.comision,
+            dv.importe_vendedor,
+
+            comprador.nombre AS comprador_nombre,
+            vendedor.nombre AS vendedor_nombre,
+
+            tp.nombre AS tipo_prenda,
+            c.nombre AS colegio
+
+        FROM ventas v
+
+        JOIN detalle_venta dv 
+            ON v.id = dv.venta_id
+
+        JOIN prendas p 
+            ON dv.prenda_id = p.id
+
+        JOIN usuarios comprador 
+            ON v.comprador_id = comprador.id
+
+        JOIN usuarios vendedor 
+            ON p.usuario_id = vendedor.id
+
+        JOIN tipos_prenda tp 
+            ON p.tipo_prenda_id = tp.id
+
+        JOIN colegios c 
+            ON p.colegio_id = c.id
+
+        WHERE 1=1
+    ";
+
+        $params = [];
+
+        if (!empty($estado)) {
+
+            $sql .= " AND v.estado_pago = ?";
+            $params[] = $estado;
+        }
+
+        if (!empty($desde)) {
+
+            $sql .= " AND DATE(v.fecha) >= ?";
+            $params[] = $desde;
+        }
+
+        if (!empty($hasta)) {
+
+            $sql .= " AND DATE(v.fecha) <= ?";
+            $params[] = $hasta;
+        }
+
+        if (!empty($comprador)) {
+
+            $sql .= " AND LOWER(comprador.nombre) LIKE LOWER(?)";
+
+            $params[] = "%{$comprador}%";
+        }
+
+        if (!empty($vendedor)) {
+
+            $sql .= " AND LOWER(vendedor.nombre) LIKE LOWER(?)";
+
+            $params[] = "%{$vendedor}%";
+        }
+
+        $sql .= " ORDER BY v.fecha DESC";
+
+        $stmt = $pdo->prepare($sql);
+
+        $stmt->execute($params);
+
+        $resultados = $stmt->fetchAll();
+
+        // AGRUPAR POR VENTA
+
+        $ventasAgrupadas = [];
+
+        foreach ($resultados as $fila) {
+
+            $ventaId = $fila['venta_id'];
+
+            if (!isset($ventasAgrupadas[$ventaId])) {
+
+                $ventasAgrupadas[$ventaId] = [
+                    'venta_id' => $fila['venta_id'],
+                    'fecha' => $fila['fecha'],
+                    'estado_pago' => $fila['estado_pago'],
+                    'comprador_nombre' => $fila['comprador_nombre'],
+                    'total' => $fila['total'],
+                    'prendas' => []
+                ];
+            }
+
+            $ventasAgrupadas[$ventaId]['prendas'][] = [
+
+                'tipo_prenda' => $fila['tipo_prenda'],
+                'colegio' => $fila['colegio'],
+                'vendedor_nombre' => $fila['vendedor_nombre'],
+                'comision' => $fila['comision'],
+                'importe_vendedor' => $fila['importe_vendedor']
+            ];
+        }
+
+        return array_values($ventasAgrupadas);
+    }
+
+    // Obtener prendas de una venta
+    public function obtenerPrendasDeVenta($ventaId)
+    {
+        $pdo = Database::getConnection();
+
+        $sql = "
+        SELECT
+            tp.nombre AS tipo_prenda,
+            c.nombre AS colegio,
+
+            vendedor.nombre AS vendedor_nombre,
+
+            dv.precio_unitario,
+            dv.comision,
+            dv.importe_vendedor
+
+        FROM detalle_venta dv
+
+        JOIN prendas p
+            ON dv.prenda_id = p.id
+
+        JOIN usuarios vendedor
+            ON p.usuario_id = vendedor.id
+
+        JOIN tipos_prenda tp
+            ON p.tipo_prenda_id = tp.id
+
+        JOIN colegios c
+            ON p.colegio_id = c.id
+
+        WHERE dv.venta_id = ?
+    ";
+
+        $stmt = $pdo->prepare($sql);
+
+        $stmt->execute([$ventaId]);
+
+        return $stmt->fetchAll();
+    }
+
+    // Marcar venta como pagada
+    public function marcarVentaPagada($ventaId)
+    {
+        $pdo = Database::getConnection();
+
+        $sql = "UPDATE ventas SET estado_pago = 'pagado' WHERE id = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$ventaId]);
     }
 }

@@ -125,4 +125,82 @@ class AdminController extends BaseController
         header('Location: ' . \App\Config\App::url('/admin/prendas-pendientes'));
         exit;
     }
+
+    // Gestión de ventas del sistema
+    public function ventas()
+    {
+        $this->checkAdmin();
+
+        $estado = $_GET['estado'] ?? null;
+        $desde = $_GET['desde'] ?? null;
+        $hasta = $_GET['hasta'] ?? null;
+        $comprador = trim($_GET['comprador'] ?? '');
+        $vendedor = trim($_GET['vendedor'] ?? '');
+
+        $ventaService = new \App\Services\VentaService();
+
+        $ventas = $ventaService->obtenerTodasLasVentas(
+            $estado,
+            $desde,
+            $hasta,
+            $comprador,
+            $vendedor
+        );
+
+        // Estadísticas
+
+        $totalComisiones = 0;
+        $totalVentas = 0;
+        $totalPrendas = 0;
+        $netoTotal = 0;
+
+        foreach ($ventas as $venta) {
+
+            $totalVentas += $venta['total'];
+
+            foreach ($venta['prendas'] as $prenda) {
+
+                $totalComisiones += $prenda['comision'];
+
+                $totalPrendas++;
+                $netoTotal += $prenda['importe_vendedor'];
+            }
+        }
+
+        $totalPedidos = count($ventas);
+
+        $this->view('admin/ventas', [
+            'ventas' => $ventas,
+            'totalComisiones' => $totalComisiones,
+            'totalVentas' => $totalVentas,
+            'totalPedidos' => $totalPedidos,
+            'totalPrendas' => $totalPrendas,
+            'netoTotal' => $netoTotal
+        ]);
+    }
+
+    // Marcar venta como pagada
+    public function marcarPagada()
+    {
+        $this->checkAdmin();
+
+        $ventaId = $_GET['id'] ?? null;
+
+        if (!$ventaId) {
+
+            $_SESSION['mensaje_error'] = 'Venta inválida';
+
+            header('Location: ' . \App\Config\App::url('/admin/ventas'));
+            exit;
+        }
+
+        $ventaService = new \App\Services\VentaService();
+
+        $ventaService->marcarVentaPagada($ventaId);
+
+        $_SESSION['mensaje_exito'] = 'Pago marcado correctamente';
+
+        header('Location: ' . \App\Config\App::url('/admin/ventas'));
+        exit;
+    }
 }

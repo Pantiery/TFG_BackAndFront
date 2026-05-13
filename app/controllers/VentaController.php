@@ -70,6 +70,30 @@ class VentaController extends BaseController
     }
 
     // VER MIS VENTAS
+
+    public function misVentas()
+    {
+        $this->checkLogin();
+
+        $usuarioId = $_SESSION['usuario']['id'];
+
+        $ventaService = new VentaService();
+
+        $ventas = $ventaService->obtenerVentasPorUsuario($usuarioId);
+
+        $totalGanado = 0;
+
+        foreach ($ventas as $venta) {
+            $totalGanado += $venta['importe_vendedor'];
+        }
+
+        $this->view('prendas/misVentas', [
+            'ventas' => $ventas,
+            'totalGanado' => $totalGanado
+        ]);
+    }
+
+    // VER MIS VENTAS
     public function monedero()
     {
         $this->checkLogin();
