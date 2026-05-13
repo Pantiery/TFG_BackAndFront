@@ -139,18 +139,21 @@ class PrendaModel
     public function obtenerPorUsuarioYEstado($pdo, $usuarioId, $estado)
     {
         $stmt = $pdo->prepare('
-        SELECT 
-            p.*, 
-            tp.nombre AS tipo, 
-            c.nombre AS colegio,
-            dv.importe_vendedor
-        FROM prendas p
-        JOIN tipos_prenda tp ON p.tipo_prenda_id = tp.id
-        JOIN colegios c ON p.colegio_id = c.id
-        LEFT JOIN detalle_venta dv ON dv.prenda_id = p.id
-        WHERE p.usuario_id = :usuario_id
-        AND p.estado_publicacion = :estado
-    ');
+            SELECT
+                p.*,
+                tp.nombre AS tipo,
+                c.nombre AS colegio,
+                dv.importe_vendedor,
+                v.fecha AS fecha,
+                v.estado_pago AS estado_pago
+            FROM prendas p
+            JOIN tipos_prenda tp ON p.tipo_prenda_id = tp.id
+            JOIN colegios c ON p.colegio_id = c.id
+            LEFT JOIN detalle_venta dv ON dv.prenda_id = p.id
+            LEFT JOIN ventas v ON dv.venta_id = v.id
+            WHERE p.usuario_id = :usuario_id
+            AND p.estado_publicacion = :estado
+        ');
 
         $stmt->execute([
             'usuario_id' => $usuarioId,
