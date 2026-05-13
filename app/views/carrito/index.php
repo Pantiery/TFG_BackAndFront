@@ -113,17 +113,14 @@
                         <span><?= number_format($total, 2, ',', '.') ?> €</span>
                     </div>
 
-                    <div class="d-flex justify-content-between mb-3">
-                        <span>Comisión plataforma (10%)</span>
-                        <span><?= number_format($totalComision, 2, ',', '.') ?> €</span>
-                    </div>
-                    <p class="text-muted small">
-                        La comisión se descuenta al vendedor, no al comprador.
-                    </p>
-
                     <div class="d-flex justify-content-between mb-4">
                         <span>Envío</span>
                         <span>Gratis</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-4">
+                        <span>IVA</span>
+                        <span>Ya incluido</span>
                     </div>
 
                     <hr>

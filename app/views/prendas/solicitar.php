@@ -56,7 +56,7 @@ $generos = $generos ?? [];
 
                 <div class="solicitar-info-card">
 
-                    <span class="home-numero">
+                    <span class="solicitar-numero">
                         1
                     </span>
 
@@ -77,7 +77,7 @@ $generos = $generos ?? [];
 
                 <div class="solicitar-info-card">
 
-                    <span class="home-numero">
+                    <span class="solicitar-numero">
                         2
                     </span>
 
@@ -98,7 +98,7 @@ $generos = $generos ?? [];
 
                 <div class="solicitar-info-card">
 
-                    <span class="home-numero">
+                    <span class="solicitar-numero">
                         3
                     </span>
 
