@@ -68,6 +68,7 @@ $totalRechazadas = count($rechazadas);
                             <div>
                                 <h3><?= htmlspecialchars($p['tipo']) ?></h3>
                                 <p><?= htmlspecialchars($p['colegio']) ?></p>
+                                <small>Publicada el <?= date('d/m/Y', strtotime($p['fecha_publicacion'])) ?></small>
                             </div>
                             <strong><?= number_format($p['precio_asignado'], 2, ',', '.') ?> €</strong>
                         </div>
@@ -89,12 +90,14 @@ $totalRechazadas = count($rechazadas);
                             <div>
                                 <h3><?= htmlspecialchars($p['tipo']) ?></h3>
                                 <p><?= htmlspecialchars($p['colegio']) ?></p>
-                                <small>Precio de venta: <?= number_format($p['precio_asignado'], 2, ',', '.') ?> €</small>
+                                <small>Vendida el <?= date('d/m/Y', strtotime($p['fecha'])) ?></small><br>
+                                <small>Precio de venta: <?= number_format($p['precio_asignado'], 2, ',', '.') ?> € (-10% comisión)</small><br>
+                                <small>Estado del pago: <?= $p['estado_pago'] ?></small>
                             </div>
 
                             <?php if (!empty($p['importe_vendedor'])): ?>
                                 <strong class="misventas-ganancia">
-                                    <?= number_format($p['importe_vendedor'], 2, ',', '.') ?> € netos
+                                    Total: <?= number_format($p['importe_vendedor'], 2, ',', '.') ?> € netos
                                 </strong>
                             <?php endif; ?>
                         </div>

@@ -37,6 +37,8 @@
                     $ventasAgrupadas[$compra['venta_id']][] = $compra;
                 }
 
+                $ventasAgrupadas = array_reverse($ventasAgrupadas, true);
+
                 $totalCompras = count($ventasAgrupadas);
                 $totalPrendas = count($compras);
                 $totalGastado = 0;
@@ -82,10 +84,9 @@
                             <div class="miscompras-card-header">
                                 <div>
                                     <h3>Compra <?= $contador ?></h3>
-                                    <p>ID de venta: <?= $ventaId ?></p>
                                 </div>
 
-                                <span class="miscompras-fecha">
+                                <span class="miscompras-fecha">Fecha de compra: 
                                     <?= date('d/m/Y', strtotime($productos[0]['fecha'])) ?>
                                 </span>
                             </div>
