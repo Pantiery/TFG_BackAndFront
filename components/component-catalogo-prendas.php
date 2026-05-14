@@ -37,6 +37,7 @@
 
                     <?php if (!empty($prenda['imagen'])): ?>
                         <img src="<?= \App\Config\App::baseUrl() . $prenda['imagen'] ?>"
+                             alt="Imagen de <?= htmlspecialchars($prenda['tipo']) ?>"
                             class="card-img-top catalogo-card-img">
                     <?php endif; ?>
 
