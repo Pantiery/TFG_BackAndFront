@@ -223,4 +223,56 @@ class AdminController extends BaseController
         header('Location: ' . \App\Config\App::url('/admin/ventas'));
         exit;
     }
+
+    // Estadísticas del sistema
+    public function estadisticas()
+    {
+        $this->checkAdmin();
+
+        $ventaService = new \App\Services\VentaService();
+
+        $ventas = $ventaService->obtenerTodasLasVentas();
+
+        $totalComisiones = 0;
+        $totalVentas = 0;
+        $totalPrendas = 0;
+        $netoTotal = 0;
+
+        foreach ($ventas as $venta) {
+
+            $totalVentas += $venta['total'];
+
+            foreach ($venta['prendas'] as $prenda) {
+
+                $totalComisiones += $prenda['comision'];
+
+                $totalPrendas++;
+
+                $netoTotal += $prenda['importe_vendedor'];
+            }
+        }
+
+        $totalPedidos = count($ventas);
+        
+        // MÉTRICAS SOSTENIBILIDAD
+
+        $co2Ahorrado = $totalPrendas * 6;
+
+        $aguaAhorrada = $totalPrendas * 2700;
+
+        $ahorroFamilias = $totalPrendas * 20;
+
+        $this->view('admin/estadisticas', [
+
+            'totalVentas' => $totalVentas,
+            'totalComisiones' => $totalComisiones,
+            'totalPedidos' => $totalPedidos,
+            'totalPrendas' => $totalPrendas,
+            'netoTotal' => $netoTotal,
+            'co2Ahorrado' => $co2Ahorrado,
+            'aguaAhorrada' => $aguaAhorrada,
+            'ahorroFamilias' => $ahorroFamilias
+
+        ]);
+    }
 }
