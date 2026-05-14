@@ -35,6 +35,10 @@ $router->get('/admin/prenda/revisar', [AdminController::class, 'revisarPrenda'])
 $router->get('/admin/prenda/aprobar', [AdminController::class, 'aprobarPrenda']);
 $router->get('/admin/prenda/rechazar', [AdminController::class, 'rechazarPrenda']);
 $router->get('/admin/ventas', [AdminController::class, 'ventas']);
+
+// NUEVA RUTA DETALLE VENTA
+$router->get('/admin/ventas/detalle', [AdminController::class, 'detalleVenta']);
+
 $router->get('/admin/estadisticas', [AdminController::class, 'estadisticas']);
 $router->get('/admin/ventas/pagar', [AdminController::class, 'marcarPagada']);
 
@@ -72,6 +76,7 @@ $router->get('/prendas/detalles', [PrendaController::class, 'detalles']);
 // $router->post('/venta/comprar', [VentaController::class, 'comprar']);
 
 $router->get('/venta/comprar', [VentaController::class, 'comprar']);
+$router->get('/venta/testDetalle', [VentaController::class, 'testDetalle']);
 
 // RUTA PARA VER MIS VENTAS
 $router->get('/monedero', [VentaController::class, 'monedero']);
