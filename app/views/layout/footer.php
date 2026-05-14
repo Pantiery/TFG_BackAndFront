@@ -16,6 +16,7 @@
                     <li><a href="<?= \App\Config\App::url('/') ?>" class="footer-link">Inicio</a></li>
                     <li><a href="<?= \App\Config\App::url('/prendas/catalogo') ?>" class="footer-link">Catálogo</a></li>
                     <li><a href="<?= \App\Config\App::url('/prendas/solicitar') ?>" class="footer-link">Solicitar venta</a></li>
+                    <li><a href="<?= \App\Config\App::url('/layout/contacto') ?>" class="footer-link">Contacto</a></li>
                 </ul>
             </div>
 
@@ -30,7 +31,11 @@
             </div>
 
             <div class="col-md-3">
-                <h6 class="footer-title">Contacto</h6>
+                <h6 class="footer-title">Sobre nosotros</h6>
+
+                <p class="footer-text mb-2">
+                    uniformesostenible@gmail.com
+                </p>
 
                 <p class="footer-text mb-2">
                     <i class="bi bi-whatsapp"></i>
