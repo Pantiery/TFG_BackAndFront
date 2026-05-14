@@ -325,6 +325,7 @@ $hayFiltroVendedor = !empty($_GET['vendedor']);
             <div class="table-responsive admin-tabla">
 
                 <table class="table table-hover align-middle mb-0">
+                    
 
                     <thead class="table-dark">
 
