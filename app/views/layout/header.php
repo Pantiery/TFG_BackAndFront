@@ -24,6 +24,8 @@
     <link rel="stylesheet" href="<?= \App\Config\App::url('/assets/css/monedero.css') ?>">
     <link rel="stylesheet" href="<?= \App\Config\App::url('/assets/css/solicitar.css') ?>">
     <link rel="stylesheet" href="<?= \App\Config\App::url('/assets/css/admin.css') ?>">
+    <link rel="stylesheet" href="<?= \App\Config\App::url('/assets/css/recuperar.css') ?>">
+    <link rel="stylesheet" href="<?= \App\Config\App::url('/assets/css/register.css') ?>">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
