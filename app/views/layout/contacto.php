@@ -1,7 +1,5 @@
 <?php require_once __DIR__ . '/../layout/header.php'; ?>
 
-<link rel="stylesheet" href="/proyecto_TFG/TFG_BackAndFront/public/assets/css/contacto.css">
-
 <main>
     <section class="contacto-hero">
         <div class="contacto-contenedor">
@@ -15,6 +13,7 @@
     </section>
 
     <section class="contacto-seccion">
+        <?php require_once __DIR__ . '/../layout/messages.php'; ?>
         <div class="contacto-contenedor contacto-grid">
 
             <div class="contacto-info">
@@ -28,7 +27,7 @@
                     <span class="contacto-numero"><i class="bi bi-envelope"></i></span>
                     <div>
                         <h3>Correo electrónico</h3>
-                        <p>soporte@unicolegio.com</p>
+                        <a href="mailto:uniformesostenible@gmail.com" class="contacto-link" target="_blank">uniformesostenible@gmail.com</a>
                     </div>
                 </div>
 
@@ -37,6 +36,7 @@
                     <div>
                         <h3>Teléfono / WhatsApp</h3>
                         <p>+34 632 71 08 02</p>
+                        <p>+34 691 43 28 82</p>
                     </div>
                 </div>
 
@@ -49,13 +49,14 @@
                 </div>
             </div>
 
+            <!-- FORMULARIO DE CONTACTO -->
             <div class="contacto-form-card">
+
                 <h2>Envíanos tu consulta</h2>
                 <p class="contacto-form-subtitulo">
                     Rellena el formulario y lo revisaremos cuanto antes.
                 </p>
-
-                <form method="POST" action="./contacto" target="_blank" class="contacto-form" novalidate>
+                <form method="POST" action="<?= \App\Config\App::url('/contacto') ?>" class="contacto-form" novalidate>
                     <div class="contacto-form-grid">
                         <div class="mb-3">
                             <label for="nombre" class="form-label">Nombre</label>
@@ -76,12 +77,6 @@
                     <div class="mb-3">
                         <label for="mensaje" class="form-label">Mensaje</label>
                         <textarea id="mensaje" name="mensaje" class="form-control casilla" rows="6" placeholder="Escribe tu mensaje..."></textarea>
-                    </div>
-
-                    <div class="contacto-aviso">
-                        <p>
-                            <strong>Importante:</strong> este formulario se abrirá en otra pestaña al enviarse gracias a <code>target="_blank"</code>.
-                        </p>
                     </div>
 
                     <button type="submit" class="btn btn-primary w-100 contacto-boton">

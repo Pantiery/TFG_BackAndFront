@@ -16,7 +16,7 @@
                     <li><a href="<?= \App\Config\App::url('/') ?>" class="footer-link">Inicio</a></li>
                     <li><a href="<?= \App\Config\App::url('/prendas/catalogo') ?>" class="footer-link">Catálogo</a></li>
                     <li><a href="<?= \App\Config\App::url('/prendas/solicitar') ?>" class="footer-link">Solicitar venta</a></li>
-                    <li><a href="<?= \App\Config\App::url('/layout/contacto') ?>" class="footer-link">Contacto</a></li>
+                    <li><a href="<?= \App\Config\App::url('/contacto') ?>" class="footer-link">Contacto</a></li>
                 </ul>
             </div>
 
@@ -35,6 +35,11 @@
 
                 <p class="footer-text mb-2">
                     uniformesostenible@gmail.com
+                </p>
+
+                <p class="footer-text mb-2">
+                    <i class="bi bi-whatsapp"></i>
+                    +34 691 43 28 82
                 </p>
 
                 <p class="footer-text mb-2">
@@ -70,9 +75,10 @@
         </div>
     </div>
 </footer>
-    
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/proyecto_TFG/TFG_BackAndFront/public/assets/js/validaciones.js"></script>
 <script src="/proyecto_TFG/TFG_BackAndFront/public/assets/js/mensajes.js"></script>
 </body>
+
 </html>

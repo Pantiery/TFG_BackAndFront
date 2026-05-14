@@ -13,6 +13,10 @@ use App\Controllers\VentaController;
 // RUTA DE INICIO
 $router->get('/', [HomeController::class, 'index']);
 
+// RUTA CONTACTO
+$router->get('/contacto', [HomeController::class, 'contacto']);
+$router->post('/contacto', [HomeController::class, 'enviarContacto']);
+
 // RUTAS DE AUTENTICACIÓN
 $router->get('/login', [AuthController::class, 'showLogin']);
 $router->post('/login', [AuthController::class, 'login']);
