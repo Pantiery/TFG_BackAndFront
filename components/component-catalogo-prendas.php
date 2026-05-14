@@ -1,4 +1,5 @@
 <?php
+
 /** @var array $prendas */
 ?>
 
@@ -8,7 +9,10 @@
 
         <!-- Si no hay prendas, mostrar mensaje -->
         <?php if (empty($prendas)): ?>
-            <div class="catalogo-vacio"><h3>No hay prendas disponibles</h3><p>Prueba a cambiar los filtros o vuelve más tarde para consultar nuevas publicaciones.</p></div>
+            <div class="catalogo-vacio">
+                <h3>No hay prendas disponibles</h3>
+                <p>Prueba a cambiar los filtros o vuelve más tarde para consultar nuevas publicaciones.</p>
+            </div>
         <?php endif; ?>
         <!-- Si hay prendas, mostrarlas en tarjetas -->
         <?php foreach ($prendas as $prenda): ?>
@@ -32,8 +36,8 @@
                 <div class="card h-100 shadow-sm">
 
                     <?php if (!empty($prenda['imagen'])): ?>
-                        <img src="/proyecto_TFG/TFG_BackAndFront/public<?= $prenda['imagen'] ?>"
-                             class="card-img-top catalogo-card-img">
+                        <img src="<?= \App\Config\App::baseUrl() . $prenda['imagen'] ?>"
+                            class="card-img-top catalogo-card-img">
                     <?php endif; ?>
 
                     <div class="card-body catalogo-card-body">
@@ -60,7 +64,7 @@
                             <span class="badge bg-<?= $badge ?> catalogo-badge-estado">
                                 <?= htmlspecialchars($prenda['estado']) ?>
                             </span>
-                            
+
                         </p>
 
                     </div>
@@ -69,7 +73,7 @@
                         <strong><?= number_format($prenda['precio_asignado'], 2, ',', '.') ?> €</strong>
 
                         <br>
-                        
+
                         <div class="card-botones">
 
                             <form method="POST" action="<?= \App\Config\App::baseUrl() ?>/carrito/add" class="m-0">
@@ -80,8 +84,8 @@
                             </form>
 
                             <button class="btn btn-ver-detalle"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#<?= $modalId ?>">
+                                data-bs-toggle="modal"
+                                data-bs-target="#<?= $modalId ?>">
                                 Ver detalle
                             </button>
 
@@ -108,7 +112,7 @@
 
                             <?php if (!empty($prenda['imagen'])): ?>
                                 <img src="/proyecto_TFG/TFG_BackAndFront/public<?= $prenda['imagen'] ?>"
-                                     class="catalogo-modal-img">
+                                    class="catalogo-modal-img">
                             <?php endif; ?>
 
                             <p><strong>Colegio:</strong> <?= htmlspecialchars($prenda['colegio']) ?></p>
@@ -117,7 +121,7 @@
                             <strong>Vendedor:</strong> <?= htmlspecialchars($prenda['vendedor']) ?><br>
 
                         </div>
-                        
+
                         <div class="card-footer text-center">
                             <div class="card-botones">
 

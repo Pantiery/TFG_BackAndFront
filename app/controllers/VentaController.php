@@ -110,4 +110,19 @@ class VentaController extends BaseController
             'total' => $total
         ]);
     }
+
+    // TEST DETALLE VENTA
+public function testDetalle()
+{
+    $this->checkLogin();
+
+    $ventaService = new VentaService();
+
+    // CAMBIAR POR UNA VENTA REAL DE TU BD
+    $detalle = $ventaService->obtenerDetalleVenta(1);
+
+    echo '<pre>';
+    var_dump($detalle);
+    echo '</pre>';
+}
 }

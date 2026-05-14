@@ -171,7 +171,7 @@ $hayFiltroVendedor = !empty($_GET['vendedor']);
             <div class="table-responsive admin-tabla">
 
                 <table class="table table-hover align-middle mb-0">
-                    
+
 
                     <thead class="table-dark">
 
@@ -301,6 +301,16 @@ $hayFiltroVendedor = !empty($_GET['vendedor']);
                                 </td>
 
                                 <td>
+
+                                    <a href="<?= \App\Config\App::url('/admin/ventas/detalle?id=' . $venta['venta_id']) ?>"
+                                        class="btn btn-primary btn-sm mb-2">
+
+                                        <i class="bi bi-eye"></i>
+                                        Ver detalle
+
+                                    </a>
+
+                                    <br>
 
                                     <?php if ($venta['estado_pago'] === 'pendiente'): ?>
 

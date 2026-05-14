@@ -177,6 +177,40 @@ class AdminController extends BaseController
         ]);
     }
 
+    // Ver detalle de una venta
+    public function detalleVenta()
+    {
+        $this->checkAdmin();
+
+        $ventaId = $_GET['id'] ?? null;
+
+        if (!$ventaId) {
+
+            $_SESSION['mensaje_error'] = 'Venta inválida';
+
+            header('Location: ' . \App\Config\App::url('/admin/ventas'));
+            exit;
+        }
+
+        $ventaService = new \App\Services\VentaService();
+
+        // Obtener detalle completo
+        $detalle = $ventaService->obtenerDetalleVenta($ventaId);
+
+        // Validar existencia
+        if (!$detalle) {
+
+            $_SESSION['mensaje_error'] = 'La venta no existe';
+
+            header('Location: ' . \App\Config\App::url('/admin/ventas'));
+            exit;
+        }
+
+        $this->view('admin/detalleVenta', [
+            'detalle' => $detalle
+        ]);
+    }
+
     // Marcar una venta como pagada
     public function marcarPagada()
     {
@@ -253,7 +287,7 @@ class AdminController extends BaseController
         }
 
         $totalPedidos = count($ventas);
-        
+
         // MÉTRICAS SOSTENIBILIDAD
 
         $co2Ahorrado = $totalPrendas * 6;

@@ -327,6 +327,7 @@ class VentaService
         SELECT
             tp.nombre AS tipo_prenda,
             c.nombre AS colegio,
+            p.imagen,
 
             vendedor.nombre AS vendedor_nombre,
 
@@ -363,13 +364,62 @@ class VentaService
     {
         $pdo = Database::getConnection();
 
-        $sql = "SELECT * FROM ventas WHERE id = ?";
+        $sql = "
+        SELECT 
+            v.id,
+            v.fecha,
+            v.total,
+            v.estado_pago,
+
+            u.id AS comprador_id,
+            u.nombre AS comprador_nombre,
+            u.apellido1 AS comprador_apellido
+
+        FROM ventas v
+
+        JOIN usuarios u
+            ON v.comprador_id = u.id
+
+        WHERE v.id = ?
+    ";
 
         $stmt = $pdo->prepare($sql);
 
         $stmt->execute([$ventaId]);
 
         return $stmt->fetch();
+    }
+
+    // Obtener detalle completo de una venta
+    public function obtenerDetalleVenta($ventaId)
+    {
+        // Obtener venta
+        $venta = $this->obtenerVentaPorId($ventaId);
+
+        // Si no existe
+        if (!$venta) {
+            return null;
+        }
+
+        // Obtener prendas
+        $prendas = $this->obtenerPrendasDeVenta($ventaId);
+
+        // Calcular totales
+        $totalComisiones = 0;
+        $totalVendedor = 0;
+
+        foreach ($prendas as $prenda) {
+
+            $totalComisiones += $prenda['comision'];
+            $totalVendedor += $prenda['importe_vendedor'];
+        }
+
+        return [
+            'venta' => $venta,
+            'prendas' => $prendas,
+            'total_comisiones' => $totalComisiones,
+            'total_vendedor' => $totalVendedor
+        ];
     }
 
     // Marcar venta como pagada
