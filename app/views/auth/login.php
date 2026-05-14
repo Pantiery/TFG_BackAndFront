@@ -14,6 +14,21 @@
   </section>
 
   <section class="login-seccion">
+
+    <?php if (isset($_SESSION['mensaje_error'])): ?>
+      <div class="alert alert-danger text-center">
+        <?= $_SESSION['mensaje_error'] ?>
+      </div>
+      <?php unset($_SESSION['mensaje_error']); ?>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['mensaje_exito'])): ?>
+      <div class="alert alert-success text-center">
+        <?= $_SESSION['mensaje_exito'] ?>
+      </div>
+      <?php unset($_SESSION['mensaje_exito']); ?>
+    <?php endif; ?>
+    
     <div class="login-contenedor login-grid">
 
       <div class="login-info">
@@ -49,20 +64,6 @@
       </div>
 
       <div class="login-form-card">
-
-        <?php if (isset($_SESSION['mensaje_error'])): ?>
-          <div class="alert alert-danger text-center">
-            <?= $_SESSION['mensaje_error'] ?>
-          </div>
-          <?php unset($_SESSION['mensaje_error']); ?>
-        <?php endif; ?>
-
-        <?php if (isset($_SESSION['mensaje_exito'])): ?>
-          <div class="alert alert-success text-center">
-            <?= $_SESSION['mensaje_exito'] ?>
-          </div>
-          <?php unset($_SESSION['mensaje_exito']); ?>
-        <?php endif; ?>
 
         <form method="POST" class="grid-layout">
 
