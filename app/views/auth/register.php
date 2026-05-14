@@ -2,39 +2,115 @@
 
 <main>
 
-    <form method="POST" action="/proyecto_TFG/TFG_BackAndFront/public/register" class="grid-layout">
+    <section class="register-hero">
+        <div class="register-contenedor">
+            <span class="home-etiqueta">Nueva cuenta</span>
+            <h1>Regístrate</h1>
+            <p>
+                Crea tu cuenta para comprar uniformes escolares de segunda mano,
+                solicitar ventas y consultar el estado de tus operaciones.
+            </p>
+        </div>
+    </section>
 
-        <h2>Regístrate</h2>
+    <section class="register-seccion">
+        <div class="register-contenedor register-grid">
 
-        <label>Nombre</label>
-        <input type="text" name="nombre" class="form-control" maxlength="25" required>
+            <div class="register-info">
+                <h2>Ventajas de registrarte</h2>
+                <p>
+                    Una cuenta de usuario te permite participar como comprador y vendedor
+                    dentro de la plataforma.
+                </p>
 
-        <label>Primer apellido</label>
-        <input type="text" name="apellido1" class="form-control" maxlength="25" required>
+                <div class="register-info-card">
+                    <span class="register-numero">1</span>
+                    <div>
+                        <h3>Compra uniformes</h3>
+                        <p>Accede al catálogo y filtra prendas por colegio, tipo y estado.</p>
+                    </div>
+                </div>
 
-        <label>Segundo apellido (opcional)</label>
-        <input type="text" name="apellido2" class="form-control" maxlength="25">
+                <div class="register-info-card">
+                    <span class="register-numero">2</span>
+                    <div>
+                        <h3>Vende prendas</h3>
+                        <p>Solicita la venta de uniformes que ya no necesites.</p>
+                    </div>
+                </div>
 
-        <label>E-mail</label>
-        <input type="email" name="email" class="form-control" maxlength="100" required>
-
-        <label>Contraseña</label>
-        <input type="password" name="password" class="form-control" minlength="8"
-            pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$" required>
-
-            <p>La contraseña debe tener al menos 8 caracteres, incluyendo letras y números, una mayúscula y al menos un carácter especial.</p>
-
-        <button type="submit" class="btn btn-primary">Registrarme</button>
-
-        <?php if (isset($_SESSION['mensaje_error'])): ?>
-            <div class="alert alert-danger">
-                <?= $_SESSION['mensaje_error'] ?>
+                <div class="register-info-card">
+                    <span class="register-numero">3</span>
+                    <div>
+                        <h3>Gestiona tu actividad</h3>
+                        <p>Consulta tus compras, ventas y pagos pendientes.</p>
+                    </div>
+                </div>
             </div>
-            <?php unset($_SESSION['mensaje_error']); ?>
-        <?php endif; ?>
 
-    </form>
+            <div class="register-form-card">
+                <form method="POST" action="/proyecto_TFG/TFG_BackAndFront/public/register" class="grid-layout" onsubmit="return validarForm();" novalidate>
+
+                    <h2>Crear cuenta</h2>
+                    <p class="register-form-subtitulo">Rellena tus datos para empezar a usar la plataforma.</p>
+
+                    <div class="register-form-grid">
+                        <div class="campo-formulario">
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input type="text" id="nombre" name="nombre" class="form-control" maxlength="25" required>
+                            <div id="div1" class="mensaje-validacion"></div>
+                        </div>
+
+                        <div class="campo-formulario">
+                            <label for="apellido1" class="form-label">Primer apellido</label>
+                            <input type="text" id="apellido1" name="apellido1" class="form-control" maxlength="25" required>
+                            <div id="div2" class="mensaje-validacion"></div>
+                        </div>
+
+                        <div class="campo-formulario">
+                            <label for="apellido2" class="form-label">Segundo apellido (opcional)</label>
+                            <input type="text" id="apellido2" name="apellido2" class="form-control" maxlength="25">
+                            <div id="div3" class="mensaje-validacion"></div>
+                        </div>
+
+                        <div class="campo-formulario">
+                            <label for="email" class="form-label">E-mail</label>
+                            <input type="email" id="email" name="email" class="form-control" maxlength="100" required>
+                            <div id="div4" class="mensaje-validacion"></div>
+                        </div>
+                    </div>
+
+                    <div class="campo-formulario">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input type="password" id="password" name="password" class="form-control" minlength="8" required>
+                        <div id="div5" class="mensaje-validacion"></div>
+                    </div>
+
+                    <div class="register-aviso">
+                        <p>
+                            Nombre y apellidos deben empezar por mayúscula y tener máximo 25 letras.
+                            La contraseña debe tener mínimo 8 caracteres, una minúscula, una mayúscula,
+                            un número y un carácter especial.
+                        </p>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Registrarme</button>
+
+                    <?php if (isset($_SESSION['mensaje_error'])): ?>
+                        <div class="alert alert-danger">
+                            <?= $_SESSION['mensaje_error'] ?>
+                        </div>
+                        <?php unset($_SESSION['mensaje_error']); ?>
+                    <?php endif; ?>
+
+                </form>
+            </div>
+
+        </div>
+    </section>
 
 </main>
+
+<script src="/proyecto_TFG/TFG_BackAndFront/public/js/validaciones.js"></script>
 
 <?php require_once __DIR__ . '/../layout/footer.php'; ?>

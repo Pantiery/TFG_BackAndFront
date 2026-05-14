@@ -1,54 +1,54 @@
-/* LOGIN */
-.login-contenedor {
+/* RECUPERAR */
+.recuperar-contenedor {
   width: min(1200px, calc(100% - 40px));
   margin: 0 auto;
 }
 
-.login-hero {
+.recuperar-hero {
   background-color: #f8fafc;
   color: #1f2d3d;
   padding: 55px 0;
   text-align: center;
 }
 
-.login-hero h1 {
+.recuperar-hero h1 {
   font-size: 2.4rem;
   margin: 12px 0 15px;
 }
 
-.login-hero p {
+.recuperar-hero p {
   max-width: 820px;
   margin: 0 auto;
   color: #4b5563;
   line-height: 1.7;
 }
 
-.login-seccion {
+.recuperar-seccion {
   padding: 60px 0;
   background: linear-gradient(135deg, rgb(23, 60, 81), #2f7fa5);
 }
 
-.login-grid {
+.recuperar-grid {
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
   gap: 35px;
   align-items: start;
 }
 
-.login-info {
+.recuperar-info {
   color: white;
 }
 
-.login-info h2,
-.login-info p {
+.recuperar-info h2,
+.recuperar-info p {
   margin-bottom: 18px;
 }
 
-.login-info > p {
+.recuperar-info > p {
   line-height: 1.7;
 }
 
-.login-info-card {
+.recuperar-info-card {
   display: flex;
   gap: 15px;
   align-items: flex-start;
@@ -60,18 +60,18 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
-.login-info-card h3 {
+.recuperar-info-card h3 {
   font-size: 1.1rem;
   margin-bottom: 6px;
 }
 
-.login-info-card p {
+.recuperar-info-card p {
   color: #4b5563;
   margin: 0;
   font-size: 0.95rem;
 }
 
-.login-numero {
+.recuperar-numero {
   width: 36px;
   height: 36px;
   min-width: 36px;
@@ -86,7 +86,7 @@
   font-weight: 700;
 }
 
-.login-form-card {
+.recuperar-form-card {
   background-color: white;
   color: #1f2d3d;
   border-radius: 16px;
@@ -94,7 +94,7 @@
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.16);
 }
 
-.login-form-card .grid-layout {
+.recuperar-form-card .grid-layout {
   display: grid;
   gap: 15px;
   margin: 0;
@@ -105,21 +105,21 @@
   box-shadow: none;
 }
 
-.login-form-card h2 {
+.recuperar-form-card h2 {
   margin-bottom: 8px;
 }
 
-.login-form-subtitulo {
+.recuperar-form-subtitulo {
   color: #4b5563;
   margin-bottom: 10px;
 }
 
-.login-form-card .form-label {
+.recuperar-form-card .form-label {
   color: #1f2d3d;
   font-weight: 700;
 }
 
-.login-form-card .form-control {
+.recuperar-form-card .form-control {
   border: 1px solid #d5dde5;
   border-radius: 10px;
   padding: 10px 12px;
@@ -127,28 +127,28 @@
   background-color: #f8fafc;
 }
 
-.login-form-card .form-control:focus {
+.recuperar-form-card .form-control:focus {
   background-color: white;
   border-color: #4cb1e0;
   box-shadow: 0 0 0 0.2rem rgba(76, 177, 224, 0.2);
 }
 
-.login-links p {
+.recuperar-links p {
   margin: 0 0 8px;
 }
 
-.login-links a {
+.recuperar-links a {
   color: #2f7fa5;
   font-weight: 700;
   text-decoration: none;
 }
 
-.login-links a:hover {
+.recuperar-links a:hover {
   color: #173c51;
   text-decoration: underline;
 }
 
-.login-form-card .btn-primary {
+.recuperar-form-card .btn-primary {
   background-color: #4cb1e0;
   border-color: #4cb1e0;
   border-radius: 10px;
@@ -156,28 +156,28 @@
   font-weight: 700;
 }
 
-.login-form-card .btn-primary:hover {
+.recuperar-form-card .btn-primary:hover {
   background-color: #2f7fa5;
   border-color: #2f7fa5;
 }
 
 @media (max-width: 992px) {
-  .login-grid {
+  .recuperar-grid {
     grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 576px) {
-  .login-hero h1 {
+  .recuperar-hero h1 {
     font-size: 1.9rem;
   }
 
-  .login-form-card {
+  .recuperar-form-card {
     padding: 22px;
   }
 
-  .login-hero,
-  .login-seccion {
+  .recuperar-hero,
+  .recuperar-seccion {
     padding: 40px 0;
   }
 }

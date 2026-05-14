@@ -173,7 +173,7 @@ $generos = $generos ?? [];
                 <form
                     enctype="multipart/form-data"
                     method="POST"
-                    action="./solicitar">
+                    action="./solicitar" novalidate>
 
                     <input
                         type="hidden"

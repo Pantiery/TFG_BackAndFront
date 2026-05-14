@@ -1,54 +1,54 @@
-/* LOGIN */
-.login-contenedor {
+/* REGISTER */
+.register-contenedor {
   width: min(1200px, calc(100% - 40px));
   margin: 0 auto;
 }
 
-.login-hero {
+.register-hero {
   background-color: #f8fafc;
   color: #1f2d3d;
   padding: 55px 0;
   text-align: center;
 }
 
-.login-hero h1 {
+.register-hero h1 {
   font-size: 2.4rem;
   margin: 12px 0 15px;
 }
 
-.login-hero p {
+.register-hero p {
   max-width: 820px;
   margin: 0 auto;
   color: #4b5563;
   line-height: 1.7;
 }
 
-.login-seccion {
+.register-seccion {
   padding: 60px 0;
   background: linear-gradient(135deg, rgb(23, 60, 81), #2f7fa5);
 }
 
-.login-grid {
+.register-grid {
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
   gap: 35px;
   align-items: start;
 }
 
-.login-info {
+.register-info {
   color: white;
 }
 
-.login-info h2,
-.login-info p {
+.register-info h2,
+.register-info p {
   margin-bottom: 18px;
 }
 
-.login-info > p {
+.register-info > p {
   line-height: 1.7;
 }
 
-.login-info-card {
+.register-info-card {
   display: flex;
   gap: 15px;
   align-items: flex-start;
@@ -60,18 +60,18 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
-.login-info-card h3 {
+.register-info-card h3 {
   font-size: 1.1rem;
   margin-bottom: 6px;
 }
 
-.login-info-card p {
+.register-info-card p {
   color: #4b5563;
   margin: 0;
   font-size: 0.95rem;
 }
 
-.login-numero {
+.register-numero {
   width: 36px;
   height: 36px;
   min-width: 36px;
@@ -86,7 +86,7 @@
   font-weight: 700;
 }
 
-.login-form-card {
+.register-form-card {
   background-color: white;
   color: #1f2d3d;
   border-radius: 16px;
@@ -94,7 +94,7 @@
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.16);
 }
 
-.login-form-card .grid-layout {
+.register-form-card .grid-layout {
   display: grid;
   gap: 15px;
   margin: 0;
@@ -105,21 +105,21 @@
   box-shadow: none;
 }
 
-.login-form-card h2 {
+.register-form-card h2 {
   margin-bottom: 8px;
 }
 
-.login-form-subtitulo {
+.register-form-subtitulo {
   color: #4b5563;
   margin-bottom: 10px;
 }
 
-.login-form-card .form-label {
+.register-form-card .form-label {
   color: #1f2d3d;
   font-weight: 700;
 }
 
-.login-form-card .form-control {
+.register-form-card .form-control {
   border: 1px solid #d5dde5;
   border-radius: 10px;
   padding: 10px 12px;
@@ -127,28 +127,28 @@
   background-color: #f8fafc;
 }
 
-.login-form-card .form-control:focus {
+.register-form-card .form-control:focus {
   background-color: white;
   border-color: #4cb1e0;
   box-shadow: 0 0 0 0.2rem rgba(76, 177, 224, 0.2);
 }
 
-.login-links p {
+.register-links p {
   margin: 0 0 8px;
 }
 
-.login-links a {
+.register-links a {
   color: #2f7fa5;
   font-weight: 700;
   text-decoration: none;
 }
 
-.login-links a:hover {
+.register-links a:hover {
   color: #173c51;
   text-decoration: underline;
 }
 
-.login-form-card .btn-primary {
+.register-form-card .btn-primary {
   background-color: #4cb1e0;
   border-color: #4cb1e0;
   border-radius: 10px;
@@ -156,28 +156,76 @@
   font-weight: 700;
 }
 
-.login-form-card .btn-primary:hover {
+.register-form-card .btn-primary:hover {
   background-color: #2f7fa5;
   border-color: #2f7fa5;
 }
 
 @media (max-width: 992px) {
-  .login-grid {
+  .register-grid {
     grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 576px) {
-  .login-hero h1 {
+  .register-hero h1 {
     font-size: 1.9rem;
   }
 
-  .login-form-card {
+  .register-form-card {
     padding: 22px;
   }
 
-  .login-hero,
-  .login-seccion {
+  .register-hero,
+  .register-seccion {
     padding: 40px 0;
   }
+}
+
+
+.register-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0 18px;
+}
+
+.register-aviso {
+  background-color: rgba(76, 177, 224, 0.12);
+  border-left: 4px solid #4cb1e0;
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin: 5px 0 10px;
+}
+
+.register-aviso p {
+  color: #4b5563;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+@media (max-width: 576px) {
+  .register-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* MENSAJES DE VALIDACIÓN */
+.campo-formulario {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.mensaje-validacion {
+  min-height: 18px;
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.mensaje-validacion.error {
+  color: #dc2626;
+}
+
+.mensaje-validacion.correcto {
+  color: #15803d;
 }
