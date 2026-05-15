@@ -2,12 +2,22 @@
 
 namespace App\Models;
 
+use App\Core\Database;
+use PDO;
+
 class PrendaModel
 {
-    // funcion para crear una prenda nueva en la base de datos
-    public function crear($pdo, $data)
+    private $pdo;
+
+    public function __construct()
     {
-        $stmt = $pdo->prepare("
+        $this->pdo = Database::getConnection();
+    }
+
+    // funcion para crear una prenda nueva en la base de datos
+    public function crear($data)
+    {
+        $stmt = $this->pdo->prepare("
             INSERT INTO prendas 
             (usuario_id, tipo_prenda_id, colegio_id, estado_calidad_id, precio_asignado, estado_publicacion, talla_id, genero_id, imagen) 
             VALUES (:usuario_id, :tipo_prenda_id, :colegio_id, :estado_calidad_id, :precio, 'pendiente', :talla_id, :genero_id, :imagen)
@@ -25,10 +35,44 @@ class PrendaModel
         ]);
     }
 
-    // funcion para obtener todas las prendas publicadas
-    public function obtenerPublicadas($pdo, $usuarioId)
+    public function existeRelacionTipoColegio($colegio, $tipo)
     {
-        $stmt = $pdo->prepare("
+        $stmt = $this->pdo->prepare("
+        SELECT COUNT(*) 
+        FROM colegio_tipo_prenda 
+        WHERE colegio_id = :colegio
+        AND tipo_prenda_id = :tipo
+    ");
+
+        $stmt->execute([
+            'colegio' => $colegio,
+            'tipo' => $tipo,
+        ]);
+
+        return $stmt->fetchColumn() > 0;
+    }
+
+    public function obtenerPrecio($tipo, $estado)
+    {
+        $stmt = $this->pdo->prepare("
+        SELECT precio 
+        FROM precios_estandar 
+        WHERE tipo_prenda_id = :tipo
+        AND estado_calidad_id = :estado
+    ");
+
+        $stmt->execute([
+            'tipo' => $tipo,
+            'estado' => $estado,
+        ]);
+
+        return $stmt->fetchColumn();
+    }
+
+    // funcion para obtener todas las prendas publicadas
+    public function obtenerPublicadas($usuarioId)
+    {
+        $stmt = $this->pdo->prepare("
             SELECT 
                 p.*, 
                 tp.nombre AS tipo, 
@@ -52,9 +96,9 @@ class PrendaModel
     }
 
     // funcion para obtener prendas pendientes de revision
-    public function obtenerPendientes($pdo)
+    public function obtenerPendientes()
     {
-        $stmt = $pdo->prepare("
+        $stmt = $this->pdo->prepare("
         SELECT 
             p.*,
             tp.nombre AS tipo,
@@ -76,9 +120,9 @@ class PrendaModel
     }
 
     // funcion para obtener una prenda por su id
-    public function obtenerPorId($pdo, $id)
+    public function obtenerPorId($id)
     {
-        $stmt = $pdo->prepare("
+        $stmt = $this->pdo->prepare("
         SELECT 
             p.*,
             tp.nombre AS tipo,
@@ -106,9 +150,9 @@ class PrendaModel
     }
 
     // funcion para aprobar una prenda pendiente
-    public function aprobar($pdo, $id)
+    public function aprobar($id)
     {
-        $stmt = $pdo->prepare("
+        $stmt = $this->pdo->prepare("
         UPDATE prendas
         SET
         estado_publicacion = 'publicada',
@@ -122,9 +166,9 @@ class PrendaModel
     }
 
     // funcion para rechazar una prenda pendiente
-    public function rechazar($pdo, $id)
+    public function rechazar($id)
     {
-        $stmt = $pdo->prepare("
+        $stmt = $this->pdo->prepare("
         UPDATE prendas
         SET estado_publicacion = 'rechazada'
         WHERE id = :id
@@ -136,9 +180,9 @@ class PrendaModel
     }
 
     // funcion para obtener prendas por usuario y estado de publicación
-    public function obtenerPorUsuarioYEstado($pdo, $usuarioId, $estado)
+    public function obtenerPorUsuarioYEstado($usuarioId, $estado)
     {
-        $stmt = $pdo->prepare('
+        $stmt = $this->pdo->prepare('
             SELECT
                 p.*,
                 tp.nombre AS tipo,
