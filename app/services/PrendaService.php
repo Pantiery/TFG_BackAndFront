@@ -15,69 +15,28 @@ class PrendaService
         $this->prendaModel = new \App\Models\PrendaModel();
     }
 
-    // Validar que el tipo de prenda sea compatible con el colegio seleccionado
-
-    public function validarTipoColegio($pdo, $colegio, $tipo)
-    {
-        $stmt = $pdo->prepare("
-            SELECT COUNT(*) 
-            FROM colegio_tipo_prenda 
-            WHERE colegio_id = :colegio 
-            AND tipo_prenda_id = :tipo
-        ");
-
-        $stmt->execute([
-            'colegio' => $colegio,
-            'tipo' => $tipo,
-        ]);
-
-        return $stmt->fetchColumn() > 0;
-    }
-
-    // Obtener el precio estándar según el tipo de prenda y su estado de calidad
-
-    public function obtenerPrecio($pdo, $tipo, $estado)
-    {
-        $stmt = $pdo->prepare("
-            SELECT precio 
-            FROM precios_estandar 
-            WHERE tipo_prenda_id = :tipo 
-            AND estado_calidad_id = :estado
-        ");
-
-        $stmt->execute([
-            'tipo' => $tipo,
-            'estado' => $estado,
-        ]);
-
-        $precio = $stmt->fetchColumn();
-
-        if ($precio === false) {
-            throw new \Exception('No existe precio definido para esta prenda');
-        }
-
-        return $precio;
-    }
-
     // Obtener prendas publicadas para el catálogo ( excluyendo las del usuario logeado )
-
     public function obtenerCatalogo($usuarioId)
     {
-        $pdo = Database::getConnection();
-        return $this->prendaModel->obtenerPublicadas($pdo, $usuarioId);
+        return $this->prendaModel
+            ->obtenerPublicadas($usuarioId);
     }
 
     // Obtener prendas del usuario según su estado ( en venta, vendidas, pendientes, rechazadas )
-
     public function obtenerMisVentas($usuarioId)
     {
-        $pdo = Database::getConnection();
-
         return [
-            'enVenta' => $this->prendaModel->obtenerPorUsuarioYEstado($pdo, $usuarioId, 'publicada'),
-            'vendidas' => $this->prendaModel->obtenerPorUsuarioYEstado($pdo, $usuarioId, 'vendida'),
-            'pendientes' => $this->prendaModel->obtenerPorUsuarioYEstado($pdo, $usuarioId, 'pendiente'),
-            'rechazadas' => $this->prendaModel->obtenerPorUsuarioYEstado($pdo, $usuarioId, 'rechazada'),
+            'enVenta' => $this->prendaModel
+                ->obtenerPorUsuarioYEstado($usuarioId, 'publicada'),
+
+            'vendidas' => $this->prendaModel
+                ->obtenerPorUsuarioYEstado($usuarioId, 'vendida'),
+
+            'pendientes' => $this->prendaModel
+                ->obtenerPorUsuarioYEstado($usuarioId, 'pendiente'),
+
+            'rechazadas' => $this->prendaModel
+                ->obtenerPorUsuarioYEstado($usuarioId, 'rechazada'),
         ];
     }
 
@@ -115,7 +74,6 @@ class PrendaService
 
     public function crearPrenda($data, $file, $usuario_id)
     {
-        $pdo = Database::getConnection();
 
         // 1. Validar campos obligatorios
         $campos = ['tipoPrenda', 'colegio', 'estadoPrenda', 'talla', 'genero'];
@@ -141,12 +99,16 @@ class PrendaService
         $genero = (int) $data['genero'];
 
         // 4. Validar relación tipo ↔ colegio
-        if (!$this->validarTipoColegio($pdo, $colegio, $tipo)) {
+        if (
+            !$this->prendaModel
+                ->existeRelacionTipoColegio($colegio, $tipo)
+        ) {
             throw new \Exception('Esa prenda no pertenece a ese colegio');
         }
 
         // 5. Obtener precio ( ya valida internamente )
-        $precio = $this->obtenerPrecio($pdo, $tipo, $estado);
+        $precio = $this->prendaModel
+            ->obtenerPrecio($tipo, $estado);
 
         // 6. Subir imagen ( puede lanzar excepción )
         $uploadService = new UploadService();
@@ -154,7 +116,7 @@ class PrendaService
 
         // 7. Guardar en BD con control de errores
         try {
-            $this->prendaModel->crear($pdo, [
+            $this->prendaModel->crear([
                 'usuario_id' => $usuario_id,
                 'tipo_prenda_id' => $tipo,
                 'colegio_id' => $colegio,
@@ -170,52 +132,9 @@ class PrendaService
     }
 
     // Filtrar prendas en el catálogo según colegio, tipo y estado de calidad ( excluyendo las del usuario logeado )
-
     public function filtrar($colegio, $tipo, $estado, $usuarioId)
     {
-        $pdo = Database::getConnection();
-
-        $sql = "
-        SELECT p.*, 
-            c.nombre AS colegio,
-            t.nombre AS tipo,
-            e.nombre AS estado,
-            u.nombre AS vendedor
-        FROM prendas p
-        JOIN colegios c ON p.colegio_id = c.id
-        JOIN tipos_prenda t ON p.tipo_prenda_id = t.id
-        JOIN estados_calidad e ON p.estado_calidad_id = e.id
-        JOIN usuarios u ON p.usuario_id = u.id
-        WHERE p.estado_publicacion = 'publicada'
-    ";
-
-        $params = [];
-
-        // Excluir prendas del usuario logeado
-        
-        if ($usuarioId !== null) {
-            $sql .= " AND p.usuario_id != ?";
-            $params[] = $usuarioId;
-        }
-
-        if (!empty($colegio)) {
-            $sql .= ' AND p.colegio_id = ?';
-            $params[] = $colegio;
-        }
-
-        if (!empty($tipo)) {
-            $sql .= ' AND p.tipo_prenda_id = ?';
-            $params[] = $tipo;
-        }
-
-        if (!empty($estado)) {
-            $sql .= ' AND p.estado_calidad_id = ?';
-            $params[] = $estado;
-        }
-
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute($params);
-
-        return $stmt->fetchAll();
+        return $this->prendaModel
+            ->filtrar($colegio, $tipo, $estado, $usuarioId);
     }
 }
