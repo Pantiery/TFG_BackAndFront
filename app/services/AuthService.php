@@ -2,14 +2,19 @@
 
 namespace App\Services;
 
-use App\Core\Database;
-use PDO;
+use App\Models\UserModel;
 
 class AuthService
 {
+    private $userModel;
+
+    public function __construct()
+    {
+        $this->userModel = new UserModel();
+    }
+
     public function registrar($data)
     {
-        $pdo = Database::getConnection();
 
         $nombre = htmlspecialchars(trim($data['nombre'] ?? ''));
         $apellido1 = htmlspecialchars(trim($data['apellido1'] ?? ''));
@@ -54,10 +59,9 @@ class AuthService
         }
 
         // Verificar email
-        $stmt = $pdo->prepare('SELECT * FROM usuarios WHERE email = :email');
-        $stmt->execute(['email' => $email]);
+        $usuarioExistente = $this->userModel->findByEmail($email);
 
-        if ($stmt->fetch(PDO::FETCH_ASSOC)) {
+        if ($usuarioExistente) {
             throw new \Exception('El email ya está registrado');
         }
 
@@ -65,24 +69,18 @@ class AuthService
         $passwordHash = password_hash($password, PASSWORD_BCRYPT);
 
         // Insert
-        $stmt = $pdo->prepare('
-            INSERT INTO usuarios (nombre, apellido1, apellido2, email, password) 
-            VALUES (:nombre, :apellido1, :apellido2, :email, :password)
-        ');
-
-        $stmt->execute([
+        $this->userModel->create([
             'nombre' => $nombre,
             'apellido1' => $apellido1,
             'apellido2' => $apellido2 ?: null,
             'email' => $email,
-            'password' => $passwordHash,
+            'password' => $passwordHash
         ]);
     }
 
     // Login
     public function login($data)
     {
-        $pdo = Database::getConnection();
 
         $email = filter_var(
             trim($data['email'] ?? ''),
@@ -99,10 +97,7 @@ class AuthService
             throw new \Exception('Debes completar todos los campos');
         }
 
-        $stmt = $pdo->prepare('SELECT * FROM usuarios WHERE email = :email');
-        $stmt->execute(['email' => $email]);
-
-        $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+        $usuario = $this->userModel->findByEmail($email);
 
         if (!$usuario || !password_verify($password, $usuario['password'])) {
             throw new \Exception('Credenciales incorrectas');
