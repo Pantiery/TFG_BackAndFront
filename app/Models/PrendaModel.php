@@ -35,6 +35,7 @@ class PrendaModel
         ]);
     }
 
+    // funcion para ver si existe una relacion entre un tipo de prenda y un colegio
     public function existeRelacionTipoColegio($colegio, $tipo)
     {
         $stmt = $this->pdo->prepare("
@@ -52,6 +53,7 @@ class PrendaModel
         return $stmt->fetchColumn() > 0;
     }
 
+    // funcion para obtener el precio estandar de una prenda segun su tipo y estado de calidad
     public function obtenerPrecio($tipo, $estado)
     {
         $stmt = $this->pdo->prepare("
@@ -205,5 +207,67 @@ class PrendaModel
         ]);
 
         return $stmt->fetchAll();
+    }
+
+    // funcion que filtra prendas en el catálogo según colegio, tipo y estado de calidad ( excluyendo las del usuario logeado )
+    public function filtrar($colegio, $tipo, $estado, $usuarioId)
+    {
+        $sql = "
+        SELECT p.*, 
+            c.nombre AS colegio,
+            t.nombre AS tipo,
+            e.nombre AS estado,
+            u.nombre AS vendedor
+
+        FROM prendas p
+
+        JOIN colegios c 
+            ON p.colegio_id = c.id
+
+        JOIN tipos_prenda t 
+            ON p.tipo_prenda_id = t.id
+
+        JOIN estados_calidad e 
+            ON p.estado_calidad_id = e.id
+
+        JOIN usuarios u 
+            ON p.usuario_id = u.id
+
+        WHERE p.estado_publicacion = 'publicada'
+    ";
+
+        $params = [];
+
+        // Excluir prendas del usuario logeado
+
+        if ($usuarioId !== null) {
+
+            $sql .= " AND p.usuario_id != ?";
+            $params[] = $usuarioId;
+        }
+
+        if (!empty($colegio)) {
+
+            $sql .= " AND p.colegio_id = ?";
+            $params[] = $colegio;
+        }
+
+        if (!empty($tipo)) {
+
+            $sql .= " AND p.tipo_prenda_id = ?";
+            $params[] = $tipo;
+        }
+
+        if (!empty($estado)) {
+
+            $sql .= " AND p.estado_calidad_id = ?";
+            $params[] = $estado;
+        }
+
+        $stmt = $this->pdo->prepare($sql);
+
+        $stmt->execute($params);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
