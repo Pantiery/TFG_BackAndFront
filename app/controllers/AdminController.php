@@ -50,7 +50,7 @@ class AdminController extends BaseController
 
         $prendaModel = new PrendaModel();
 
-        $prenda = $prendaModel->obtenerPorId($pdo, $id);
+        $prenda = $prendaModel->obtenerPorId($id);
 
         // Si la prenda no existe o no está pendiente, mostrar error
         if (!$prenda) {
