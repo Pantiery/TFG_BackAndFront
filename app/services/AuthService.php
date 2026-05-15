@@ -11,10 +11,15 @@ class AuthService
     {
         $pdo = Database::getConnection();
 
-        $nombre = trim($data['nombre'] ?? '');
-        $apellido1 = trim($data['apellido1'] ?? '');
-        $apellido2 = trim($data['apellido2'] ?? '');
-        $email = trim($data['email'] ?? '');
+        $nombre = htmlspecialchars(trim($data['nombre'] ?? ''));
+        $apellido1 = htmlspecialchars(trim($data['apellido1'] ?? ''));
+        $apellido2 = htmlspecialchars(trim($data['apellido2'] ?? ''));
+
+        $email = filter_var(
+            trim($data['email'] ?? ''),
+            FILTER_SANITIZE_EMAIL
+        );
+
         $password = trim($data['password'] ?? '');
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -27,6 +32,25 @@ class AuthService
 
         if (!$nombre || !$apellido1 || !$email || !$password) {
             throw new \Exception('Todos los campos obligatorios deben ser completados');
+        }
+
+        if (strlen($nombre) < 2 || strlen($apellido1) < 2) {
+            throw new \Exception('El nombre y apellido deben tener al menos 2 caracteres');
+        }
+
+        if (
+            strlen($nombre) > 50 ||
+            strlen($apellido1) > 50 ||
+            strlen($apellido2) > 50
+        ) {
+            throw new \Exception('Los nombres no pueden superar los 50 caracteres');
+        }
+
+        if (
+            !preg_match('/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/', $nombre) ||
+            !preg_match('/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/', $apellido1)
+        ) {
+            throw new \Exception('El nombre y apellido solo pueden contener letras');
         }
 
         // Verificar email
@@ -60,11 +84,19 @@ class AuthService
     {
         $pdo = Database::getConnection();
 
-        $email = trim($data['email'] ?? '');
+        $email = filter_var(
+            trim($data['email'] ?? ''),
+            FILTER_SANITIZE_EMAIL
+        );
+
         $password = trim($data['password'] ?? '');
 
-         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             throw new \Exception('El email no es válido');
+        }
+
+        if (!$email || !$password) {
+            throw new \Exception('Debes completar todos los campos');
         }
 
         $stmt = $pdo->prepare('SELECT * FROM usuarios WHERE email = :email');
