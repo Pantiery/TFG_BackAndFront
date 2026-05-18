@@ -9,6 +9,8 @@ use App\Core\Database;
 
 class VentaController extends BaseController
 {
+    // Procesar compra
+
     public function comprar()
     {
         $this->checkLogin();
@@ -53,7 +55,7 @@ class VentaController extends BaseController
         exit;
     }
 
-    // VER MIS COMPRAS
+    // Ver mis compras
 
     public function misCompras()
     {
@@ -69,7 +71,7 @@ class VentaController extends BaseController
         ]);
     }
 
-    // VER MIS VENTAS
+    // Ver mis ventas
 
     public function misVentas()
     {
@@ -93,7 +95,8 @@ class VentaController extends BaseController
         ]);
     }
 
-    // VER MIS VENTAS
+    // Ver mi monedero
+    
     public function monedero()
     {
         $this->checkLogin();
@@ -110,19 +113,4 @@ class VentaController extends BaseController
             'total' => $total
         ]);
     }
-
-    // TEST DETALLE VENTA
-public function testDetalle()
-{
-    $this->checkLogin();
-
-    $ventaService = new VentaService();
-
-    // CAMBIAR POR UNA VENTA REAL DE TU BD
-    $detalle = $ventaService->obtenerDetalleVenta(1);
-
-    echo '<pre>';
-    var_dump($detalle);
-    echo '</pre>';
-}
 }

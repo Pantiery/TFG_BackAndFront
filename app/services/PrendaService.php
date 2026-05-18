@@ -46,6 +46,8 @@ class PrendaService
     {
         $pdo = Database::getConnection();
 
+        // Si se ha seleccionado un colegio, solo mostrar los tipos de prenda asociados a ese colegio. Si no, mostrar todos los tipos.
+        
         if ($colegioSeleccionado) {
             $stmt = $pdo->prepare("
                 SELECT tp.id, tp.nombre

@@ -2,9 +2,12 @@
 
 require_once __DIR__ . '/../app/Core/Autoload.php';
 
+use App\Core\Router;
+use App\Core\Env;
+
 session_start();
 
-//CIERRE DE SESION POR INACTIVIDAD
+// Cierro de sesión por inactividad
 $tiempo_inactividad = 1200; // 20 minutos en segundos
 if (isset($_SESSION['ultima_actividad'])) {
     if (time() - $_SESSION['ultima_actividad'] > $tiempo_inactividad) {
@@ -19,31 +22,17 @@ if (isset($_SESSION['ultima_actividad'])) {
     }
 }
 
-//RESETEO EL TIEMPO DE INACTIVIDAD
+// Reseteo el tiempo de actividad
 $_SESSION['ultima_actividad'] = time();
 
-//AUTOLOAD (CARGA AUTOMATICA DE CLASES)
-spl_autoload_register(function ($class) {
-    $class = str_replace('App\\', '', $class);
-    $class = str_replace('\\', '/', $class);
-    $file = __DIR__ . '/../app/' . $class . '.php';
-
-    if (file_exists($file)) {
-        require_once $file;
-    }
-});
-
-// obtener ruta
-$uri = $_SERVER['REQUEST_URI'];
-$uri = explode('?', $uri)[0];
+// URI solicitada
+$uri = explode('?', $_SERVER['REQUEST_URI'])[0];
 $uri = str_replace('/proyecto_TFG/TFG_BackAndFront/public', '', $uri);
 
-// método HTTP
+// Método HTTP solicitado
 $method = $_SERVER['REQUEST_METHOD'];
 
-use App\Core\Router;
-use App\Core\Env;
-
+// Cargar variables de entorno
 Env::load(__DIR__ . '/../.env');
 $router = new Router();
 
