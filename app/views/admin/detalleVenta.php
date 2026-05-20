@@ -18,10 +18,6 @@ $totalVendedor = $detalle['total_vendedor'] ?? 0;
 
         <div class="admin-contenedor">
 
-            <span class="home-etiqueta">
-                Panel de administración
-            </span>
-
             <h1>
                 Detalle de venta #<?= $venta['id'] ?>
             </h1>

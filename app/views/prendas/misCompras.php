@@ -2,7 +2,7 @@
 <main>
     <section class="miscompras-hero">
         <div class="miscompras-contenedor">
-            <span class="home-etiqueta">Historial de compras</span>
+            
             <h1>Mis compras</h1>
             <p>
                 Consulta las compras realizadas en UniColegio, revisa las prendas adquiridas

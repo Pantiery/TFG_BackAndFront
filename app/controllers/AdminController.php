@@ -24,7 +24,11 @@ class AdminController extends BaseController
 
         $prendaModel = new PrendaModel();
 
-        $pendientes = $prendaModel->obtenerPendientes($pdo);
+        // CAPTURAR BÚSQUEDA
+        $busqueda = trim($_GET['buscar'] ?? '');
+
+        // ENVIAR BÚSQUEDA AL MODELO
+        $pendientes = $prendaModel->obtenerPendientes($pdo, $busqueda);
 
         $this->view('admin/prendasPendientes', [
             'pendientes' => $pendientes
@@ -92,7 +96,7 @@ class AdminController extends BaseController
 
         $prendaModel = new PrendaModel();
 
-        $prendaModel->aprobar($pdo, $id);
+        $prendaModel->aprobar($id);
 
         $_SESSION['mensaje_exito'] = 'Prenda aprobada correctamente';
 
@@ -118,7 +122,7 @@ class AdminController extends BaseController
 
         $prendaModel = new PrendaModel();
 
-        $prendaModel->rechazar($pdo, $id);
+        $prendaModel->rechazar($id);
 
         $_SESSION['mensaje_exito'] = 'Prenda rechazada correctamente';
 
@@ -307,6 +311,28 @@ class AdminController extends BaseController
             'aguaAhorrada' => $aguaAhorrada,
             'ahorroFamilias' => $ahorroFamilias
 
+        ]);
+    }
+
+    // Gestión de usuarios
+    public function usuarios()
+    {
+        $this->checkAdmin();
+
+        $buscar = trim($_GET['buscar'] ?? '');
+
+        $userModel = new \App\Models\UserModel();
+
+        if (!empty($buscar)) {
+
+            $usuarios = $userModel->buscarUsuarios($buscar);
+        } else {
+
+            $usuarios = $userModel->obtenerTodos();
+        }
+
+        $this->view('admin/usuarios', [
+            'usuarios' => $usuarios
         ]);
     }
 }

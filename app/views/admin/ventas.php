@@ -21,10 +21,6 @@ $hayFiltroVendedor = !empty($_GET['vendedor']);
 
         <div class="admin-contenedor">
 
-            <span class="home-etiqueta">
-                Panel de administración
-            </span>
-
             <h1>
                 Gestión de ventas
             </h1>

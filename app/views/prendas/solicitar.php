@@ -16,18 +16,14 @@ $generos = $generos ?? [];
 
         <div class="solicitar-contenedor">
 
-            <span class="home-etiqueta">
-                Venta de uniformes
-            </span>
-
             <h1>
                 Solicita la venta de una prenda
             </h1>
 
             <p>
-                Rellena el formulario con los datos de la prenda.
+                Rellena el formulario.
                 Nuestro equipo revisará la solicitud,
-                asignará el precio estándar correspondiente y,
+                asignará el precio y,
                 si todo es correcto,
                 la publicará en el catálogo.
             </p>
@@ -56,9 +52,9 @@ $generos = $generos ?? [];
 
                 <div class="solicitar-info-card">
 
-                    <span class="solicitar-numero">
-                        1
-                    </span>
+                    <div class="solicitar-numero">
+                        <i class="bi bi-tags"></i>
+                    </div>
 
                     <div>
 
@@ -77,9 +73,9 @@ $generos = $generos ?? [];
 
                 <div class="solicitar-info-card">
 
-                    <span class="solicitar-numero">
-                        2
-                    </span>
+                    <div class="solicitar-numero">
+                        <i class="bi bi-percent"></i>
+                    </div>
 
                     <div>
 
@@ -98,9 +94,9 @@ $generos = $generos ?? [];
 
                 <div class="solicitar-info-card">
 
-                    <span class="solicitar-numero">
-                        3
-                    </span>
+                    <div class="solicitar-numero">
+                        <i class="bi bi-shield-check"></i>
+                    </div>
 
                     <div>
 
@@ -311,6 +307,16 @@ $generos = $generos ?? [];
 
                     </div>
 
+
+                    <!-- Botón -->
+                    <button
+                        type="submit"
+                        class="btn btn-home btn-home-principal w-100">
+
+                        Enviar solicitud de venta
+
+                    </button>
+
                     <!-- Aviso -->
                     <div class="solicitar-aviso">
 
@@ -326,15 +332,6 @@ $generos = $generos ?? [];
                         </p>
 
                     </div>
-
-                    <!-- Botón -->
-                    <button
-                        type="submit"
-                        class="btn btn-home btn-home-principal w-100">
-
-                        Enviar solicitud de venta
-
-                    </button>
 
                 </form>
 

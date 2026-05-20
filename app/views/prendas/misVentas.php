@@ -17,11 +17,11 @@ $totalRechazadas = count($rechazadas);
 
     <section class="misventas-hero">
         <div class="misventas-contenedor">
-            <span class="home-etiqueta">Panel del vendedor</span>
+          
             <h1>Mis ventas</h1>
             <p>
-                Consulta el estado de tus prendas, revisa cuáles están publicadas, pendientes de aprobación,
-                vendidas o rechazadas, y controla tus ganancias de forma sencilla.
+                Consulta el estado de tus prendas, revisa si estan publicadas, pendientes de aprobación,
+                vendidas o rechazadas, y controla tus ganancias.
             </p>
         </div>
     </section>

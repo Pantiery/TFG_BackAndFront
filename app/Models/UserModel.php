@@ -75,4 +75,36 @@ class UserModel
 
         return $this->pdo->lastInsertId();
     }
+
+
+    // Obtener todos los usuarios
+    public function obtenerTodos()
+    {
+        $stmt = $this->pdo->query("
+        SELECT *
+        FROM usuarios
+        ORDER BY id DESC
+    ");
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Buscar usuarios por nombre, apellido o email
+    public function buscarUsuarios($buscar)
+    {
+        $stmt = $this->pdo->prepare("
+        SELECT *
+        FROM usuarios
+        WHERE nombre LIKE :buscar
+        OR apellido1 LIKE :buscar
+        OR email LIKE :buscar
+        ORDER BY id DESC
+    ");
+
+        $stmt->execute([
+            'buscar' => '%' . $buscar . '%'
+        ]);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

@@ -19,10 +19,6 @@ $ahorroFamilias = $ahorroFamilias ?? 0;
 
         <div class="admin-contenedor-wide">
 
-            <span class="home-etiqueta">
-                Panel de administración
-            </span>
-
             <h1>
                 Estadísticas del sistema
             </h1>

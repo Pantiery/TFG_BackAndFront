@@ -7,7 +7,7 @@
 .register-hero {
   background-color: #f8fafc;
   color: #1f2d3d;
-  padding: 55px 0;
+  padding: 6px 0;
   text-align: center;
 }
 
@@ -24,7 +24,7 @@
 }
 
 .register-seccion {
-  padding: 60px 0;
+  padding: 30px 0;
   background: linear-gradient(135deg, rgb(23, 60, 81), #2f7fa5);
 }
 
@@ -60,6 +60,10 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
+.register-hero p {
+  max-width: none;
+}
+
 .register-info-card h3 {
   font-size: 1.1rem;
   margin-bottom: 6px;
@@ -90,13 +94,13 @@
   background-color: white;
   color: #1f2d3d;
   border-radius: 16px;
-  padding: 30px;
+  padding: 20px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.16);
 }
 
 .register-form-card .grid-layout {
   display: grid;
-  gap: 15px;
+  gap: 0px;
   margin: 0;
   padding: 0;
   max-width: none;
@@ -122,7 +126,7 @@
 .register-form-card .form-control {
   border: 1px solid #d5dde5;
   border-radius: 10px;
-  padding: 10px 12px;
+  padding: 2px 12px;
   color: #1f2d3d;
   background-color: #f8fafc;
 }

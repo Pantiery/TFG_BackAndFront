@@ -97,28 +97,45 @@ class PrendaModel
         return $stmt->fetchAll();
     }
 
-    // funcion para obtener prendas pendientes de revision
-    public function obtenerPendientes()
+    // funcion para obtener prendas pendientes de revisión (con filtro de búsqueda por nombre o email del vendedor)
+    public function obtenerPendientes($pdo, $busqueda = '')
     {
-        $stmt = $this->pdo->prepare("
-        SELECT 
-            p.*,
-            tp.nombre AS tipo,
-            c.nombre AS colegio,
-            e.nombre AS estado,
-            u.nombre AS vendedor,
-            u.apellido1
-        FROM prendas p
-        JOIN tipos_prenda tp ON p.tipo_prenda_id = tp.id
-        JOIN colegios c ON p.colegio_id = c.id
-        JOIN estados_calidad e ON p.estado_calidad_id = e.id
-        JOIN usuarios u ON p.usuario_id = u.id
-        WHERE p.estado_publicacion = 'pendiente'
-    ");
+        $sql = "SELECT 
+                p.id,
+                p.imagen,
+                tp.nombre AS tipo,
+                c.nombre AS colegio,
+                u.nombre AS vendedor,
+                u.apellido1,
+                u.email,
+                ec.nombre AS estado
+            FROM prendas p
+            JOIN usuarios u ON p.usuario_id = u.id
+            JOIN tipos_prenda tp ON p.tipo_prenda_id = tp.id
+            JOIN colegios c ON p.colegio_id = c.id
+            JOIN estados_calidad ec ON p.estado_calidad_id = ec.id
+            WHERE p.estado_publicacion = 'pendiente'";
+
+        // FILTRO DE BÚSQUEDA
+        if (!empty($busqueda)) {
+
+            $sql .= " AND (
+                    u.nombre LIKE :buscar
+                    OR u.email LIKE :buscar
+                  )";
+        }
+
+        $stmt = $pdo->prepare($sql);
+
+        // BIND DEL FILTRO
+        if (!empty($busqueda)) {
+
+            $stmt->bindValue(':buscar', "%$busqueda%");
+        }
 
         $stmt->execute();
 
-        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        return $stmt->fetchAll();
     }
 
     // funcion para obtener una prenda por su id

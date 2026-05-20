@@ -4,7 +4,6 @@
 
     <section class="register-hero">
         <div class="register-contenedor">
-            <span class="home-etiqueta">Nueva cuenta</span>
             <h1>Regístrate</h1>
             <p>
                 Crea tu cuenta para comprar uniformes escolares de segunda mano,
@@ -24,7 +23,9 @@
                 </p>
 
                 <div class="register-info-card">
-                    <span class="register-numero">1</span>
+                    <span class="register-numero">
+                        <i class="fa-solid fa-shirt"></i>
+                    </span>
                     <div>
                         <h3>Compra uniformes</h3>
                         <p>Accede al catálogo y filtra prendas por colegio, tipo y estado.</p>
@@ -32,7 +33,9 @@
                 </div>
 
                 <div class="register-info-card">
-                    <span class="register-numero">2</span>
+                    <span class="register-numero">
+                        <i class="fa-solid fa-tag"></i>
+                    </span>
                     <div>
                         <h3>Vende prendas</h3>
                         <p>Solicita la venta de uniformes que ya no necesites.</p>
@@ -40,7 +43,9 @@
                 </div>
 
                 <div class="register-info-card">
-                    <span class="register-numero">3</span>
+                    <span class="register-numero">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </span>
                     <div>
                         <h3>Gestiona tu actividad</h3>
                         <p>Consulta tus compras, ventas y pagos pendientes.</p>
@@ -49,6 +54,14 @@
             </div>
 
             <div class="register-form-card">
+
+                <?php if (isset($_SESSION['mensaje_error'])): ?>
+                    <div class="alert alert-danger">
+                        <?= $_SESSION['mensaje_error'] ?>
+                    </div>
+                    <?php unset($_SESSION['mensaje_error']); ?>
+                <?php endif; ?>
+
                 <form method="POST" action="/proyecto_TFG/TFG_BackAndFront/public/register" class="grid-layout" onsubmit="return validarForm();" novalidate>
 
                     <h2>Crear cuenta</h2>
@@ -86,22 +99,15 @@
                         <div id="div5" class="mensaje-validacion"></div>
                     </div>
 
+                    <button type="submit" class="btn btn-primary">Registrarme</button>
+
                     <div class="register-aviso">
                         <p>
-                            Nombre y apellidos deben empezar por mayúscula y tener máximo 25 letras.
-                            La contraseña debe tener mínimo 8 caracteres, una minúscula, una mayúscula,
+                            Nombre y apellidos deben empezar por mayúscula y máximo 25 letras.
+                            Mínimo 8 caracteres, una minúscula, una mayúscula,
                             un número y un carácter especial.
                         </p>
                     </div>
-
-                    <button type="submit" class="btn btn-primary">Registrarme</button>
-
-                    <?php if (isset($_SESSION['mensaje_error'])): ?>
-                        <div class="alert alert-danger">
-                            <?= $_SESSION['mensaje_error'] ?>
-                        </div>
-                        <?php unset($_SESSION['mensaje_error']); ?>
-                    <?php endif; ?>
 
                 </form>
             </div>

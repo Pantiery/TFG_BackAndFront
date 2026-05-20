@@ -4,7 +4,6 @@
 
   <section class="login-hero">
     <div class="login-contenedor">
-      <span class="home-etiqueta">Acceso de usuario</span>
       <h1>Inicia sesión</h1>
       <p>
         Accede a tu cuenta para comprar uniformes, solicitar la venta de prendas,
@@ -15,20 +14,6 @@
 
   <section class="login-seccion">
 
-    <?php if (isset($_SESSION['mensaje_error'])): ?>
-      <div class="alert alert-danger text-center">
-        <?= $_SESSION['mensaje_error'] ?>
-      </div>
-      <?php unset($_SESSION['mensaje_error']); ?>
-    <?php endif; ?>
-
-    <?php if (isset($_SESSION['mensaje_exito'])): ?>
-      <div class="alert alert-success text-center">
-        <?= $_SESSION['mensaje_exito'] ?>
-      </div>
-      <?php unset($_SESSION['mensaje_exito']); ?>
-    <?php endif; ?>
-    
     <div class="login-contenedor login-grid">
 
       <div class="login-info">
@@ -39,35 +24,64 @@
         </p>
 
         <div class="login-info-card">
-          <span class="login-numero">1</span>
+
+          <div class="solicitar-numero">
+            <i class="bi bi-cart-check"></i>
+          </div>
+
           <div>
             <h3>Compra prendas</h3>
             <p>Consulta el catálogo y añade uniformes disponibles a tu carrito.</p>
           </div>
+
         </div>
 
         <div class="login-info-card">
-          <span class="login-numero">2</span>
+
+          <div class="solicitar-numero">
+            <i class="bi bi-box-arrow-up"></i>
+          </div>
+
           <div>
             <h3>Solicita ventas</h3>
             <p>Envía prendas para que el administrador las revise y publique.</p>
           </div>
+
         </div>
 
         <div class="login-info-card">
-          <span class="login-numero">3</span>
+
+          <div class="solicitar-numero">
+            <i class="bi bi-wallet2"></i>
+          </div>
+
           <div>
             <h3>Consulta tus pagos</h3>
             <p>Revisa el estado de tus ventas y el importe pendiente en tu monedero.</p>
           </div>
+          
         </div>
       </div>
 
       <div class="login-form-card">
 
+        <?php if (isset($_SESSION['mensaje_error'])): ?>
+          <div class="alert alert-danger text-center">
+            <?= $_SESSION['mensaje_error'] ?>
+          </div>
+          <?php unset($_SESSION['mensaje_error']); ?>
+        <?php endif; ?>
+
+        <?php if (isset($_SESSION['mensaje_exito'])): ?>
+          <div class="alert alert-success text-center">
+            <?= $_SESSION['mensaje_exito'] ?>
+          </div>
+          <?php unset($_SESSION['mensaje_exito']); ?>
+        <?php endif; ?>
+
         <form method="POST" class="grid-layout">
 
-          <h2>Login</h2>
+          <h2>Iniciar sesión</h2>
           <p class="login-form-subtitulo">Introduce tus datos para acceder a la plataforma.</p>
 
           <label class="form-label">Email</label>

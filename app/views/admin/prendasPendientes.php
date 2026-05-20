@@ -6,10 +6,6 @@
 
         <div class="admin-contenedor">
 
-            <span class="home-etiqueta">
-                Panel de administración
-            </span>
-
             <h1>
                 Gestión de prendas
             </h1>
@@ -29,6 +25,66 @@
         <div class="admin-contenedor-wide">
 
             <?php require __DIR__ . '/../layout/messages.php'; ?>
+
+            <!-- FILTRO -->
+
+            <div class="card shadow border-0 mb-5">
+
+                <div class="card-body">
+
+                    <form method="GET"
+                        action="<?= \App\Config\App::url('/admin/prendas-pendientes') ?>">
+
+                        <div class="row g-3 align-items-end justify-content-center">
+
+                            <div class="col-lg-6 col-md-8">
+
+                                <label class="form-label fw-bold">
+
+                                    Buscar prenda
+
+                                </label>
+
+                                <input type="text"
+                                    name="buscar"
+                                    class="form-control"
+                                    placeholder="Usuario o email"
+                                    value="<?= $_GET['buscar'] ?? '' ?>">
+
+                            </div>
+
+                            <div class="col-lg-3 col-md-4">
+
+                                <div class="d-flex gap-2">
+
+                                    <button class="btn btn-primary flex-fill">
+
+                                        <i class="bi bi-search"></i>
+
+                                        Buscar
+
+                                    </button>
+
+                                    <a href="<?= \App\Config\App::url('/admin/prendas-pendientes') ?>"
+                                        class="btn btn-outline-secondary flex-fill d-flex align-items-center justify-content-center">
+
+                                        <i class="bi bi-x-circle me-1"></i>
+
+                                        Limpiar
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
 
             <?php if (empty($pendientes)): ?>
 

@@ -48,10 +48,10 @@ p.parrafo-info {
 .navbar {
   background-color: #4cb1e0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  padding: 12px 20px;
+  padding: 0px 8px;
 }
 
-/* 🔥 TEXTO HEADER MÁS GRANDE */
+/* TEXTO HEADER MÁS GRANDE */
 .navbar-brand span {
   font-size: 1.6rem;
   font-weight: 700;
@@ -117,7 +117,6 @@ p.parrafo-info {
 }
 
 /* FOOTER */
-/* FOOTER MEJORADO */
 .footer {
   background-color: #4cb1e0;
   color: #1f2d3d;

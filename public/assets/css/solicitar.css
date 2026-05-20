@@ -7,7 +7,7 @@
 .solicitar-hero {
   background-color: #f8fafc;
   color: #1f2d3d;
-  padding: 55px 0;
+  padding: 10px 0;
   text-align: center;
 }
 
@@ -17,14 +17,14 @@
 }
 
 .solicitar-hero p {
-  max-width: 820px;
+  max-width: 1420px;
   margin: 0 auto;
   color: #4b5563;
   line-height: 1.7;
 }
 
 .solicitar-seccion {
-  padding: 60px 0;
+  padding: 30px 0;
   background: linear-gradient(135deg, rgb(23, 60, 81), #2f7fa5);
 }
 
@@ -92,7 +92,7 @@
   background-color: white;
   color: #1f2d3d;
   border-radius: 16px;
-  padding: 30px;
+  padding: 15px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.16);
 }
 
@@ -102,13 +102,13 @@
 
 .solicitar-form-subtitulo {
   color: #4b5563;
-  margin-bottom: 25px;
+  margin-bottom: 5px;
 }
 
 .solicitar-form-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0 18px;
+  gap: 0 12px;
 }
 
 .solicitar-form-card .form-label {
@@ -120,7 +120,7 @@
 .solicitar-form-card .form-control {
   border: 1px solid #d5dde5;
   border-radius: 10px;
-  padding: 10px 12px;
+  padding: 0px 12px;
   color: #1f2d3d;
   background-color: #f8fafc;
 }

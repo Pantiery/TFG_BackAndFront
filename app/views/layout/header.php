@@ -13,6 +13,8 @@
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <!-- CSS -->
     <link rel="stylesheet" href="<?= \App\Config\App::url('/assets/css/catalogo.css') ?>">
@@ -45,8 +47,8 @@
             <a class="navbar-brand d-flex align-items-center" href="<?= \App\Config\App::url('/') ?>">
                 <img src="<?= \App\Config\App::url('/assets/img/logo/logoUniformes.png') ?>"
                     alt="Logo"
-                    width="100"
-                    height="100"
+                    width="65"
+                    height="65"
                     class="me-2">
 
                 <span>UniColegio</span>

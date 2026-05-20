@@ -11,10 +11,6 @@ require __DIR__ . '/../layout/header.php';
 
         <div class="admin-contenedor">
 
-            <span class="home-etiqueta">
-                Panel de administración
-            </span>
-
             <h1>
                 Revisar prenda
             </h1>
@@ -39,7 +35,7 @@ require __DIR__ . '/../layout/header.php';
 
             </a>
 
-            <article class="admin-card admin-detalle">
+            <article class="admin-detalle-card">
 
                 <div class="admin-detalle-img">
 

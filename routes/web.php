@@ -92,6 +92,9 @@ $router->get('/admin/usuarios/bloquear', [UserController::class, 'bloquear']);
 // Activar usuario bloqueado
 $router->get('/admin/usuarios/activar', [UserController::class, 'activar']);
 
+// Bloquear usuario o activar usuario bloqueado
+$router->get('/admin/usuarios', [AdminController::class, 'usuarios']);
+
 
 // Gestión de prendas del sistema
 
