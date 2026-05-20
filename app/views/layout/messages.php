@@ -1,15 +1,35 @@
+<?php if (isset($_SESSION['mensaje_error'])): ?>
 
+    <div class="alert alert-danger alert-dismissible fade show text-center">
 
-    <?php if (isset($_SESSION['mensaje_error'])): ?>
-        <div class="alert alert-danger text-center">
-            <?= $_SESSION['mensaje_error'] ?>
-        </div>
-        <?php unset($_SESSION['mensaje_error']); ?>
-    <?php endif; ?>
+        <?= htmlspecialchars($_SESSION['mensaje_error']) ?>
 
-    <?php if (isset($_SESSION['mensaje_exito'])): ?>
-        <div class="alert alert-success text-center">
-            <?= $_SESSION['mensaje_exito'] ?>
-        </div>
-        <?php unset($_SESSION['mensaje_exito']); ?>
-    <?php endif; ?>
+        <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert">
+        </button>
+
+    </div>
+
+    <?php unset($_SESSION['mensaje_error']); ?>
+
+<?php endif; ?>
+
+<?php if (isset($_SESSION['mensaje_exito'])): ?>
+
+    <div class="alert alert-success alert-dismissible fade show text-center">
+
+        <?= htmlspecialchars($_SESSION['mensaje_exito']) ?>
+
+        <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert">
+        </button>
+
+    </div>
+
+    <?php unset($_SESSION['mensaje_exito']); ?>
+
+<?php endif; ?>
