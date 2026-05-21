@@ -114,9 +114,6 @@ $filtroEstado = $_GET['estado'] ?? '';
 
     <div class="catalogo-contenedor catalogo-mensajes">
 
-        <!-- MENSAJES DE ÉXITO O ERROR -->
-        <?php require __DIR__ . '/../layout/messages.php'; ?>
-
     </div>
 
     <section class="catalogo-listado-seccion">
@@ -134,8 +131,5 @@ $filtroEstado = $_GET['estado'] ?? '';
     </section>
 
 </main>
-
-<script src="<?= \App\Config\App::baseUrl() ?>/assets/js/mensajes.js"></script>
-<script src="<?= \App\Config\App::baseUrl() ?>/assets/js/carrito.js"></script>
 
 <?php require_once __DIR__ . '/../layout/footer.php'; ?>

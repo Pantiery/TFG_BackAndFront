@@ -5,9 +5,7 @@
 <main>
 
     <div class="container">
-        <br>
-        <!-- MENSAJES DE ÉXITO O ERROR -->
-        <?php require __DIR__ . '/../layout/messages.php'; ?>
+
         <br>
         <!-- TITULO -->
         <div class="mb-4">
@@ -23,7 +21,7 @@
 
                     <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
                         <h3 class="fs-4 fw-semibold mb-0">Productos añadidos</h3>
-                        <span class="badge text-bg-dark rounded-pill px-3 py-2">
+                        <span id="contador-productos-carrito" class="badge text-bg-dark rounded-pill px-3 py-2">
                             <?= count($productos) ?> producto(s)
                         </span>
                     </div>
@@ -35,7 +33,9 @@
 
                         <?php foreach ($productos as $producto): ?>
 
-                            <div class="row align-items-center carrito-item py-4 border-bottom">
+                            <div
+                                id="producto-<?= $producto['id'] ?>"
+                                class="row align-items-center carrito-item py-4 border-bottom">
 
                                 <!-- IMAGEN -->
                                 <div class="col-md-3 mb-3 mb-md-0">
@@ -64,7 +64,10 @@
                                     </div>
 
                                     <!-- ELIMINAR -->
-                                    <form method="POST" action="<?= \App\Config\App::baseUrl() ?>/carrito/remove">
+                                    <form
+                                        method="POST"
+                                        action="<?= \App\Config\App::baseUrl() ?>/carrito/remove"
+                                        class="form-remove-carrito">
                                         <input type="hidden" name="prenda_id" value="<?= $producto['id'] ?>">
                                         <button class="btn btn-outline-danger btn-sm">
                                             <i class="bi bi-trash3"></i> Eliminar
@@ -110,7 +113,9 @@
 
                     <div class="d-flex justify-content-between mb-3">
                         <span>Subtotal</span>
-                        <span><?= number_format($total, 2, ',', '.') ?> €</span>
+                        <span id="subtotal-carrito">
+                            <?= number_format($total, 2, ',', '.') ?> €
+                        </span>
                     </div>
 
                     <div class="d-flex justify-content-between mb-4">
@@ -127,7 +132,9 @@
 
                     <div class="d-flex justify-content-between align-items-center mt-3 mb-4 total-box">
                         <span class="fw-bold fs-5">Total</span>
-                        <span class="fw-bold fs-4">
+                        <span
+                            id="total-carrito"
+                            class="fw-bold fs-4">
                             <?= number_format($total, 2, ',', '.') ?> €
                         </span>
                     </div>

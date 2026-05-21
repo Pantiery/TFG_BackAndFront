@@ -115,23 +115,51 @@ class CarritoController extends BaseController
         $prendaId = $_POST['prenda_id'] ?? null;
 
         if (!$prendaId) {
-            header('Location: ' . \App\Config\App::baseUrl() . '/carrito');
-            exit;
+
+            return $this->jsonResponse(
+                false,
+                'No se ha recibido ninguna prenda',
+                '/carrito'
+            );
         }
 
         $carritoService = new CarritoService();
 
         $carrito = $carritoService->getByUserId($usuarioId);
 
-        if ($carrito) {
+        if (!$carrito) {
 
-            $carritoService->removeItem($carrito['id'], $prendaId);
-
-            $_SESSION['mensaje_exito'] =
-                'Producto eliminado del carrito correctamente';
+            return $this->jsonResponse(
+                false,
+                'Carrito no encontrado',
+                '/carrito'
+            );
         }
 
-        header('Location: ' . \App\Config\App::baseUrl() . '/carrito');
-        exit;
+        $carritoService->removeItem(
+            $carrito['id'],
+            $prendaId
+        );
+
+        $productos = $carritoService->getItems($carrito['id']);
+
+        $totalItems = count($productos);
+
+        $total = 0;
+
+        foreach ($productos as $producto) {
+            $total += $producto['precio_asignado'];
+        }
+
+        return $this->jsonResponse(
+            true,
+            'Producto eliminado correctamente',
+            '/carrito',
+            [
+                'prendaId' => $prendaId,
+                'totalItems' => $totalItems,
+                'total' => $total
+            ]
+        );
     }
 }
