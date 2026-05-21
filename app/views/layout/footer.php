@@ -86,6 +86,8 @@
 <script src="/proyecto_TFG/TFG_BackAndFront/public/assets/js/validaciones.js"></script>
 <script src="/proyecto_TFG/TFG_BackAndFront/public/assets/js/mensajes.js"></script>
 <script src="/proyecto_TFG/TFG_BackAndFront/public/assets/js/carrito.js"></script>
+<script src="/proyecto_TFG/TFG_BackAndFront/public/assets/js/ventas.js"></script>
 
 </body>
+
 </html>

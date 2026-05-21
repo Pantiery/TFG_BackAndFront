@@ -114,6 +114,9 @@ $filtroEstado = $_GET['estado'] ?? '';
 
     <div class="catalogo-contenedor catalogo-mensajes">
 
+        <!-- MENSAJES DE ÉXITO O ERROR -->
+        <?php require __DIR__ . '/../layout/messages.php'; ?>
+
     </div>
 
     <section class="catalogo-listado-seccion">

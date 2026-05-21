@@ -69,7 +69,7 @@ $router->get('/admin/ventas', [AdminController::class, 'ventas']);
 $router->get('/admin/ventas/detalle', [AdminController::class, 'detalleVenta']);
 
 // Marcar venta como pagada
-$router->get('/admin/ventas/pagar', [AdminController::class, 'marcarPagada']);
+$router->post('/admin/ventas/pagar', [AdminController::class, 'marcarPagada']);
 
 // Ver estadísticas generales
 $router->get('/admin/estadisticas', [AdminController::class, 'estadisticas']);
@@ -132,7 +132,7 @@ $router->post('/carrito/checkout', [CarritoController::class, 'checkout']);
 // Compras y ventas
 
 // Comprar prenda directamente
-$router->get('/venta/comprar', [VentaController::class, 'comprar']);
+$router->post('/venta/comprar', [VentaController::class, 'comprar']);
 
 // Ver historial de compras del usuario
 $router->get('/prendas/misCompras', [VentaController::class, 'misCompras']);

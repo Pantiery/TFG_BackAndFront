@@ -6,6 +6,8 @@
 
     <div class="container">
 
+        <?php require __DIR__ . '/../layout/messages.php'; ?>
+
         <br>
         <!-- TITULO -->
         <div class="mb-4">
@@ -139,7 +141,10 @@
                         </span>
                     </div>
 
-                    <form method="GET" action="<?= \App\Config\App::url('/venta/comprar') ?>">
+                    <form
+                        method="POST"
+                        action="<?= \App\Config\App::url('/venta/comprar') ?>"
+                        class="form-comprar-carrito">
                         <button class="btn btn-dark w-100 py-3 fw-semibold mb-3">
                             <i class="bi bi-bag-check"></i> Comprar ahora
                         </button>

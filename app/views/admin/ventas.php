@@ -274,7 +274,7 @@ $hayFiltroVendedor = !empty($_GET['vendedor']);
 
                                 </td>
 
-                                <td>
+                                <td id="estado-venta-<?= $venta['venta_id'] ?>">
 
                                     <?php if ($venta['estado_pago'] === 'pagado'): ?>
 
@@ -310,13 +310,26 @@ $hayFiltroVendedor = !empty($_GET['vendedor']);
 
                                     <?php if ($venta['estado_pago'] === 'pendiente'): ?>
 
-                                        <a href="<?= \App\Config\App::url('/admin/ventas/pagar?id=' . $venta['venta_id']) ?>"
-                                            class="btn btn-success btn-sm">
+                                        <form
+                                            method="POST"
+                                            action="<?= \App\Config\App::url('/admin/ventas/pagar') ?>"
+                                            class="form-pagar-venta">
 
-                                            <i class="bi bi-check-circle"></i>
-                                            Pagar pedido
+                                            <input
+                                                type="hidden"
+                                                name="venta_id"
+                                                value="<?= $venta['venta_id'] ?>">
 
-                                        </a>
+                                            <button
+                                                type="submit"
+                                                class="btn btn-success btn-sm">
+
+                                                <i class="bi bi-check-circle"></i>
+                                                Pagar pedido
+
+                                            </button>
+
+                                        </form>
 
                                     <?php else: ?>
 

@@ -1,3 +1,8 @@
+console.log('carrito.js cargado');
+console.log(
+    'formularios compra:',
+    document.querySelectorAll('.form-comprar-carrito').length
+);
 
 // FUNCIONES PARA MOSTRAR TOASTS Y GESTIONAR MENSAJES DEL CARRITO
 function mostrarToast(mensaje, tipo = 'success') {
@@ -187,6 +192,81 @@ document.querySelectorAll('.form-remove-carrito')
                     }
                 }
 
+            } catch (error) {
+
+                console.error(error);
+
+                mostrarToast(
+                    'Error inesperado',
+                    'danger'
+                );
+            }
+        });
+    });
+
+// GESTIÓN DE LA COMPRA DEL CARRITO
+
+document.querySelectorAll('.form-comprar-carrito')
+
+    .forEach(form => {
+
+        form.addEventListener('submit', async e => {
+
+            console.log('submit comprar');
+
+            e.preventDefault();
+
+            try {
+
+                const response = await fetch(form.action, {
+
+                    method: 'POST',
+
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                });
+
+                const data = await response.json();
+
+                mostrarToast(
+                    data.message,
+                    data.success ? 'success' : 'danger'
+                );
+
+                if (data.success) {
+
+                    document.querySelectorAll('.carrito-item')
+                        .forEach(item => item.remove());
+
+                    const contador =
+                        document.getElementById('contador-carrito');
+
+                    if (contador) {
+                        contador.textContent = '0';
+                    }
+
+                    const contadorPagina =
+                        document.getElementById('contador-productos-carrito');
+
+                    if (contadorPagina) {
+                        contadorPagina.textContent = '0 producto(s)';
+                    }
+
+                    const subtotal =
+                        document.getElementById('subtotal-carrito');
+
+                    const total =
+                        document.getElementById('total-carrito');
+
+                    if (subtotal) {
+                        subtotal.textContent = '0,00 €';
+                    }
+
+                    if (total) {
+                        total.textContent = '0,00 €';
+                    }
+                }
             } catch (error) {
 
                 console.error(error);

@@ -220,14 +220,15 @@ class AdminController extends BaseController
     {
         $this->checkAdmin();
 
-        $ventaId = $_GET['id'] ?? null;
+        $ventaId = $_POST['venta_id'] ?? null;
 
         if (!$ventaId) {
 
-            $_SESSION['mensaje_error'] = 'Venta inválida';
-
-            header('Location: ' . \App\Config\App::url('/admin/ventas'));
-            exit;
+            return $this->jsonResponse(
+                false,
+                'Venta inválida',
+                '/admin/ventas'
+            );
         }
 
         $ventaService = new \App\Services\VentaService();
@@ -238,28 +239,34 @@ class AdminController extends BaseController
         // Validar existencia
         if (!$venta) {
 
-            $_SESSION['mensaje_error'] = 'La venta no existe';
-
-            header('Location: ' . \App\Config\App::url('/admin/ventas'));
-            exit;
+            return $this->jsonResponse(
+                false,
+                'La venta no existe',
+                '/admin/ventas'
+            );
         }
 
         // Evitar doble pago
         if ($venta['estado_pago'] === 'pagado') {
 
-            $_SESSION['mensaje_error'] = 'Esta venta ya está pagada';
-
-            header('Location: ' . \App\Config\App::url('/admin/ventas'));
-            exit;
+            return $this->jsonResponse(
+                false,
+                'Esta venta ya está pagada',
+                '/admin/ventas'
+            );
         }
 
         // Marcar pagada
         $ventaService->marcarVentaPagada($ventaId);
 
-        $_SESSION['mensaje_exito'] = 'Pago marcado correctamente';
-
-        header('Location: ' . \App\Config\App::url('/admin/ventas'));
-        exit;
+        return $this->jsonResponse(
+            true,
+            'Pago marcado correctamente',
+            '/admin/ventas',
+            [
+                'ventaId' => $ventaId
+            ]
+        );
     }
 
     // Estadísticas del sistema

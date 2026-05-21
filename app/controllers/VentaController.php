@@ -21,9 +21,12 @@ class VentaController extends BaseController
         $items = $carritoService->getItemsByUser($usuarioId);
 
         if (empty($items)) {
-            $_SESSION['mensaje_error'] = 'El carrito está vacío';
-            header('Location: ' . \App\Config\App::url('/carrito'));
-            exit;
+
+            return $this->jsonResponse(
+                false,
+                'El carrito está vacío',
+                '/carrito'
+            );
         }
 
         $pdo = Database::getConnection();
@@ -44,15 +47,20 @@ class VentaController extends BaseController
 
             $pdo->commit();
 
-            $_SESSION['mensaje_exito'] = 'Compra realizada correctamente';
+            return $this->jsonResponse(
+                true,
+                'Compra realizada correctamente',
+                '/carrito'
+            );
         } catch (\Exception $e) {
             $pdo->rollBack();
 
-            $_SESSION['mensaje_error'] = $e->getMessage();
+            return $this->jsonResponse(
+                false,
+                $e->getMessage(),
+                '/carrito'
+            );
         }
-
-        header('Location: ' . \App\Config\App::url('/carrito'));
-        exit;
     }
 
     // Ver mis compras
@@ -96,7 +104,7 @@ class VentaController extends BaseController
     }
 
     // Ver mi monedero
-    
+
     public function monedero()
     {
         $this->checkLogin();
