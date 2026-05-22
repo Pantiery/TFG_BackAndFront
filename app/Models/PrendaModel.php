@@ -14,7 +14,10 @@ class PrendaModel
         $this->pdo = Database::getConnection();
     }
 
-    // funcion para crear una prenda nueva en la base de datos
+    // FUNCIONES RELACIONADAS CON PRENDAS ( CREACIÓN, OBTENCIÓN, FILTRADO, APROBACIÓN, RECHAZO, ETC. )
+
+    // FUNCION PARA CREAR UNA PRENDA NUEVA ( CON ESTADO PENDIENTE DE REVISIÓN )
+    
     public function crear($data)
     {
         $stmt = $this->pdo->prepare("
@@ -35,7 +38,8 @@ class PrendaModel
         ]);
     }
 
-    // funcion para ver si existe una relacion entre un tipo de prenda y un colegio
+    // FUNCION PARA VERIFICAR SI EXISTE UNA RELACIÓN VÁLIDA ENTRE UN TIPO DE PRENDA Y UN COLEGIO
+
     public function existeRelacionTipoColegio($colegio, $tipo)
     {
         $stmt = $this->pdo->prepare("
@@ -53,7 +57,8 @@ class PrendaModel
         return $stmt->fetchColumn() > 0;
     }
 
-    // funcion para obtener el precio estandar de una prenda segun su tipo y estado de calidad
+    // FUNCION PARA OBTENER EL PRECIO ESTÁNDAR DE UNA PRENDA SEGÚN SU TIPO Y ESTADO DE CALIDAD
+
     public function obtenerPrecio($tipo, $estado)
     {
         $stmt = $this->pdo->prepare("
@@ -71,7 +76,8 @@ class PrendaModel
         return $stmt->fetchColumn();
     }
 
-    // funcion para obtener todas las prendas publicadas
+    // FUNCION PARA OBTENER TODAS LAS PRENDAS PUBLICADAS
+
     public function obtenerPublicadas($usuarioId)
     {
         $stmt = $this->pdo->prepare("
@@ -97,7 +103,8 @@ class PrendaModel
         return $stmt->fetchAll();
     }
 
-    // funcion para obtener prendas pendientes de revisión (con filtro de búsqueda por nombre o email del vendedor)
+    // FUNCION PARA OBTENER PRENDAS PENDIENTES DE REVISIÓN (CON FILTRO DE BÚSQUEDA POR NOMBRE O EMAIL DEL VENDEDOR)
+
     public function obtenerPendientes($pdo, $busqueda = '')
     {
         $sql = "SELECT 
@@ -116,7 +123,8 @@ class PrendaModel
             JOIN estados_calidad ec ON p.estado_calidad_id = ec.id
             WHERE p.estado_publicacion = 'pendiente'";
 
-        // FILTRO DE BÚSQUEDA
+        // Filtro de búsqueda por nombre o email del vendedor
+
         if (!empty($busqueda)) {
 
             $sql .= " AND (
@@ -127,7 +135,8 @@ class PrendaModel
 
         $stmt = $pdo->prepare($sql);
 
-        // BIND DEL FILTRO
+        // Bind del parámetro de búsqueda si se ha proporcionado una cadena de búsqueda válida
+
         if (!empty($busqueda)) {
 
             $stmt->bindValue(':buscar', "%$busqueda%");
@@ -138,7 +147,8 @@ class PrendaModel
         return $stmt->fetchAll();
     }
 
-    // funcion para obtener una prenda por su id
+    // FUNCION PARA OBTENER UNA PRENDA POR SU ID
+
     public function obtenerPorId($id)
     {
         $stmt = $this->pdo->prepare("
@@ -168,7 +178,8 @@ class PrendaModel
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
-    // funcion para aprobar una prenda pendiente
+    // FUNCION PARA APROBAR UNA PRENDA PENDIENTE
+
     public function aprobar($id)
     {
         $stmt = $this->pdo->prepare("
@@ -184,7 +195,8 @@ class PrendaModel
         ]);
     }
 
-    // funcion para rechazar una prenda pendiente
+    // FUNCION PARA RECHAZAR UNA PRENDA PENDIENTE
+
     public function rechazar($id)
     {
         $stmt = $this->pdo->prepare("
@@ -198,7 +210,8 @@ class PrendaModel
         ]);
     }
 
-    // funcion para obtener prendas por usuario y estado de publicación
+    // FUNCION PARA OBTENER PRENDAS POR USUARIO Y ESTADO DE PUBLICACIÓN
+
     public function obtenerPorUsuarioYEstado($usuarioId, $estado)
     {
         $stmt = $this->pdo->prepare('
@@ -226,7 +239,8 @@ class PrendaModel
         return $stmt->fetchAll();
     }
 
-    // funcion que filtra prendas en el catálogo según colegio, tipo y estado de calidad ( excluyendo las del usuario logeado )
+    // FUNCION QUE FILTRA PRENDAS EN EL CATÁLOGO SEGÚN COLEGIO, TIPO Y ESTADO DE CALIDAD ( EXCLUYENDO LAS DEL USUARIO LOGEADO )
+
     public function filtrar($colegio, $tipo, $estado, $usuarioId)
     {
         $sql = "

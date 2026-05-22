@@ -9,13 +9,15 @@ class UserModel
 {
     private $pdo;
 
-    // Constructor para establecer conexión a la base de datos
+    // COSNTRUCTOR PARA CONECTAR A LA BASE DE DATOS
+
     public function __construct()
     {
         $this->pdo = Database::getConnection();
     }
 
-    // Buscar por email
+    // BUSCAR POR EMAIL
+
     public function findByEmail($email)
     {
         $stmt = $this->pdo->prepare("
@@ -30,7 +32,8 @@ class UserModel
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    // Buscar por ID
+    // BUSCAR POR ID
+
     public function findById($id)
     {
         $stmt = $this->pdo->prepare("
@@ -45,7 +48,8 @@ class UserModel
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    // Crear nuevo usuario
+    // CREAR NUEVO USUARIO
+
     public function create($data)
     {
         $stmt = $this->pdo->prepare("
@@ -77,7 +81,8 @@ class UserModel
     }
 
 
-    // Obtener todos los usuarios
+    // OBTENER TODOS LOS USUARIOS
+
     public function obtenerTodos()
     {
         $stmt = $this->pdo->query("
@@ -89,7 +94,8 @@ class UserModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Buscar usuarios por nombre, apellido o email
+    // BUSCAR USUARIOS POR NOMBRE, APELLIDO O EMAIL
+    
     public function buscarUsuarios($buscar)
     {
         $stmt = $this->pdo->prepare("

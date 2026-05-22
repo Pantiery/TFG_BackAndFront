@@ -74,11 +74,6 @@ $router->post('/admin/ventas/pagar', [AdminController::class, 'marcarPagada']);
 // Ver estadísticas generales
 $router->get('/admin/estadisticas', [AdminController::class, 'estadisticas']);
 
-// Mostrar formulario insertar prenda manualmente
-$router->get('/admin/prendas/insertar', [PrendaController::class, 'createAdmin']);
-
-// Guardar prenda creada por admin
-$router->post('/admin/prendas/insertar', [PrendaController::class, 'storeAdmin']);
 
 
 // Gestion de usuarios del sistema
