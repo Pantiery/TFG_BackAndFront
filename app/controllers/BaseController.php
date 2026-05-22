@@ -11,7 +11,21 @@ class BaseController
     {
         if (!isset($_SESSION['usuario'])) {
 
-            $_SESSION['mensaje_error'] = 'Debes iniciar sesión para acceder a esta página';
+            if ($this->isAjax()) {
+
+                header('Content-Type: application/json');
+
+                echo json_encode([
+                    'success' => false,
+                    'loginRequired' => true,
+                    'message' => 'Debes iniciar sesión'
+                ]);
+
+                exit;
+            }
+
+            $_SESSION['mensaje_error'] =
+                'Debes iniciar sesión para acceder a esta página';
 
             header('Location: ' . App::url('/login'));
             exit;
@@ -61,5 +75,48 @@ class BaseController
         }
 
         require $archivo;
+    }
+
+    // FUNCION PARA VERIFICAR SI LA PETICION ES AJAX
+    protected function isAjax()
+    {
+        return !empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+            strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
+    }
+
+    protected function jsonResponse(
+        $success,
+        $message,
+        $redirect = '/prendas/catalogo',
+        $extra = []
+    ) {
+
+        // RESPUESTA AJAX
+        if ($this->isAjax()) {
+
+            header('Content-Type: application/json');
+
+            echo json_encode(array_merge([
+                'success' => $success,
+                'message' => $message
+            ], $extra));
+
+            exit;
+        }
+
+        // RESPUESTA NORMAL
+        if ($success) {
+            $_SESSION['mensaje_exito'] = $message;
+        } else {
+            $_SESSION['mensaje_error'] = $message;
+        }
+
+        header(
+            'Location: ' .
+                \App\Config\App::baseUrl() .
+                $redirect
+        );
+
+        exit;
     }
 }

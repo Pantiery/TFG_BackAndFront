@@ -5,9 +5,9 @@
 <main>
 
     <div class="container">
-        <br>
-        <!-- MENSAJES DE ÉXITO O ERROR -->
+
         <?php require __DIR__ . '/../layout/messages.php'; ?>
+
         <br>
         <!-- TITULO -->
         <div class="mb-4">
@@ -23,7 +23,7 @@
 
                     <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
                         <h3 class="fs-4 fw-semibold mb-0">Productos añadidos</h3>
-                        <span class="badge text-bg-dark rounded-pill px-3 py-2">
+                        <span id="contador-productos-carrito" class="badge text-bg-dark rounded-pill px-3 py-2">
                             <?= count($productos) ?> producto(s)
                         </span>
                     </div>
@@ -35,7 +35,9 @@
 
                         <?php foreach ($productos as $producto): ?>
 
-                            <div class="row align-items-center carrito-item py-4 border-bottom">
+                            <div
+                                id="producto-<?= $producto['id'] ?>"
+                                class="row align-items-center carrito-item py-4 border-bottom">
 
                                 <!-- IMAGEN -->
                                 <div class="col-md-3 mb-3 mb-md-0">
@@ -56,6 +58,14 @@
                                         <?= $producto['tipo'] ?> - <?= $producto['colegio_nombre'] ?>
                                     </h4>
 
+                                    <?php if ($producto['estado_publicacion'] !== 'publicada'): ?>
+                                        <div class="alert alert-danger alerta-prenda-no-disponible py-2 mt-2">
+                                            <strong>Prenda no disponible.</strong><br>
+                                            Esta prenda ya ha sido adquirida por otro usuario.
+                                            Debes eliminarla del carrito para continuar con la compra.
+                                        </div>
+                                    <?php endif; ?>
+
                                     <div class="d-flex flex-wrap gap-3 small text-secondary mb-3">
                                         <span>
                                             <strong>Estado:</strong>
@@ -64,7 +74,10 @@
                                     </div>
 
                                     <!-- ELIMINAR -->
-                                    <form method="POST" action="<?= \App\Config\App::baseUrl() ?>/carrito/remove">
+                                    <form
+                                        method="POST"
+                                        action="<?= \App\Config\App::baseUrl() ?>/carrito/remove"
+                                        class="form-remove-carrito">
                                         <input type="hidden" name="prenda_id" value="<?= $producto['id'] ?>">
                                         <button class="btn btn-outline-danger btn-sm">
                                             <i class="bi bi-trash3"></i> Eliminar
@@ -90,6 +103,20 @@
             </div>
 
             <!-- COLUMNA DERECHA -->
+
+            <?php
+            $hayPrendasNoDisponibles = false;
+
+            foreach ($productos as $producto) {
+
+                if ($producto['estado_publicacion'] !== 'publicada') {
+
+                    $hayPrendasNoDisponibles = true;
+                    break;
+                }
+            }
+            ?>
+
             <div class="col-lg-4">
                 <div class="card border-0 shadow-sm rounded-4 p-4 resumen-card">
 
@@ -110,7 +137,9 @@
 
                     <div class="d-flex justify-content-between mb-3">
                         <span>Subtotal</span>
-                        <span><?= number_format($total, 2, ',', '.') ?> €</span>
+                        <span id="subtotal-carrito">
+                            <?= number_format($total, 2, ',', '.') ?> €
+                        </span>
                     </div>
 
                     <div class="d-flex justify-content-between mb-4">
@@ -127,13 +156,26 @@
 
                     <div class="d-flex justify-content-between align-items-center mt-3 mb-4 total-box">
                         <span class="fw-bold fs-5">Total</span>
-                        <span class="fw-bold fs-4">
+                        <span
+                            id="total-carrito"
+                            class="fw-bold fs-4">
                             <?= number_format($total, 2, ',', '.') ?> €
                         </span>
                     </div>
 
-                    <form method="GET" action="<?= \App\Config\App::url('/venta/comprar') ?>">
-                        <button class="btn btn-dark w-100 py-3 fw-semibold mb-3">
+                    <?php if ($hayPrendasNoDisponibles): ?>
+                        <div class="alert alert-warning alerta-prenda-no-disponible">
+                            Debes eliminar las prendas no disponibles antes de poder finalizar la compra.
+                        </div>
+                    <?php endif; ?>
+
+                    <form
+                        method="POST"
+                        action="<?= \App\Config\App::url('/venta/comprar') ?>"
+                        class="form-comprar-carrito">
+                        <button
+                            class="btn btn-dark w-100 py-3 fw-semibold mb-3"
+                            <?= $hayPrendasNoDisponibles ? 'disabled' : '' ?>>
                             <i class="bi bi-bag-check"></i> Comprar ahora
                         </button>
                     </form>

@@ -8,7 +8,7 @@ class VentaService
 {
     // VENTAS
 
-    // Crear venta y devolver ID
+    // CREAR VENTA Y OBTENER ID
 
     public function crearVenta($usuarioId)
     {
@@ -23,7 +23,7 @@ class VentaService
         return $pdo->lastInsertId();
     }
 
-    // Insertar detalles de venta
+    // INSERTAR DETALLE DE VENTA Y ACTUALIZAR ESTADO DE PRENDA
 
     public function insertarDetalle($ventaId, $items)
     {
@@ -36,7 +36,9 @@ class VentaService
         $stmt = $pdo->prepare($sql);
 
         foreach ($items as $item) {
-            // 🔥 comprobar si la prenda ya está vendida
+
+            // comprobar si la prenda ya está vendida
+
             $sqlCheck = 'SELECT COUNT(*) FROM detalle_venta WHERE prenda_id = ?';
             $stmtCheck = $pdo->prepare($sqlCheck);
             $stmtCheck->execute([$item['id']]);
@@ -58,13 +60,14 @@ class VentaService
             ]);
 
             // Actualizar estado de prenda a 'vendida'
+
             $sqlUpdate = "UPDATE prendas SET estado_publicacion = 'vendida' WHERE id = ?";
             $stmtUpdate = $pdo->prepare($sqlUpdate);
             $stmtUpdate->execute([$item['id']]);
         }
     }
 
-    // Actualizar total de venta
+    // ACTUALIZAR TOTAL DE LA VENTA
 
     public function actualizarTotal($ventaId, $items)
     {
@@ -83,7 +86,7 @@ class VentaService
 
     // COMPRAS
 
-    // Obtener compras por usuario
+    // OBTENER COMPRAS POR USUARIO (HISTORIAL)
 
     public function obtenerComprasPorUsuario($usuarioId)
     {
@@ -114,7 +117,7 @@ class VentaService
 
     // VENTAS DEL VENDEDOR
 
-    // Obtener ventas pendientes por usuario
+    // OBTENER VENTAS PENDIENTES PARA EL VENDEDOR
 
     public function obtenerVentasPendientes($usuarioId)
     {
@@ -141,7 +144,8 @@ class VentaService
         return $stmt->fetchAll();
     }
 
-    // Calcular total pendiente para el vendedor
+    // CALCULAR TOTAL PENDIENTE PARA EL VENDEDOR
+
     public function calcularTotalPendiente($ventas)
     {
         $total = 0;
@@ -153,7 +157,8 @@ class VentaService
         return $total;
     }
 
-    // Obtener ventas por usuario (historial)
+    // OBTENER VENTAS POR USUARIO (HISTORIAL)
+
     public function obtenerVentasPorUsuario($usuarioId)
     {
         $pdo = Database::getConnection();
@@ -201,7 +206,8 @@ class VentaService
 
     // ADMIN
 
-    // Obtener todas las ventas agrupadas (admin)
+    // OBTENER TODAS LAS VENTAS AGRUPADAS PARA ADMIN CON FILTROS
+
     public function obtenerTodasLasVentas(
         $estado = null,
         $desde = null,
@@ -285,7 +291,7 @@ class VentaService
 
         $resultados = $stmt->fetchAll();
 
-        // AGRUPAR POR VENTA
+        // Agrupar resultados por venta_id para facilitar la visualización en el admin
 
         $ventasAgrupadas = [];
 
@@ -318,7 +324,8 @@ class VentaService
         return array_values($ventasAgrupadas);
     }
 
-    // Obtener prendas de una venta
+    // OBTENER PRENDAS DE UNA VENTA POR ID
+
     public function obtenerPrendasDeVenta($ventaId)
     {
         $pdo = Database::getConnection();
@@ -359,7 +366,8 @@ class VentaService
         return $stmt->fetchAll();
     }
 
-    // Obtener venta por ID
+    // OBTENER VENTA POR ID CON DATOS DEL COMPRADOR
+
     public function obtenerVentaPorId($ventaId)
     {
         $pdo = Database::getConnection();
@@ -390,7 +398,8 @@ class VentaService
         return $stmt->fetch();
     }
 
-    // Obtener detalle completo de una venta
+    // OBTENER DETALLE COMPLETO DE UNA VENTA
+
     public function obtenerDetalleVenta($ventaId)
     {
         // Obtener venta
@@ -422,7 +431,8 @@ class VentaService
         ];
     }
 
-    // Marcar venta como pagada
+    // MARCAR VENTA COMO PAGADA
+    
     public function marcarVentaPagada($ventaId)
     {
         $pdo = Database::getConnection();

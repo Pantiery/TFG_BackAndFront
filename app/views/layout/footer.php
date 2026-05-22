@@ -76,9 +76,18 @@
     </div>
 </footer>
 
+<div
+    id="toast-container"
+    class="toast-container position-fixed top-0 end-0 p-3"
+    style="margin-top: 90px;">
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/proyecto_TFG/TFG_BackAndFront/public/assets/js/validaciones.js"></script>
 <script src="/proyecto_TFG/TFG_BackAndFront/public/assets/js/mensajes.js"></script>
+<script src="/proyecto_TFG/TFG_BackAndFront/public/assets/js/carrito.js"></script>
+<script src="/proyecto_TFG/TFG_BackAndFront/public/assets/js/ventas.js"></script>
+
 </body>
 
 </html>

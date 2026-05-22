@@ -104,7 +104,7 @@
                         <li class="nav-item">
                             <a class="nav-link active" href="<?= \App\Config\App::url('/carrito') ?>">
                                 Carrito
-                                <span class="badge text-bg-dark rounded-pill ms-2">
+                                <span class="badge text-bg-dark rounded-pill ms-2" id="contador-carrito">
                                     <?= count($productos ?? []) ?>
                                 </span>
                             </a>

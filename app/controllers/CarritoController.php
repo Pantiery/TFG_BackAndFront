@@ -10,29 +10,43 @@ class CarritoController extends BaseController
     // AÑADIR AL CARRITO
     public function add()
     {
-        // Verificar que el usuario está logueado
         $this->checkLogin();
 
         $prendaId = $_POST['prenda_id'] ?? null;
         $usuarioId = $_SESSION['usuario']['id'];
 
-        // Obtener el dueño de la prenda
-        $pdo = \App\Core\Database::getConnection();
-        $stmt = $pdo->prepare('SELECT usuario_id FROM prendas WHERE id = ?');
-        $stmt->execute([$prendaId]);
-        $prenda = $stmt->fetch();
+        if (!$prendaId) {
 
-        // Validar que no es suya
-        if ($prenda && $prenda['usuario_id'] == $usuarioId) {
-            $_SESSION['mensaje_error'] = 'No puedes comprar tu propia prenda';
-            header('Location: ' . \App\Config\App::baseUrl() . '/prendas/catalogo');
-            exit;
+            return $this->jsonResponse(
+                false,
+                'No se ha recibido ninguna prenda'
+            );
         }
 
-        if (!$prendaId) {
-            $_SESSION['mensaje_error'] = 'No se ha recibido ninguna prenda.';
-            header('Location: ' . \App\Config\App::baseUrl() . '/prendas/catalogo');
-            exit;
+        $pdo = \App\Core\Database::getConnection();
+
+        $stmt = $pdo->prepare(
+            'SELECT usuario_id FROM prendas WHERE id = ?'
+        );
+
+        $stmt->execute([$prendaId]);
+
+        $prenda = $stmt->fetch();
+
+        if (!$prenda) {
+
+            return $this->jsonResponse(
+                false,
+                'La prenda no existe'
+            );
+        }
+
+        if ($prenda['usuario_id'] == $usuarioId) {
+
+            return $this->jsonResponse(
+                false,
+                'No puedes comprar tu propia prenda'
+            );
         }
 
         $carritoService = new CarritoService();
@@ -43,16 +57,31 @@ class CarritoController extends BaseController
             $carrito = $carritoService->create($usuarioId);
         }
 
-        $anadido = $carritoService->addItem($carrito['id'], $prendaId);
+        $anadido = $carritoService->addItem(
+            $carrito['id'],
+            $prendaId
+        );
 
         if ($anadido) {
-            $_SESSION['mensaje_exito'] = 'Prenda añadida al carrito con éxito';
-        } else {
-            $_SESSION['mensaje_error'] = 'No se puede añadir la prenda (ya está en el carrito o ha sido vendida)';
+
+            $totalItems = count(
+                $carritoService->getItems($carrito['id'])
+            );
+
+            return $this->jsonResponse(
+                true,
+                'Prenda añadida al carrito',
+                '/prendas/catalogo',
+                [
+                    'totalItems' => $totalItems
+                ]
+            );
         }
 
-        header('Location: ' . \App\Config\App::baseUrl() . '/prendas/catalogo');
-        exit;
+        return $this->jsonResponse(
+            false,
+            'La prenda ya está en el carrito o vendida'
+        );
     }
 
     // VER CARRITO
@@ -86,23 +115,51 @@ class CarritoController extends BaseController
         $prendaId = $_POST['prenda_id'] ?? null;
 
         if (!$prendaId) {
-            header('Location: ' . \App\Config\App::baseUrl() . '/carrito');
-            exit;
+
+            return $this->jsonResponse(
+                false,
+                'No se ha recibido ninguna prenda',
+                '/carrito'
+            );
         }
 
         $carritoService = new CarritoService();
 
         $carrito = $carritoService->getByUserId($usuarioId);
 
-        if ($carrito) {
+        if (!$carrito) {
 
-            $carritoService->removeItem($carrito['id'], $prendaId);
-
-            $_SESSION['mensaje_exito'] =
-                'Producto eliminado del carrito correctamente';
+            return $this->jsonResponse(
+                false,
+                'Carrito no encontrado',
+                '/carrito'
+            );
         }
 
-        header('Location: ' . \App\Config\App::baseUrl() . '/carrito');
-        exit;
+        $carritoService->removeItem(
+            $carrito['id'],
+            $prendaId
+        );
+
+        $productos = $carritoService->getItems($carrito['id']);
+
+        $totalItems = count($productos);
+
+        $total = 0;
+
+        foreach ($productos as $producto) {
+            $total += $producto['precio_asignado'];
+        }
+
+        return $this->jsonResponse(
+            true,
+            'Producto eliminado correctamente',
+            '/carrito',
+            [
+                'prendaId' => $prendaId,
+                'totalItems' => $totalItems,
+                'total' => $total
+            ]
+        );
     }
 }

@@ -17,25 +17,18 @@ class Database
             $dbname = $_ENV['DB_NAME'];
             $user = $_ENV['DB_USER'];
             $pass = $_ENV['DB_PASS'];
-            //CHARSET (que es?)
             $charset = 'utf8mb4';
-
-            // datos para conexión remota (freesqldatabase) no funciona
-            // $host = 'sql8.freesqldatabase.com';
-            // $dbname = 'sql8823386'; // ← tu BD
-            // $user = 'sql8823386';
-            // $pass = 'gtqVCrJh67';
 
             try {
                 self::$connection = new PDO(
-                    "mysql:host=$host;dbname=$dbname;charset=utf8",
+                    "mysql:host=$host;dbname=$dbname;charset=$charset",
                     $user,
                     $pass,
                 );
 
                 self::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (PDOException $e) {
-                die('Error de conexión: ' . $e->getMessage());
+                die('Error de conexión a la base de datos: ' . $e->getMessage());
             }
         }
 

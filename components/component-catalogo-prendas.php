@@ -37,7 +37,7 @@
 
                     <?php if (!empty($prenda['imagen'])): ?>
                         <img src="<?= \App\Config\App::baseUrl() . $prenda['imagen'] ?>"
-                             alt="Imagen de <?= htmlspecialchars($prenda['tipo']) ?>"
+                            alt="Imagen de <?= htmlspecialchars($prenda['tipo']) ?>"
                             class="card-img-top catalogo-card-img">
                     <?php endif; ?>
 
@@ -77,7 +77,10 @@
 
                         <div class="card-botones">
 
-                            <form method="POST" action="<?= \App\Config\App::baseUrl() ?>/carrito/add" class="m-0">
+                            <form
+                                method="POST"
+                                action="<?= \App\Config\App::baseUrl() ?>/carrito/add"
+                                class="m-0 form-carrito">
                                 <input type="hidden" name="prenda_id" value="<?= $prenda['id'] ?>">
                                 <button type="submit" class="btn btn-add-carrito">
                                     Añadir al carrito
@@ -126,7 +129,10 @@
                         <div class="card-footer text-center">
                             <div class="card-botones">
 
-                                <form method="POST" action="<?= \App\Config\App::baseUrl() ?>/carrito/add" class="m-0">
+                                <form
+                                    method="POST"
+                                    action="<?= \App\Config\App::baseUrl() ?>/carrito/add"
+                                    class="m-0 form-carrito">
                                     <input type="hidden" name="prenda_id" value="<?= $prenda['id'] ?>">
                                     <button type="submit" class="btn btn-add-carrito">
                                         Añadir al carrito

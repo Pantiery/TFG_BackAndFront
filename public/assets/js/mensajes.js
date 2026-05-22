@@ -1,14 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    document.querySelectorAll('.alert').forEach(mensaje => {
-        setTimeout(() => {
-            mensaje.classList.remove('show');
-            mensaje.classList.add('fade');
-
+    document.querySelectorAll('.alert:not(.alerta-prenda-no-disponible)')
+        .forEach(mensaje => {
             setTimeout(() => {
-                mensaje.remove();
-            }, 500);
-        }, 3000);
-    });
+                mensaje.classList.remove('show');
+                mensaje.classList.add('fade');
+
+                setTimeout(() => {
+                    mensaje.remove();
+                }, 500);
+            }, 3000);
+        });
 
 });

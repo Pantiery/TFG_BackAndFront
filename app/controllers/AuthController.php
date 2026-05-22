@@ -8,7 +8,8 @@ use App\Services\AuthService;
 
 class AuthController extends BaseController
 {
-    // Redirigir a login si ya está autenticado
+    // REDIRIGIR A LOGIN SI YA ESTÁ AUTENTICADO
+
     public function showLogin()
     {
         if (isset($_SESSION['usuario'])) {
@@ -19,7 +20,8 @@ class AuthController extends BaseController
         $this->view('auth/login');
     }
 
-    // Redirigir a registro si ya está autenticado
+    // REDIRIGIR A REGISTRO SI YA ESTÁ AUTENTICADO
+
     public function showRegister()
     {
         if (isset($_SESSION['usuario'])) {
@@ -30,7 +32,8 @@ class AuthController extends BaseController
         $this->view('auth/register');
     }
 
-    // Registrar nuevo usuario
+    // REGISTRAR NUEVO USUARIO
+
     public function register()
     {
         $service = new AuthService();
@@ -49,7 +52,8 @@ class AuthController extends BaseController
         }
     }
 
-    // Función para iniciar sesión
+    // FUNCION PARA INICIAR SESIÓN
+
     public function login()
     {
         $service = new AuthService();
@@ -58,6 +62,7 @@ class AuthController extends BaseController
             $usuario = $service->login($_POST);
 
             // Regenerar el ID de sesión para prevenir ataques de fijación de sesión
+
             session_regenerate_id(true);
 
             $_SESSION['usuario'] = [
@@ -70,6 +75,7 @@ class AuthController extends BaseController
             ];
 
             // comprobar si tiene carrito, si no, crearlo
+
             $carritoService = new \App\Services\CarritoService();
 
             $carrito = $carritoService->getByUserId($usuario['id']);
@@ -87,7 +93,8 @@ class AuthController extends BaseController
         }
     }
 
-    // Función para cerrar sesión
+    // FUNCIÓN PARA CERRAR SESIÓN
+
     public function logout()
     {
         $_SESSION = [];
@@ -97,13 +104,15 @@ class AuthController extends BaseController
         exit;
     }
 
-    // Mostrar vista recuperar contraseña
+    // FUNCIÓN PARA MOSTRAR LA VISTA DE RECUPERAR CONTRASEÑA
+
     public function showRecuperar()
     {
         $this->view('auth/recuperar');
     }
 
-    // Procesar recuperación de contraseña
+    // FUNCIÓN PARA PROCESAR LA RECUPERACIÓN DE CONTRASEÑA
+    
     public function recuperarPassword()
     {
         $_SESSION['mensaje_exito'] =

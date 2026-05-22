@@ -15,7 +15,7 @@ class PrendaController extends BaseController
         $this->service = new PrendaService();
     }
 
-    // Página para solicitar una prenda
+    // PAGINA DE SOLICITUD DE PRENDA
 
     public function create()
     {
@@ -28,13 +28,14 @@ class PrendaController extends BaseController
         $this->view('prendas/solicitar', $datos);
     }
 
-    // Gestiona el envío del formulario delegando la lógica al service
+    // GESTIONAR ENVÍO DE SOLICITUD DE PRENDA
 
     public function store()
     {
         $this->checkLogin();
 
         // permite solo POST e impide accesos directos
+
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header('Location: ' . App::url('/prendas/solicitar'));
             exit;
@@ -45,6 +46,7 @@ class PrendaController extends BaseController
         $usuario_id = $_SESSION['usuario']['id'];
 
         // Validación básica de archivo ( antes del service )
+
         if (!$file || $file['error'] !== UPLOAD_ERR_OK) {
             $_SESSION['mensaje_error'] = 'Debes subir una imagen válida';
             header('Location: ' . App::url('/prendas/solicitar'));
@@ -63,7 +65,7 @@ class PrendaController extends BaseController
         exit;
     }
 
-    // Página de mis ventas
+    // PAGINA DE MIS VENTAS
 
     public function misVentas()
     {
@@ -76,7 +78,7 @@ class PrendaController extends BaseController
         $this->view('prendas/misVentas', $datos);
     }
 
-    // Catálogo de prendas
+    // PAGINA DE CATÁLOGO DE PRENDAS
 
     public function catalogo()
     {
@@ -94,53 +96,5 @@ class PrendaController extends BaseController
             'tiposPrenda' => $datos['tiposPrenda'],
             'estadosCalidad' => $datos['estados'],
         ]);
-    }
-
-    // Página para insertar una prenda ( solo admin )
-
-    public function createAdmin()
-    {
-        $this->checkAdmin();
-
-        $colegioSeleccionado = $_GET['colegio'] ?? null;
-
-        $datos = $this->service->obtenerDatosFormulario($colegioSeleccionado);
-
-        $this->view('admin/insertarPrenda', $datos);
-    }
-
-    // Gestiona el envío del formulario de inserción por parte del admin
-
-    public function storeAdmin()
-    {
-        $this->checkAdmin();
-
-        // Seguridad: solo POST
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            header('Location: ' . App::url('/admin/prendas/insertar'));
-            exit;
-        }
-
-        $data = $_POST;
-        $file = $_FILES['archivoEnviado'] ?? null;
-        $usuario_id = $_SESSION['usuario']['id'];
-
-        // Validación archivo
-        if (!$file || $file['error'] !== UPLOAD_ERR_OK) {
-            $_SESSION['mensaje_error'] = 'Debes subir una imagen válida';
-            header('Location: ' . App::url('/admin/prendas/insertar'));
-            exit;
-        }
-
-        try {
-            $this->service->crearPrenda($data, $file, $usuario_id);
-
-            $_SESSION['mensaje_exito'] = 'Prenda insertada correctamente';
-        } catch (\Exception $e) {
-            $_SESSION['mensaje_error'] = $e->getMessage();
-        }
-
-        header('Location: ' . App::url('/admin/prendas/insertar'));
-        exit;
     }
 }

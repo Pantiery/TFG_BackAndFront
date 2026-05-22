@@ -115,21 +115,7 @@ $filtroEstado = $_GET['estado'] ?? '';
     <div class="catalogo-contenedor catalogo-mensajes">
 
         <!-- MENSAJES DE ÉXITO O ERROR -->
-        <?php if (isset($_SESSION['mensaje_exito'])): ?>
-            <div class="alert alert-success alert-dismissible fade show">
-                <?= htmlspecialchars($_SESSION['mensaje_exito']) ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            </div>
-            <?php unset($_SESSION['mensaje_exito']); ?>
-        <?php endif; ?>
-
-        <?php if (isset($_SESSION['mensaje_error'])): ?>
-            <div class="alert alert-danger alert-dismissible fade show">
-                <?= htmlspecialchars($_SESSION['mensaje_error']) ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            </div>
-            <?php unset($_SESSION['mensaje_error']); ?>
-        <?php endif; ?>
+        <?php require __DIR__ . '/../layout/messages.php'; ?>
 
     </div>
 
@@ -148,7 +134,5 @@ $filtroEstado = $_GET['estado'] ?? '';
     </section>
 
 </main>
-
-<script src="<?= \App\Config\App::baseUrl() ?>/assets/js/mensajes.js"></script>
 
 <?php require_once __DIR__ . '/../layout/footer.php'; ?>
