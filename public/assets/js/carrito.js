@@ -73,6 +73,14 @@ document.querySelectorAll('.form-carrito')
 
                 const data = await response.json();
 
+                // Si el servidor indica que se requiere login, redirigimos al usuario a la página de login
+                if (data.loginRequired) {
+
+                    window.location.href = '/proyecto_TFG/TFG_BackAndFront/public/login';
+
+                    return;
+                }
+
                 mostrarToast(
                     data.message,
                     data.success ? 'success' : 'danger'
@@ -127,6 +135,13 @@ document.querySelectorAll('.form-remove-carrito')
 
                 const data = await response.json();
 
+                if (data.loginRequired) {
+
+                    window.location.href = '/proyecto_TFG/TFG_BackAndFront/public/login';
+
+                    return;
+                }
+
                 mostrarToast(
                     data.message,
                     data.success ? 'success' : 'danger'
@@ -141,6 +156,7 @@ document.querySelectorAll('.form-remove-carrito')
 
                     if (producto) {
                         producto.remove();
+                        location.reload();
                     }
 
                     const contador =
@@ -228,6 +244,13 @@ document.querySelectorAll('.form-comprar-carrito')
                 });
 
                 const data = await response.json();
+
+                if (data.loginRequired) {
+
+                    window.location.href = '/proyecto_TFG/TFG_BackAndFront/public/login';
+
+                    return;
+                }
 
                 mostrarToast(
                     data.message,

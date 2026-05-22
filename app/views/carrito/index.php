@@ -58,6 +58,14 @@
                                         <?= $producto['tipo'] ?> - <?= $producto['colegio_nombre'] ?>
                                     </h4>
 
+                                    <?php if ($producto['estado_publicacion'] !== 'publicada'): ?>
+                                        <div class="alert alert-danger alerta-prenda-no-disponible py-2 mt-2">
+                                            <strong>Prenda no disponible.</strong><br>
+                                            Esta prenda ya ha sido adquirida por otro usuario.
+                                            Debes eliminarla del carrito para continuar con la compra.
+                                        </div>
+                                    <?php endif; ?>
+
                                     <div class="d-flex flex-wrap gap-3 small text-secondary mb-3">
                                         <span>
                                             <strong>Estado:</strong>
@@ -95,6 +103,20 @@
             </div>
 
             <!-- COLUMNA DERECHA -->
+
+            <?php
+            $hayPrendasNoDisponibles = false;
+
+            foreach ($productos as $producto) {
+
+                if ($producto['estado_publicacion'] !== 'publicada') {
+
+                    $hayPrendasNoDisponibles = true;
+                    break;
+                }
+            }
+            ?>
+
             <div class="col-lg-4">
                 <div class="card border-0 shadow-sm rounded-4 p-4 resumen-card">
 
@@ -141,11 +163,19 @@
                         </span>
                     </div>
 
+                    <?php if ($hayPrendasNoDisponibles): ?>
+                        <div class="alert alert-warning alerta-prenda-no-disponible">
+                            Debes eliminar las prendas no disponibles antes de poder finalizar la compra.
+                        </div>
+                    <?php endif; ?>
+
                     <form
                         method="POST"
                         action="<?= \App\Config\App::url('/venta/comprar') ?>"
                         class="form-comprar-carrito">
-                        <button class="btn btn-dark w-100 py-3 fw-semibold mb-3">
+                        <button
+                            class="btn btn-dark w-100 py-3 fw-semibold mb-3"
+                            <?= $hayPrendasNoDisponibles ? 'disabled' : '' ?>>
                             <i class="bi bi-bag-check"></i> Comprar ahora
                         </button>
                     </form>

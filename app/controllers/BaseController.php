@@ -11,7 +11,21 @@ class BaseController
     {
         if (!isset($_SESSION['usuario'])) {
 
-            $_SESSION['mensaje_error'] = 'Debes iniciar sesión para acceder a esta página';
+            if ($this->isAjax()) {
+
+                header('Content-Type: application/json');
+
+                echo json_encode([
+                    'success' => false,
+                    'loginRequired' => true,
+                    'message' => 'Debes iniciar sesión'
+                ]);
+
+                exit;
+            }
+
+            $_SESSION['mensaje_error'] =
+                'Debes iniciar sesión para acceder a esta página';
 
             header('Location: ' . App::url('/login'));
             exit;

@@ -7,7 +7,8 @@ use App\Core\Database;
 
 class AdminController extends BaseController
 {
-    // función para mostrar el dashboard del admin
+    // FUNCION PARA VER EL PANEL DE ADMINISTRACIÓN
+
     public function index()
     {
         $this->checkAdmin();
@@ -15,7 +16,8 @@ class AdminController extends BaseController
         $this->view('admin/index');
     }
 
-    // función para mostrar las prendas pendientes de revisión
+    // FUNCION PARA MOSTRAR LAS PRENDAS PENDIENTES DE REVISIÓN
+
     public function prendasPendientes()
     {
         $this->checkAdmin();
@@ -35,12 +37,11 @@ class AdminController extends BaseController
         ]);
     }
 
-    // función para revisar una prenda pendiente
+    // FUNCION PARA REVISAR UNA PRENDA PENDIENTE
+
     public function revisarPrenda()
     {
         $this->checkAdmin();
-
-        $pdo = Database::getConnection();
 
         $id = $_GET['id'] ?? null;
 
@@ -78,12 +79,11 @@ class AdminController extends BaseController
         ]);
     }
 
-    // función para aprobar una prenda pendiente
+    // FUNCION PARA APROBAR UNA PRENDA PENDIENTE
+
     public function aprobarPrenda()
     {
         $this->checkAdmin();
-
-        $pdo = Database::getConnection();
 
         $id = $_GET['id'] ?? null;
 
@@ -104,12 +104,11 @@ class AdminController extends BaseController
         exit;
     }
 
-    // función para rechazar una prenda pendiente
+    // FUNCION PARA RECHAZAR UNA PRENDA PENDIENTE
+
     public function rechazarPrenda()
     {
         $this->checkAdmin();
-
-        $pdo = Database::getConnection();
 
         $id = $_GET['id'] ?? null;
 
@@ -130,7 +129,8 @@ class AdminController extends BaseController
         exit;
     }
 
-    // Gestión de ventas del sistema
+    // FUNCION PARA GESTIONAR LAS VENTAS DEL SISTEMA
+
     public function ventas()
     {
         $this->checkAdmin();
@@ -181,7 +181,8 @@ class AdminController extends BaseController
         ]);
     }
 
-    // Ver detalle de una venta
+    // FUNCION PARA VER EL DETALLE DE UNA VENTA
+
     public function detalleVenta()
     {
         $this->checkAdmin();
@@ -199,9 +200,11 @@ class AdminController extends BaseController
         $ventaService = new \App\Services\VentaService();
 
         // Obtener detalle completo
+
         $detalle = $ventaService->obtenerDetalleVenta($ventaId);
 
         // Validar existencia
+
         if (!$detalle) {
 
             $_SESSION['mensaje_error'] = 'La venta no existe';
@@ -215,7 +218,8 @@ class AdminController extends BaseController
         ]);
     }
 
-    // Marcar una venta como pagada
+    // FUNCION PARA MARCAR UNA VENTA COMO PAGADA
+
     public function marcarPagada()
     {
         $this->checkAdmin();
@@ -234,9 +238,11 @@ class AdminController extends BaseController
         $ventaService = new \App\Services\VentaService();
 
         // Obtener venta
+
         $venta = $ventaService->obtenerVentaPorId($ventaId);
 
         // Validar existencia
+
         if (!$venta) {
 
             return $this->jsonResponse(
@@ -247,6 +253,7 @@ class AdminController extends BaseController
         }
 
         // Evitar doble pago
+
         if ($venta['estado_pago'] === 'pagado') {
 
             return $this->jsonResponse(
@@ -257,6 +264,7 @@ class AdminController extends BaseController
         }
 
         // Marcar pagada
+
         $ventaService->marcarVentaPagada($ventaId);
 
         return $this->jsonResponse(
@@ -269,7 +277,8 @@ class AdminController extends BaseController
         );
     }
 
-    // Estadísticas del sistema
+    // FUNCION PARA VER LAS ESTADÍSTICAS DEL SISTEMA
+
     public function estadisticas()
     {
         $this->checkAdmin();
@@ -321,7 +330,8 @@ class AdminController extends BaseController
         ]);
     }
 
-    // Gestión de usuarios
+    // FUNCION PARA GESTIONAR LOS USUARIOS DEL SISTEMA
+
     public function usuarios()
     {
         $this->checkAdmin();
