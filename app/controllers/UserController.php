@@ -11,7 +11,7 @@ class UserController extends BaseController
     {
         $this->checkAdmin();
 
-        // 🔗 CONEXIÓN (TU FORMA CORRECTA)
+        // CONEXIÓN A LA BASE DE DATOS
         $pdo = \App\Core\Database::getConnection();
 
         // CONSULTA
