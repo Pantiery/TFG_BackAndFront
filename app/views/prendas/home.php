@@ -83,7 +83,7 @@ require_once __DIR__ . '/../layout/header.php';
 
                 <article class="home-card">
                     <span class="home-numero">2</span>
-                    <h3>Regogida en colegio</h3>
+                    <h3>Recogida en colegio</h3>
                     <p>Se le enviará un mensaje al vendedor para citarlo en un colegio indicado y la prenda la recogerá uno de nuestros trabajadores.</p>
                 </article>
 

@@ -1,8 +1,4 @@
-console.log('carrito.js cargado');
-console.log(
-    'formularios compra:',
-    document.querySelectorAll('.form-comprar-carrito').length
-);
+
 
 // FUNCIONES PARA MOSTRAR TOASTS Y GESTIONAR MENSAJES DEL CARRITO
 function mostrarToast(mensaje, tipo = 'success') {
@@ -227,8 +223,6 @@ document.querySelectorAll('.form-comprar-carrito')
     .forEach(form => {
 
         form.addEventListener('submit', async e => {
-
-            console.log('submit comprar');
 
             e.preventDefault();
 

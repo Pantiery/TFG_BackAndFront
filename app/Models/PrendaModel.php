@@ -265,7 +265,7 @@ class PrendaModel
             ON p.usuario_id = u.id
 
         WHERE p.estado_publicacion = 'publicada'
-    ";
+        ";
 
         $params = [];
 

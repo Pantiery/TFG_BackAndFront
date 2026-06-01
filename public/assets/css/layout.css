@@ -295,3 +295,10 @@ img {
     text-align: left;
   }
 }
+
+/* HERO RESPONSIVE */
+@media (max-width: 768px) {
+  .hero {
+    height: 75vh;
+  }
+}

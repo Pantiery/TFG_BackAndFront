@@ -87,7 +87,9 @@ class PrendaController extends BaseController
         $estado = $_GET['estado'] ?? null;
 
         $datos = $this->service->obtenerDatosFormulario($colegio ?: null);
+
         $usuarioId = $_SESSION['usuario']['id'] ?? null;
+        
         $prendas = $this->service->filtrar($colegio, $tipo, $estado, $usuarioId);
 
         $this->view('prendas/catalogo', [
